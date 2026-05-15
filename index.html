@@ -82,9 +82,12 @@
       return cleaned.split(/\s+\+\s+/).map((part) => {
         const item = part.trim();
         const amount = item.match(/(\d+(?:[–-]\d+)?(?:\s?g| huevos?| km)?)/i)?.[1] || "";
+        const title = amount && /huevos?/i.test(amount)
+          ? item.replace(/^\d+(?:[–-]\d+)?\s*/i, "").replace(/^huevos?/i, "Huevos").trim()
+          : item.replace(amount, "").replace(/^de\s+/i, "").trim();
         return {
           emoji: ingredientEmoji(item),
-          title: item.replace(amount, "").replace(/^de\s+/i, "").trim() || item,
+          title: title || item,
           amount,
         };
       }).filter((item) => item.title);
@@ -337,46 +340,42 @@
             </div>
           </header>
 
-          <section className={`overflow-hidden rounded-[2rem] bg-gradient-to-br ${timeMeta.scene} p-1 shadow-xl shadow-slate-900/15`}>
-            <div className="grid gap-4 rounded-[1.8rem] bg-white/10 p-4 text-white md:grid-cols-[.95fr_1.05fr] md:p-6">
+          <section className="grid gap-4 md:grid-cols-[.92fr_1.08fr]">
+            <div className="grid gap-4 md:contents">
               <div className="space-y-4">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex gap-2">
-                    {[{ key: "night", icon: "🌙", label: "Noche", bg: "from-red-500 to-black" }, { key: "morning", icon: "🌅", label: "Mañana", bg: "from-yellow-300 to-black" }, { key: "afternoon", icon: "☀️", label: "Tarde", bg: "from-yellow-300 to-red-600" }].map((item) => <div key={item.key} className={`grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br ${item.bg} text-xl shadow-sm ${timeMeta.key === item.key ? "ring-2 ring-white" : "opacity-60"}`} title={item.label}>{item.icon}</div>)}
-                  </div>
-                  <button onClick={setToday} className="tap rounded-2xl bg-white/15 px-3 py-2 text-sm font-black shadow-sm ring-1 ring-white/20">Hoy</button>
-                </div>
-
-                <div className="rounded-[1.7rem] bg-black/20 p-4 ring-1 ring-white/15">
+                <div className="p-1">
                   <div className="mb-4 flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-bold text-white/70">{timeMeta.label}</p>
-                      <h2 className="text-4xl font-black leading-none tracking-tight md:text-5xl">Hola, {person.label}</h2>
+                    <div className="flex items-start gap-3">
+                      <div className="pt-1 text-4xl md:text-5xl" title={timeMeta.label}>{timeMeta.icon}</div>
+                      <div>
+                        <p className="text-sm font-bold text-emerald-700">{clock}</p>
+                        <h2 className="text-4xl font-black leading-none tracking-tight text-slate-950 md:text-5xl">{timeMeta.label}, {person.label}</h2>
+                      </div>
                     </div>
-                    <div className="flex rounded-2xl bg-white/15 p-1 ring-1 ring-white/20">
-                      {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-11 w-11 place-items-center rounded-xl text-xl ${activePerson === key ? "bg-white text-slate-950" : "text-white/80"}`} title={p.label}>{p.avatar}</button>)}
+                    <div className="flex rounded-2xl bg-white/70 p-1 shadow-sm ring-1 ring-slate-200">
+                      {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-8 w-8 place-items-center rounded-xl text-sm ${activePerson === key ? "bg-slate-950 text-white" : "text-slate-500"}`} title={p.label}>{p.avatar}</button>)}
                     </div>
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-[150px_1fr]">
-                    <div className="relative mx-auto grid h-36 w-36 place-items-center rounded-full bg-white/10">
-                      <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#ffffff ${ringProgress * 3.6}deg, rgba(255,255,255,.18) 0deg)` }}></div>
-                      <div className="relative grid h-28 w-28 place-items-center rounded-full bg-slate-950 text-center shadow-inner">
+                    <div className="relative mx-auto grid h-36 w-36 place-items-center rounded-full bg-emerald-100">
+                      <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#16a34a ${ringProgress * 3.6}deg, rgba(15,23,42,.10) 0deg)` }}></div>
+                      <div className="relative grid h-28 w-28 place-items-center rounded-full bg-white text-center shadow-inner">
                         <div>
-                          <p className="text-3xl font-black">{latestWeight || "—"}</p>
-                          <p className="text-xs font-bold text-white/60">kg actuales</p>
+                          <p className="text-3xl font-black text-slate-950">{latestWeight || "—"}</p>
+                          <p className="text-xs font-bold text-slate-500">kg actuales</p>
                         </div>
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <div className="rounded-2xl bg-white/15 p-3 ring-1 ring-white/20">
-                        <p className="text-xs font-black uppercase text-white/60">Objetivo final</p>
-                        <p className="text-2xl font-black">{person.target} kg</p>
+                    <div className="flex flex-col justify-center space-y-4">
+                      <div>
+                        <p className="text-xs font-black uppercase text-emerald-700">Objetivo final</p>
+                        <p className="text-3xl font-black text-emerald-700">{person.target} kg</p>
                       </div>
-                      <div className="rounded-2xl bg-white/15 p-3 ring-1 ring-white/20">
-                        <p className="text-xs font-black uppercase text-white/60">Estimación</p>
-                        <p className="font-black">{goalEta}</p>
-                        <p className="mt-1 text-xs font-bold text-white/60">Basado en la bajada semanal de tus registros.</p>
+                      <div>
+                        <p className="text-xs font-black uppercase text-emerald-700">Estimación</p>
+                        <p className="text-2xl font-black leading-tight text-emerald-700">{goalEta}</p>
+                        <p className="mt-1 text-xs font-bold text-slate-500">Basado en la bajada semanal de tus registros.</p>
                       </div>
                     </div>
                   </div>
