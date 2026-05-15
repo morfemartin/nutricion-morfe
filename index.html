@@ -48,6 +48,64 @@
       return "Cena";
     };
 
+    const timeOfDayMeta = (date = new Date()) => {
+      const hour = date.getHours();
+      if (hour >= 5 && hour < 12) return { key: "morning", icon: "🌅", label: "Buenos días", scene: "from-yellow-300 via-orange-300 to-slate-950" };
+      if (hour >= 12 && hour < 19) return { key: "afternoon", icon: "☀️", label: "Buenas tardes", scene: "from-yellow-300 via-red-400 to-slate-950" };
+      return { key: "night", icon: "🌙", label: "Buenas noches", scene: "from-red-500 via-slate-900 to-black" };
+    };
+
+    const shiftItem = (items, current, direction) => {
+      const index = items.indexOf(current);
+      return items[(index + direction + items.length) % items.length];
+    };
+
+    const ingredientEmoji = (text) => {
+      const value = text.toLowerCase();
+      if (value.includes("huevo") || value.includes("perico")) return "🥚";
+      if (value.includes("pollo")) return "🍗";
+      if (value.includes("carne")) return "🥩";
+      if (value.includes("arroz")) return "🍚";
+      if (value.includes("lenteja")) return "🫘";
+      if (value.includes("pan") || value.includes("arepa") || value.includes("harina")) return "🫓";
+      if (value.includes("sopa")) return "🍲";
+      if (value.includes("aguacate")) return "🥑";
+      if (value.includes("queso")) return "🧀";
+      if (value.includes("plátano")) return "🍌";
+      if (value.includes("hígado") || value.includes("pasta")) return "🥫";
+      if (value.includes("tomate")) return "🍅";
+      return "🍽️";
+    };
+
+    const parseIngredientItems = (text) => {
+      const cleaned = String(text || "").replace(/^([^:]+):\s*/, "");
+      return cleaned.split(/\s+\+\s+/).map((part) => {
+        const item = part.trim();
+        const amount = item.match(/(\d+(?:[–-]\d+)?(?:\s?g| huevos?| km)?)/i)?.[1] || "";
+        return {
+          emoji: ingredientEmoji(item),
+          title: item.replace(amount, "").replace(/^de\s+/i, "").trim() || item,
+          amount,
+        };
+      }).filter((item) => item.title);
+    };
+
+    const estimateGoalEta = (weights, target) => {
+      const clean = weights.filter((x) => x.weight).map((x) => ({ date: normalizeDate(x.date), weight: Number(x.weight) })).filter((x) => x.date && x.weight);
+      if (clean.length < 2) return "Registra 2 pesos para calcular la fecha";
+      const newest = clean[0];
+      const older = clean[Math.min(clean.length - 1, 6)];
+      const daysBetween = Math.max(1, (new Date(`${newest.date}T12:00:00`) - new Date(`${older.date}T12:00:00`)) / 86400000);
+      const weeklyLoss = ((older.weight - newest.weight) / daysBetween) * 7;
+      const remaining = newest.weight - target;
+      if (remaining <= 0) return "Objetivo alcanzado";
+      if (weeklyLoss <= 0.05) return "Aún falta ritmo de bajada para estimar";
+      const totalDays = Math.ceil((remaining / weeklyLoss) * 7);
+      const months = Math.floor(totalDays / 30);
+      const daysLeft = totalDays % 30;
+      return `${months} meses + ${daysLeft} días aprox.`;
+    };
+
     const mealMeta = {
       Desayuno: { emoji: "☀️", accent: "from-amber-200 to-orange-100", hint: "Energía limpia" },
       Almuerzo: { emoji: "🍛", accent: "from-emerald-200 to-lime-100", hint: "Fuerte y completo" },
@@ -68,7 +126,7 @@
         target: 80,
       },
       mama: {
-        label: "Mamá",
+        label: "Aquilorub",
         avatar: "🌷",
         goal: "79 kg → 76–77 kg → 74–75 kg",
         calories: "1550–1750 kcal",
@@ -179,6 +237,10 @@
       const avg7 = numericWeights.length ? (numericWeights.reduce((a, b) => a + b, 0) / numericWeights.length).toFixed(1) : "—";
       const latestWeight = latest?.weight ? Number(latest.weight) : null;
       const progress = latestWeight ? Math.max(0, Math.min(100, ((person.start - latestWeight) / (person.start - person.target)) * 100)) : 0;
+      const ringProgress = Math.round(progress);
+      const goalEta = estimateGoalEta(sortedLogs, person.target);
+      const timeMeta = timeOfDayMeta();
+      const mealItems = parseIngredientItems(mealText);
       const sparkWeights = [...currentLogs].filter((x) => x.weight).slice(-8).map((x) => Number(x.weight)).filter(Boolean);
       const minSpark = sparkWeights.length ? Math.min(...sparkWeights) : 0;
       const maxSpark = sparkWeights.length ? Math.max(...sparkWeights) : 1;
@@ -194,6 +256,9 @@
         setForm({ ...form, date: value });
         if (value) setActiveDay(dayFromDate(new Date(`${value}T12:00:00`)));
       };
+
+      const moveDay = (direction) => setActiveDay(shiftItem(days, activeDay, direction));
+      const moveMeal = (direction) => setActiveMeal(shiftItem(mealOrder, activeMeal, direction));
 
       const addLog = async () => {
         if (!form.date) return;
@@ -272,73 +337,123 @@
             </div>
           </header>
 
-          <section className={`overflow-hidden rounded-[2rem] bg-gradient-to-br ${person.hero} p-1 shadow-xl shadow-emerald-900/10`}>
-            <div className="rounded-[1.8rem] bg-white/35 p-4 md:p-6">
-              <div className="grid gap-4 lg:grid-cols-[1.1fr_.9fr]">
-                <div className="space-y-4">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap rounded-2xl px-4 py-2 text-sm font-black shadow-sm ${activePerson === key ? p.chip : "bg-white/65 text-slate-800"}`}>{p.avatar} {p.label}</button>)}
+          <section className={`overflow-hidden rounded-[2rem] bg-gradient-to-br ${timeMeta.scene} p-1 shadow-xl shadow-slate-900/15`}>
+            <div className="grid gap-4 rounded-[1.8rem] bg-white/10 p-4 text-white md:grid-cols-[.95fr_1.05fr] md:p-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex gap-2">
+                    {[{ key: "night", icon: "🌙", label: "Noche", bg: "from-red-500 to-black" }, { key: "morning", icon: "🌅", label: "Mañana", bg: "from-yellow-300 to-black" }, { key: "afternoon", icon: "☀️", label: "Tarde", bg: "from-yellow-300 to-red-600" }].map((item) => <div key={item.key} className={`grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br ${item.bg} text-xl shadow-sm ${timeMeta.key === item.key ? "ring-2 ring-white" : "opacity-60"}`} title={item.label}>{item.icon}</div>)}
                   </div>
-
-                  <div>
-                    <p className="text-sm font-bold text-slate-700">{dateLabel(form.date)} · {clock}</p>
-                    <h2 className="mt-1 text-4xl font-black leading-none tracking-tight md:text-6xl">Ahora toca</h2>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div className={`rounded-[1.6rem] bg-gradient-to-br ${meal.accent} p-4 shadow-sm`}>
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="text-4xl">{meal.emoji}</span>
-                        <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-black">{meal.hint}</span>
-                      </div>
-                      <p className="mt-4 text-sm font-black uppercase text-slate-600">{activeMeal}</p>
-                      <p className="mt-1 text-lg font-black leading-tight">{mealText}</p>
-                    </div>
-
-                    <div className="rounded-[1.6rem] bg-slate-950 p-4 text-white shadow-sm">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="text-4xl">{routine.icon}</span>
-                        <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-black">{selectedRoutineType}</span>
-                      </div>
-                      <p className="mt-4 text-sm font-black uppercase text-white/60">{activeDay}</p>
-                      <p className="mt-1 text-xl font-black leading-tight">{routine.title}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-white/70">{routine.detail}</p>
-                    </div>
-                  </div>
+                  <button onClick={setToday} className="tap rounded-2xl bg-white/15 px-3 py-2 text-sm font-black shadow-sm ring-1 ring-white/20">Hoy</button>
                 </div>
 
-                <div className="rounded-[1.6rem] glass p-4 shadow-sm">
-                  <div className="flex items-center justify-between gap-3">
+                <div className="rounded-[1.7rem] bg-black/20 p-4 ring-1 ring-white/15">
+                  <div className="mb-4 flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-sm font-bold text-slate-500">Registro rápido</p>
-                      <h3 className="text-2xl font-black">{person.label}</h3>
+                      <p className="text-sm font-bold text-white/70">{timeMeta.label}</p>
+                      <h2 className="text-4xl font-black leading-none tracking-tight md:text-5xl">Hola, {person.label}</h2>
                     </div>
-                    <button onClick={setToday} className="tap rounded-2xl bg-white px-3 py-2 text-sm font-black shadow-sm">Hoy</button>
+                    <div className="flex rounded-2xl bg-white/15 p-1 ring-1 ring-white/20">
+                      {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-11 w-11 place-items-center rounded-xl text-xl ${activePerson === key ? "bg-white text-slate-950" : "text-white/80"}`} title={p.label}>{p.avatar}</button>)}
+                    </div>
                   </div>
 
-                  <div className="mt-4 grid grid-cols-2 gap-2">
-                    <input className="col-span-2 rounded-2xl bg-white/80 p-3 font-bold outline-none ring-1 ring-white/70" type="date" value={form.date} onChange={e => handleDate(e.target.value)} />
-                    <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Peso kg" value={form.weight} onChange={e => setForm({...form, weight: e.target.value})} />
-                    <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Cintura cm" value={form.waist} onChange={e => setForm({...form, waist: e.target.value})} />
-                    <input inputMode="numeric" className="col-span-2 rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Pasos" value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} />
-                    <textarea className="col-span-2 min-h-20 rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Notas: hambre, fuerza, sueño..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} />
-                  </div>
-
-                  <div className="mt-3 grid grid-cols-4 gap-2">
-                    {mealOrder.map((item) => <button key={item} onClick={() => setActiveMeal(item)} className={`tap rounded-2xl px-2 py-3 text-lg shadow-sm ${activeMeal === item ? "bg-slate-950 text-white" : "bg-white/75"}`} title={item}>{mealMeta[item].emoji}</button>)}
-                  </div>
-
-                  <div className="mt-3 flex gap-2 overflow-x-auto hide-scroll">
-                    {["Fuerza", "Cardio", "Activo", "Fondo", "Descanso"].map((item) => <button key={item} onClick={() => setRoutineType(item)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-black shadow-sm ${selectedRoutineType === item ? "bg-slate-950 text-white" : "bg-white/75"}`}>{item}</button>)}
-                  </div>
-
-                  <button disabled={loading} onClick={addLog} className="tap mt-4 w-full rounded-2xl bg-slate-950 p-4 font-black text-white shadow-lg shadow-slate-950/20">{loading ? "Guardando..." : "+ Guardar registro"}</button>
-                  <div className="mt-3 flex items-center justify-between text-xs font-bold text-slate-600">
-                    <span>{status}</span>
-                    <span>{todaysLogs.length} registro(s) hoy</span>
+                  <div className="grid gap-4 sm:grid-cols-[150px_1fr]">
+                    <div className="relative mx-auto grid h-36 w-36 place-items-center rounded-full bg-white/10">
+                      <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#ffffff ${ringProgress * 3.6}deg, rgba(255,255,255,.18) 0deg)` }}></div>
+                      <div className="relative grid h-28 w-28 place-items-center rounded-full bg-slate-950 text-center shadow-inner">
+                        <div>
+                          <p className="text-3xl font-black">{latestWeight || "—"}</p>
+                          <p className="text-xs font-bold text-white/60">kg actuales</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="rounded-2xl bg-white/15 p-3 ring-1 ring-white/20">
+                        <p className="text-xs font-black uppercase text-white/60">Objetivo final</p>
+                        <p className="text-2xl font-black">{person.target} kg</p>
+                      </div>
+                      <div className="rounded-2xl bg-white/15 p-3 ring-1 ring-white/20">
+                        <p className="text-xs font-black uppercase text-white/60">Estimación</p>
+                        <p className="font-black">{goalEta}</p>
+                        <p className="mt-1 text-xs font-bold text-white/60">Basado en la bajada semanal de tus registros.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              <div className="space-y-4">
+                <div className="rounded-[1.7rem] bg-white/90 p-4 text-slate-950 shadow-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <button onClick={() => moveDay(-1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-slate-950 text-white">‹</button>
+                    <div className="text-center">
+                      <p className="text-xs font-black uppercase text-slate-500">Día de la semana</p>
+                      <h3 className="text-3xl font-black">{activeDay}</h3>
+                    </div>
+                    <button onClick={() => moveDay(1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-slate-950 text-white">›</button>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between gap-3 rounded-[1.4rem] bg-slate-100 p-2">
+                    <button onClick={() => moveMeal(-1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white shadow-sm">‹</button>
+                    <div className="text-center">
+                      <p className="text-xs font-black uppercase text-slate-500">{clock}</p>
+                      <p className="text-2xl font-black">{meal.emoji} {activeMeal}</p>
+                    </div>
+                    <button onClick={() => moveMeal(1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white shadow-sm">›</button>
+                  </div>
+                </div>
+
+                <div className={`rounded-[1.7rem] bg-gradient-to-br ${meal.accent} p-4 text-slate-950 shadow-sm`}>
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-black uppercase text-slate-600">Lo que toca comer</p>
+                      <h3 className="text-2xl font-black">{activeMeal}</h3>
+                    </div>
+                    <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-black">{meal.hint}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                    {mealItems.map((item, index) => <div key={`${item.title}-${index}`} className="rounded-2xl bg-white/75 p-3 shadow-sm">
+                      <div className="text-2xl">{item.emoji}</div>
+                      <p className="mt-2 text-sm font-black leading-tight">{item.title}</p>
+                      <p className="mt-1 text-xs font-bold text-slate-500">{item.amount || "al gusto"}</p>
+                    </div>)}
+                  </div>
+                </div>
+
+                <div className="rounded-[1.7rem] bg-slate-950 p-4 text-white shadow-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-black uppercase text-white/50">Rutina actual</p>
+                      <h3 className="text-2xl font-black">{routine.icon} {routine.title}</h3>
+                    </div>
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-black">{selectedRoutineType}</span>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-white/70">{routine.detail}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded-[2rem] glass p-5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-bold text-slate-500">Registro rápido</p>
+                <h3 className="text-2xl font-black">{person.label}</h3>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
+                <span>{status}</span>
+                <span className="rounded-2xl bg-white px-3 py-2 shadow-sm">{todaysLogs.length} hoy</span>
+              </div>
+            </div>
+
+            <div className="mt-4 grid gap-2 md:grid-cols-6">
+              <input className="rounded-2xl bg-white/80 p-3 font-bold outline-none ring-1 ring-white/70 md:col-span-2" type="date" value={form.date} onChange={e => handleDate(e.target.value)} />
+              <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Peso kg" value={form.weight} onChange={e => setForm({...form, weight: e.target.value})} />
+              <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Cintura cm" value={form.waist} onChange={e => setForm({...form, waist: e.target.value})} />
+              <input inputMode="numeric" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Pasos" value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} />
+              <button disabled={loading} onClick={addLog} className="tap rounded-2xl bg-slate-950 p-3 font-black text-white shadow-lg shadow-slate-950/15">{loading ? "Guardando..." : "+ Guardar"}</button>
+              <textarea className="min-h-20 rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70 md:col-span-6" placeholder="Notas: hambre, fuerza, sueño..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} />
             </div>
           </section>
 
