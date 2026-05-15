@@ -1,4 +1,4 @@
-const CACHE_NAME = "nutricion-morfe-v1";
+const CACHE_NAME = "nutricion-morfe-v2";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg"];
 
 self.addEventListener("install", (event) => {

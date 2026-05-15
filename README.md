@@ -2,6 +2,12 @@
 
 App PWA familiar para seguir la dieta de Martín y su mamá.
 
+## Guardado de datos
+
+La app está publicada en GitHub Pages, pero GitHub Pages solo sirve archivos estáticos: no puede guardar registros por sí mismo. Para no exponer un token de GitHub en el navegador, los registros siguen entrando por el backend de Google Apps Script y se guardan automáticamente en Google Sheets.
+
+No hace falta editar la hoja a mano. Cada registro enviado desde la app incluye fecha, hora, día de la semana, comida seleccionada y tipo de rutina dentro de las notas, además de peso, cintura y pasos.
+
 ## Archivos
 
 - `index.html`: app completa.
