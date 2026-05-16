@@ -25,6 +25,7 @@
     .glass { background: rgba(255, 255, 255, .08); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .08); }
     .tap { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .tap:active { transform: scale(.98); }
+    .glow-text { text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
     th, b, strong { font-weight: 400; }
   </style>
 </head>
@@ -148,6 +149,7 @@
         chip: "bg-emerald-950 text-white",
         start: 84,
         target: 80,
+        progressRange: 6,
       },
       mama: {
         label: "Aquilorub",
@@ -159,6 +161,7 @@
         chip: "bg-rose-950 text-white",
         start: 79,
         target: 76,
+        progressRange: 6,
       },
     };
 
@@ -260,7 +263,8 @@
       const numericWeights = sortedLogs.filter((x) => x.weight).slice(0, 7).map((x) => Number(x.weight)).filter(Boolean);
       const avg7 = numericWeights.length ? (numericWeights.reduce((a, b) => a + b, 0) / numericWeights.length).toFixed(1) : "—";
       const latestWeight = latest?.weight ? Number(latest.weight) : null;
-      const progress = latestWeight ? Math.max(0, Math.min(100, ((person.start - latestWeight) / (person.start - person.target)) * 100)) : 0;
+      const remainingToGoal = latestWeight ? Math.max(0, latestWeight - person.target) : person.progressRange;
+      const progress = latestWeight ? Math.max(0, Math.min(100, ((person.progressRange - remainingToGoal) / person.progressRange) * 100)) : 0;
       const ringProgress = Math.round(progress);
       const goalEta = estimateGoalEta(sortedLogs, person.target);
       const timeMeta = timeOfDayMeta();
@@ -362,18 +366,19 @@
               </div>
             </div>
 
-            <div className="mt-3 grid grid-cols-[1fr_104px] gap-3">
+            <div className="mt-3 grid grid-cols-[1fr_116px] gap-3">
               <div className="min-w-0">
-                <h2 className="text-[28px] font-normal leading-[1.08] tracking-normal text-white">{timeMeta.label},<br />{person.label}</h2>
+                <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
               </div>
 
-              <div className="relative grid h-[104px] w-[104px] place-items-center rounded-full bg-white/65">
-                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#ffffff ${ringProgress * 3.6}deg, rgba(255,255,255,.52) 0deg)` }}></div>
-                <div className="absolute right-1 top-2 h-8 w-8 rounded-full bg-red-800/70"></div>
-                <div className="relative grid h-[74px] w-[74px] place-items-center rounded-full bg-orange-400 text-center shadow-inner">
+              <div className="relative grid h-[116px] w-[116px] place-items-center rounded-full bg-white/18 shadow-[inset_0_1px_10px_rgba(255,255,255,.45),0_18px_45px_rgba(0,0,0,.18)] ring-1 ring-white/55 backdrop-blur-xl">
+                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(rgba(255,255,255,.92) ${ringProgress * 3.6}deg, rgba(255,255,255,.30) 0deg)` }}></div>
+                <div className="absolute inset-[10px] rounded-full bg-white/8 backdrop-blur-xl"></div>
+                <div className="absolute right-1 top-3 h-8 w-8 rounded-full bg-red-900/45 shadow-[inset_0_1px_8px_rgba(255,255,255,.20)] backdrop-blur-md"></div>
+                <div className="relative grid h-[76px] w-[76px] place-items-center rounded-full bg-orange-500/30 text-center shadow-[inset_0_1px_12px_rgba(255,255,255,.32)] ring-1 ring-white/35 backdrop-blur-2xl">
                   <div>
-                    <p className="text-2xl font-normal leading-none text-white">{latestWeight || "—"}</p>
-                    <p className="mt-1 text-[7px] font-normal uppercase leading-none text-white">Peso actual</p>
+                    <p className="glow-text text-2xl font-normal leading-none text-white">{latestWeight || "—"}</p>
+                    <p className="glow-text mt-1 text-[7px] font-normal uppercase leading-none text-white">Peso actual</p>
                   </div>
                 </div>
               </div>
