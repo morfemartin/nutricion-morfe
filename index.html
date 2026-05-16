@@ -28,8 +28,8 @@
     .glow-text { text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
     .morning-hero {
       background:
-        radial-gradient(ellipse at 22% 106%, rgba(255, 233, 93, .98) 0%, rgba(255, 206, 65, .82) 10%, rgba(255, 104, 20, .68) 25%, rgba(90, 14, 4, .74) 50%, rgba(38, 6, 0, .98) 100%),
-        linear-gradient(150deg, #260600 0%, #581006 44%, #f03a08 100%) !important;
+        radial-gradient(ellipse at 82% 104%, rgba(255, 234, 108, .98) 0%, rgba(255, 178, 50, .86) 17%, rgba(247, 96, 18, .74) 35%, rgba(91, 10, 3, .9) 66%, rgba(32, 4, 0, 1) 100%),
+        linear-gradient(150deg, #200400 0%, #5b0a03 48%, #f55f10 100%) !important;
     }
     .afternoon-hero {
       background:
@@ -55,24 +55,24 @@
       border-radius: 999px;
     }
     .morning-sun-halo {
-      left: -6%;
-      bottom: -46%;
+      right: -10%;
+      bottom: -42%;
       height: 17rem;
       width: 20rem;
       background: rgba(255, 229, 91, .42);
       filter: blur(24px);
     }
     .morning-sun-core {
-      left: 11%;
-      bottom: -34%;
+      right: 7%;
+      bottom: -31%;
       height: 9rem;
       width: 11rem;
       background: rgba(255, 236, 107, .92);
       filter: blur(13px);
     }
     .morning-sun-veil {
-      left: 18%;
-      bottom: -10%;
+      right: 10%;
+      bottom: -4%;
       height: 10rem;
       width: 20rem;
       background: rgba(250, 64, 10, .32);
@@ -516,8 +516,8 @@
                   </button>;
                 })}
               </div>
-              <div className="flex rounded-full bg-white/90 p-1 shadow-sm">
-                {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-6 w-6 place-items-center rounded-full text-[11px] ${activePerson === key ? "bg-slate-950 text-white" : "text-slate-500"}`} title={p.label}>{p.avatar}</button>)}
+              <div className="flex rounded-full bg-white/15 p-1 shadow-[0_8px_24px_rgba(0,0,0,.18)] ring-1 ring-white/45 backdrop-blur-xl">
+                {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-6 w-6 place-items-center rounded-full text-[11px] outline-none focus-visible:ring-1 focus-visible:ring-white/60 ${activePerson === key ? "bg-white/20 text-white shadow-inner" : "text-white/70"}`} title={p.label}>{p.avatar}</button>)}
               </div>
             </div>
 
