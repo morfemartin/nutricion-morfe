@@ -144,8 +144,19 @@
     const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     const mealOrder = ["Desayuno", "Almuerzo", "Merienda", "Cena"];
     const todayISO = () => new Date().toISOString().slice(0, 10);
+    const emptyBodyForm = () => ({ date: todayISO(), weight: "", waist: "", shoulders: "", chest: "", hip: "", arm: "", forearm: "", neck: "", leg: "", steps: "", notes: "" });
     const normalizeDate = (value) => String(value || "").slice(0, 10);
     const dayFromDate = (date = new Date()) => days[date.getDay() === 0 ? 6 : date.getDay() - 1];
+    const isoFromLocalDate = (date) => date.toISOString().slice(0, 10);
+    const dateForDayName = (targetDay, baseISO = todayISO()) => {
+      const base = new Date(`${baseISO}T12:00:00`);
+      const currentIndex = days.indexOf(dayFromDate(base));
+      const targetIndex = days.indexOf(targetDay);
+      if (currentIndex < 0 || targetIndex < 0) return baseISO;
+      base.setDate(base.getDate() + targetIndex - currentIndex);
+      return isoFromLocalDate(base);
+    };
+    const isRegisterDayISO = (iso) => Boolean(iso) && dayFromDate(new Date(`${iso}T12:00:00`)) === "Viernes";
     const clockLabel = (date = new Date()) => date.toLocaleTimeString("es-VE", { hour: "2-digit", minute: "2-digit" });
     const dateLabel = (iso) => {
       const date = iso ? new Date(`${iso}T12:00:00`) : new Date();
@@ -261,6 +272,17 @@
       Cena: { emoji: "🌙", accent: "from-indigo-200 to-violet-100", hint: "Cerrar sin pasarse" },
     };
 
+    const measurementFields = [
+      { key: "waist", label: "Cintura cm" },
+      { key: "shoulders", label: "Hombros cm" },
+      { key: "chest", label: "Pecho cm" },
+      { key: "hip", label: "Cadera cm" },
+      { key: "arm", label: "Bíceps cm" },
+      { key: "forearm", label: "Antebrazo cm" },
+      { key: "neck", label: "Cuello cm" },
+      { key: "leg", label: "Pierna cm" },
+    ];
+
     const people = {
       martin: {
         label: "Martín",
@@ -327,7 +349,7 @@
       const [plans, setPlans] = React.useState(null);
       const [planStatus, setPlanStatus] = React.useState("Cargando planes...");
       const [logs, setLogs] = React.useState({ body: { martin: [], mama: [] }, meals: { martin: [], mama: [] }, workouts: { martin: [], mama: [] } });
-      const [form, setForm] = React.useState({ date: todayISO(), weight: "", waist: "", steps: "", notes: "" });
+      const [form, setForm] = React.useState(emptyBodyForm());
       const [selectedExercise, setSelectedExercise] = React.useState(null);
       const [workoutForm, setWorkoutForm] = React.useState({ weight: "", reps: "", duration: "", distance: "", notes: "" });
       const [status, setStatus] = React.useState("Cargando registros...");
@@ -422,6 +444,7 @@
       const timeMeta = systemMeta[activeSystem];
       const systems = orderedSystems(activeSystem);
       const mealItems = dayPlan.items || parseIngredientItems(dayPlan.text || "");
+      const isRegisterDay = activeDay === "Viernes" || isRegisterDayISO(form.date);
       const sparkWeights = [...currentLogs].filter((x) => x.weight).slice(-8).map((x) => Number(x.weight)).filter(Boolean);
       const minSpark = sparkWeights.length ? Math.min(...sparkWeights) : 0;
       const maxSpark = sparkWeights.length ? Math.max(...sparkWeights) : 1;
@@ -439,7 +462,11 @@
         if (value) setActiveDay(dayFromDate(new Date(`${value}T12:00:00`)));
       };
 
-      const moveDay = (direction) => setActiveDay(shiftItem(days, activeDay, direction));
+      const setDayWithDate = (dayName) => {
+        setActiveDay(dayName);
+        setForm((prev) => ({ ...prev, date: dateForDayName(dayName, prev.date) }));
+      };
+      const moveDay = (direction) => setDayWithDate(shiftItem(days, activeDay, direction));
       const moveMeal = (direction) => setActiveMeal(shiftItem(mealOrder, activeMeal, direction));
       const selectSystem = (key) => {
         const nextSystem = systemMeta[key];
@@ -449,12 +476,17 @@
 
       const addLog = async () => {
         if (!form.date) return;
+        const measurementNotes = measurementFields
+          .filter((field) => form[field.key])
+          .map((field) => `${field.label}: ${form[field.key]}`)
+          .join(" · ");
         const metadata = [
           `Día: ${activeDay}`,
           `Hora: ${clock}`,
           `Comida: ${activeMeal}`,
           `Rutina: ${selectedRoutineType} - ${routine.title}`,
-        ].join(" · ");
+          measurementNotes,
+        ].filter(Boolean).join(" · ");
 
         const entry = {
           ...form,
@@ -475,7 +507,7 @@
             const fallback = await postAction("add", { entry });
             if (!fallback.ok) throw new Error("No se pudo guardar");
           }
-          setForm({ date: todayISO(), weight: "", waist: "", steps: "", notes: "" });
+          setForm(emptyBodyForm());
           setStatus("Guardado");
           await loadLogs();
         } catch(e) {
@@ -744,10 +776,10 @@
             </div>
           </section>
 
-          <section className="rounded-[2rem] glass p-5 shadow-sm">
+          {isRegisterDay && <section className="rounded-[2rem] glass p-5 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <p className="text-sm font-light text-white/50">Registro rápido</p>
+                <p className="text-sm font-light text-white/50">Día de registro</p>
                 <h3 className="text-2xl font-normal">{person.label}</h3>
               </div>
               <div className="flex items-center gap-2 text-xs font-light text-white/50">
@@ -757,14 +789,25 @@
             </div>
 
             <div className="mt-4 grid gap-2 md:grid-cols-6">
-              <input className="rounded-2xl bg-white/10 p-3 font-light text-white outline-none ring-1 ring-white/10 md:col-span-2" type="date" value={form.date} onChange={e => handleDate(e.target.value)} />
+              <input className="rounded-2xl bg-white/10 p-3 font-light text-white outline-none ring-1 ring-white/10 md:col-span-2" type="date" value={form.date} onInput={e => handleDate(e.target.value)} onChange={e => handleDate(e.target.value)} />
               <input inputMode="decimal" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Peso kg" value={form.weight} onChange={e => setForm({...form, weight: e.target.value})} />
-              <input inputMode="decimal" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Cintura cm" value={form.waist} onChange={e => setForm({...form, waist: e.target.value})} />
               <input inputMode="numeric" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Pasos" value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} />
               <button disabled={loading} onClick={addLog} className="tap rounded-2xl bg-white p-3 font-normal text-slate-950 shadow-lg shadow-black/15">{loading ? "Guardando..." : "+ Guardar"}</button>
+              <div className="rounded-[1.5rem] bg-white/10 p-3 ring-1 ring-white/10 md:col-span-6">
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-normal uppercase text-white/50">Medidas de registro</p>
+                    <p className="text-sm font-light text-white/60">Aparecen solo el viernes para guardar el progreso semanal.</p>
+                  </div>
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-amber-200">semanal</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                  {measurementFields.map((field) => <input key={field.key} inputMode="decimal" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder={field.label} value={form[field.key]} onChange={e => setForm({...form, [field.key]: e.target.value})} />)}
+                </div>
+              </div>
               <textarea className="min-h-20 rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40 md:col-span-6" placeholder="Notas: hambre, fuerza, sueño..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} />
             </div>
-          </section>
+          </section>}
 
           <section className="grid gap-4 lg:grid-cols-[.85fr_1.15fr]">
             <div className="rounded-[2rem] glass p-5 shadow-sm">
@@ -800,7 +843,7 @@
                   <h3 className="text-2xl font-normal">{activeDay}</h3>
                 </div>
                 <div className="flex max-w-full gap-2 overflow-x-auto hide-scroll">
-                  {days.map(d => <button key={d} onClick={() => setActiveDay(d)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-normal shadow-sm ${activeDay === d ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>{d.slice(0, 3)}</button>)}
+                  {days.map(d => <button key={d} onClick={() => setDayWithDate(d)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-normal shadow-sm ${activeDay === d ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>{d.slice(0, 3)}</button>)}
                 </div>
               </div>
 

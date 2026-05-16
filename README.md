@@ -17,6 +17,8 @@ Los registros diarios viven en Google Sheets:
 
 El código de backend actualizado está en `apps-script.gs` y debe desplegarse en el Web App de Google Apps Script para activar las acciones nuevas.
 
+En la app, el registro corporal aparece solo los viernes como día de registro. Ese día se guardan peso, pasos y medidas completas del cuerpo para usarlas como control semanal.
+
 ## Archivos
 
 - `index.html`: app completa.
