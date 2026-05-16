@@ -377,6 +377,8 @@
       if (current === null || start === target) return 0;
       return clamp(((current - start) / (target - start)) * 100);
     };
+    const closenessLower = (current, target) => current ? clamp((target / current) * 100) : 0;
+    const closenessHigher = (current, target) => target ? clamp((current / target) * 100) : 0;
     const linePoints = (values, min, max, width = 280, height = 130) => {
       const pad = 12;
       const usableW = width - pad * 2;
@@ -411,38 +413,6 @@
       if (duration !== null) return duration;
       if (distance !== null) return distance;
       return 1;
-    };
-    const demoWorkoutLogs = () => {
-      const today = new Date(`${todayISO()}T12:00:00`);
-      const muscles = [
-        { muscle: "Hombros", exercise: "Press hombro", base: 18, step: 1.1 },
-        { muscle: "Pecho", exercise: "Press pecho", base: 34, step: .9 },
-        { muscle: "Espalda", exercise: "Dominadas asistidas", base: 8, step: .7 },
-        { muscle: "Brazos", exercise: "Curl bíceps", base: 13, step: .55 },
-        { muscle: "Antebrazo", exercise: "Curl muñeca", base: 10, step: .45 },
-        { muscle: "Pierna", exercise: "Prensa segura", base: 55, step: 1.8 },
-        { muscle: "Abdomen", exercise: "Plancha", base: 35, step: 2.2, tracking: "timed" },
-        { muscle: "Cardio", exercise: "Running base", base: 5, step: .35, tracking: "distance" },
-      ];
-      return muscles.flatMap((item, muscleIndex) => Array.from({ length: 8 }, (_, weekIndex) => {
-        const date = new Date(today);
-        date.setDate(date.getDate() - (7 - weekIndex) * 7 - (muscleIndex % 3));
-        const wave = Math.sin((weekIndex + muscleIndex) * .9) * item.step;
-        const value = Math.max(1, item.base + weekIndex * item.step + wave);
-        return {
-          id: `demo-${item.muscle}-${weekIndex}`,
-          person: "martin",
-          date: isoFromLocalDate(date),
-          module: item.muscle === "Cardio" ? "home" : "gym",
-          exercise: item.exercise,
-          muscle: item.muscle,
-          tracking: item.tracking || "weighted",
-          weight: item.tracking ? "" : value.toFixed(1),
-          reps: item.tracking ? "" : "10",
-          duration: item.tracking === "timed" ? value.toFixed(0) : "",
-          distance: item.tracking === "distance" ? value.toFixed(1) : "",
-        };
-      }));
     };
     const buildMusclePerformance = (workouts = []) => {
       const today = new Date(`${todayISO()}T12:00:00`);
@@ -503,9 +473,8 @@
       const [activeDay, setActiveDay] = React.useState(dayFromDate(now));
       const [activeMeal, setActiveMeal] = React.useState(mealFromHour(now));
       const [activeSystem, setActiveSystem] = React.useState(systemFromDate(now));
-      const [progressView, setProgressView] = React.useState("aesthetic");
+      const [progressView, setProgressView] = React.useState("performance");
       const [visibleMuscles, setVisibleMuscles] = React.useState({});
-      const [showFullDay, setShowFullDay] = React.useState(false);
       const [plans, setPlans] = React.useState(null);
       const [planStatus, setPlanStatus] = React.useState("Cargando planes...");
       const [logs, setLogs] = React.useState({ body: { martin: [], mama: [] }, meals: { martin: [], mama: [] }, workouts: { martin: [], mama: [] } });
@@ -620,28 +589,27 @@
           label: "Peso",
           value: `${formatMetric(currentWeightMetric)} kg`,
           target: `${goals.targetWeightKgMin}-${goals.targetWeightKgMax} kg`,
-          progress: progressLower(currentWeightMetric, goals.startWeightKg, goals.targetWeightKgMax),
+          progress: closenessLower(currentWeightMetric, goals.targetWeightKgMax),
         },
         {
           key: "waist",
           label: "Cintura",
           value: `${formatMetric(currentWaistMetric)} cm`,
           target: `${goals.targetWaistCmMin}-${goals.targetWaistCmMax} cm`,
-          progress: progressLower(currentWaistMetric, goals.startWaistCm, goals.targetWaistCmMax),
+          progress: closenessLower(currentWaistMetric, goals.targetWaistCmMax),
         },
         {
           key: "shoulders",
           label: "Hombros",
           value: `${formatMetric(currentShouldersMetric)} cm`,
           target: `${goals.targetShouldersCm} cm+`,
-          progress: progressHigher(currentShouldersMetric, goals.startShouldersCm, goals.targetShouldersCm),
+          progress: closenessHigher(currentShouldersMetric, goals.targetShouldersCm),
         },
       ];
-      const ratioProgress = progressHigher(currentRatio, goals.startRatio, goals.targetRatio);
+      const ratioProgress = closenessHigher(currentRatio, goals.targetRatio);
       const definitionProgress = Math.round((ratioProgress * 1.4 + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / 4.4);
       const actualWorkouts = logs.workouts?.[activePerson] || [];
-      const performanceIsDemo = activePerson === "martin" && !actualWorkouts.length;
-      const performanceMuscles = buildMusclePerformance(performanceIsDemo ? demoWorkoutLogs() : actualWorkouts);
+      const performanceMuscles = buildMusclePerformance(actualWorkouts);
       const visiblePerformanceMuscles = performanceMuscles.filter((muscle) => visibleMuscles[muscle.name] !== false);
       const performanceValues = visiblePerformanceMuscles.flatMap((muscle) => muscle.values.filter((value) => value !== null));
       const performanceMin = performanceValues.length ? Math.min(...performanceValues) : 0;
@@ -1019,8 +987,8 @@
                   <h3 className="text-2xl font-normal">{progressView === "aesthetic" ? goals.phase : "Rendimiento"}</h3>
                 </div>
                 <div className="flex rounded-full bg-white/10 p-1 ring-1 ring-white/10">
-                  <button onClick={() => setProgressView("aesthetic")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "aesthetic" ? "bg-white text-slate-950" : "text-white/60"}`}>Estético</button>
                   <button onClick={() => setProgressView("performance")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "performance" ? "bg-white text-slate-950" : "text-white/60"}`}>Rendimiento</button>
+                  <button onClick={() => setProgressView("aesthetic")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "aesthetic" ? "bg-white text-slate-950" : "text-white/60"}`}>Estético</button>
                 </div>
               </div>
 
@@ -1081,7 +1049,7 @@
                       <p className="text-xs font-normal uppercase text-white/50">Carga por músculo</p>
                       <p className="text-sm font-light text-white/55">Últimas 8 semanas</p>
                     </div>
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white/70">{performanceIsDemo ? "demo 2 meses" : performanceValues.length ? "activo" : "sin datos"}</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white/70">{performanceValues.length ? "activo" : "sin datos"}</span>
                   </div>
                   <div className="relative h-40 overflow-hidden rounded-[1.4rem] bg-black/25">
                     {performanceValues.length ? <svg viewBox="0 0 280 130" className="h-full w-full" preserveAspectRatio="none" aria-label="Tendencia de rendimiento por músculo">
@@ -1119,8 +1087,8 @@
                 </div>
               </div>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {(showFullDay ? mealOrder : [activeMeal]).map((mealName) => <button key={mealName} onClick={() => setActiveMeal(mealName)} className={`tap rounded-[1.5rem] p-4 text-left shadow-sm ${activeMeal === mealName ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>
+              <div className="mt-4 grid gap-3">
+                {mealOrder.map((mealName) => <button key={mealName} onClick={() => setActiveMeal(mealName)} className={`tap rounded-[1.5rem] p-4 text-left shadow-sm ${activeMeal === mealName ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">{mealMeta[mealName].emoji}</span>
                     <h4 className="font-normal">{mealName}</h4>
@@ -1128,8 +1096,6 @@
                   <p className={`mt-2 text-sm leading-relaxed ${activeMeal === mealName ? "text-slate-600" : "text-white/60"}`}>{mealSummary(mealsForDay[mealName])}</p>
                 </button>)}
               </div>
-
-              <button onClick={() => setShowFullDay(!showFullDay)} className="tap mt-4 rounded-2xl bg-white/10 px-4 py-3 text-sm font-normal text-white shadow-sm">{showFullDay ? "Ver solo ahora" : "Ver todo el día"}</button>
             </div>
           </section>
 
