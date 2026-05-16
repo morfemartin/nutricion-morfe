@@ -1,5 +1,5 @@
-const CACHE_NAME = "nutricion-morfe-v28";
-const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg"];
+const CACHE_NAME = "nutricion-morfe-v29";
+const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg", "./data/plans.v1.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));

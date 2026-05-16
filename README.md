@@ -2,15 +2,26 @@
 
 App PWA familiar para seguir la dieta de Martín y su mamá.
 
-## Guardado de datos
+## Datos y guardado
 
 La app está publicada en GitHub Pages, pero GitHub Pages solo sirve archivos estáticos: no puede guardar registros por sí mismo. Para no exponer un token de GitHub en el navegador, los registros siguen entrando por el backend de Google Apps Script y se guardan automáticamente en Google Sheets.
 
-No hace falta editar la hoja a mano. Cada registro enviado desde la app incluye fecha, hora, día de la semana, comida seleccionada y tipo de rutina dentro de las notas, además de peso, cintura y pasos.
+Los planes editables viven en `data/plans.v1.json`. Ahí se cambian comidas, rutinas, módulos y ejercicios sin rediseñar la app.
+
+Los registros diarios viven en Google Sheets:
+
+- `Body_Log`: peso, medidas y pasos.
+- `Meal_Log`: comidas planificadas/registradas.
+- `Workout_Log`: ejercicios registrados.
+- `Registros`: pestaña antigua conservada como compatibilidad.
+
+El código de backend actualizado está en `apps-script.gs` y debe desplegarse en el Web App de Google Apps Script para activar las acciones nuevas.
 
 ## Archivos
 
 - `index.html`: app completa.
+- `data/plans.v1.json`: planes de alimentación y rutinas versionados.
+- `apps-script.gs`: backend de Google Apps Script para Sheets.
 - `manifest.json`: configuración PWA.
 - `sw.js`: service worker básico.
 - `icon.svg`: icono de la app.
