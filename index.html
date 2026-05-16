@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#12b981" />
   <title>Nutrición Morfe</title>
-  <link rel="manifest" href="./manifest.json" />
+  <link id="app-manifest" rel="manifest" href="./manifest.json" />
+  <link id="app-icon" rel="icon" href="./icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet" />
@@ -40,6 +41,11 @@
       background:
         radial-gradient(ellipse at 77% 110%, rgba(97, 176, 255, .72) 0%, rgba(34, 94, 245, .58) 22%, rgba(16, 33, 104, .78) 48%, rgba(5, 8, 33, .98) 100%),
         linear-gradient(150deg, #050821 0%, #11194b 48%, #1d4ed8 100%) !important;
+    }
+    .mama-hero {
+      background:
+        radial-gradient(ellipse at 80% 105%, rgba(251, 207, 232, .86) 0%, rgba(244, 114, 182, .64) 24%, rgba(190, 24, 93, .72) 54%, rgba(70, 8, 36, .98) 100%),
+        linear-gradient(145deg, #461126 0%, #9f1239 52%, #f9a8d4 100%) !important;
     }
     .morning-sun-halo,
     .morning-sun-core,
@@ -131,6 +137,17 @@
       border-radius: 999px;
       background: rgba(255, 255, 255, .92);
       box-shadow: 0 0 10px rgba(255, 255, 255, .82), 0 0 22px rgba(125, 211, 252, .42);
+    }
+    .app-shell-martin {
+      background:
+        radial-gradient(circle at top left, rgba(16, 185, 129, .10), transparent 24rem),
+        radial-gradient(circle at 80% 20%, rgba(96, 165, 250, .12), transparent 26rem);
+    }
+    .app-shell-mama {
+      background:
+        radial-gradient(circle at 18% 8%, rgba(251, 207, 232, .42), transparent 17rem),
+        radial-gradient(circle at 90% 22%, rgba(244, 114, 182, .30), transparent 22rem),
+        linear-gradient(180deg, #2a0717 0%, #421127 46%, #12060d 100%);
     }
     th, b, strong { font-weight: 400; }
   </style>
@@ -249,9 +266,22 @@
       }).filter((item) => item.title);
     };
 
-    const estimateGoalEta = (weights, target) => {
+    const formatEtaDays = (totalDays) => {
+      const months = Math.floor(totalDays / 30);
+      const daysLeft = totalDays % 30;
+      if (months <= 0) return `${daysLeft} días aprox.`;
+      return `${months} ${months === 1 ? "mes" : "meses"} + ${daysLeft} días aprox.`;
+    };
+
+    const estimateGoalEta = (weights, target, fallbackWeight, fallbackWeeklyLoss) => {
       const clean = weights.filter((x) => x.weight).map((x) => ({ date: normalizeDate(x.date), weight: Number(x.weight) })).filter((x) => x.date && x.weight);
-      if (clean.length < 2) return "Registra 2 pesos para calcular la fecha";
+      if (clean.length < 2) {
+        const baseWeight = clean[0]?.weight || fallbackWeight;
+        const remaining = baseWeight - target;
+        if (!baseWeight || remaining <= 0) return `Meta ${target} kg alcanzada`;
+        if (!fallbackWeeklyLoss) return "Registra 2 pesos para calcular la fecha";
+        return `${target} kg en ${formatEtaDays(Math.ceil((remaining / fallbackWeeklyLoss) * 7))}`;
+      }
       const newest = clean[0];
       const older = clean[Math.min(clean.length - 1, 6)];
       const daysBetween = Math.max(1, (new Date(`${newest.date}T12:00:00`) - new Date(`${older.date}T12:00:00`)) / 86400000);
@@ -260,9 +290,7 @@
       if (remaining <= 0) return "Objetivo alcanzado";
       if (weeklyLoss <= 0.05) return "Aún falta ritmo de bajada para estimar";
       const totalDays = Math.ceil((remaining / weeklyLoss) * 7);
-      const months = Math.floor(totalDays / 30);
-      const daysLeft = totalDays % 30;
-      return `${months} meses + ${daysLeft} días aprox.`;
+      return `${target} kg en ${formatEtaDays(totalDays)}`;
     };
 
     const mealMeta = {
@@ -297,7 +325,7 @@
         progressRange: 6,
       },
       mama: {
-        label: "Aquilorub",
+        label: "Aquilrub",
         avatar: "🌷",
         goal: "79 kg → 76–77 kg → 74–75 kg",
         calories: "1550–1750 kcal",
@@ -327,23 +355,30 @@
         targetRatio: 1.6,
         calories: "2250-2350 kcal",
         weeklyLoss: "0.5-0.7 kg/sem",
+        weeklyLossTargetKg: .6,
       },
       mama: {
         phase: "Definición",
-        heightCm: 165,
+        heightCm: 168,
         goldenRatio: 1.5,
         startWeightKg: 79,
         targetWeightKgMin: 74,
-        targetWeightKgMax: 76,
-        startWaistCm: 86,
-        targetWaistCmMin: 80,
-        targetWaistCmMax: 82,
-        startShouldersCm: 110,
-        targetShouldersCm: 112,
-        startRatio: 110 / 86,
-        targetRatio: 1.38,
+        targetWeightKgMax: 75,
+        phase1WeightKgMin: 76,
+        phase1WeightKgMax: 77,
+        startWaistCm: 94,
+        targetWaistCmMin: 86,
+        targetWaistCmMax: 89,
+        phase1WaistCmMin: 90,
+        phase1WaistCmMax: 92,
+        startHipCm: 114,
+        startShouldersCm: null,
+        targetShouldersCm: null,
+        startRatio: null,
+        targetRatio: null,
         calories: "1550-1750 kcal",
         weeklyLoss: "0.4-0.6 kg/sem",
+        weeklyLossTargetKg: .5,
       },
     };
 
@@ -554,7 +589,7 @@
             const fallback = await res.json();
             if (!fallback.ok) throw new Error("Error al leer registros");
             setLogs(normalizeLogs(fallback));
-            setStatus("Sincronizado");
+            setStatus("Sincronizado clásico");
           }
         } catch (e) {
           setStatus("Sin conexión con el backend");
@@ -564,6 +599,14 @@
       };
 
       React.useEffect(() => { loadLogs(); }, []);
+
+      React.useEffect(() => {
+        const icon = document.getElementById("app-icon");
+        if (icon) icon.setAttribute("href", activePerson === "mama" ? "./icon-mama.svg" : "./icon.svg");
+        const manifest = document.getElementById("app-manifest");
+        if (manifest) manifest.setAttribute("href", activePerson === "mama" ? "./manifest-mama.json" : "./manifest.json");
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", activePerson === "mama" ? "#be185d" : "#12b981");
+      }, [activePerson]);
 
       const currentLogs = logs.body?.[activePerson] || [];
       const sortedLogs = [...currentLogs].sort((a, b) => normalizeDate(b.date).localeCompare(normalizeDate(a.date)));
@@ -576,7 +619,8 @@
       const remainingToGoal = displayWeight ? Math.max(0, displayWeight - person.target) : person.progressRange;
       const progress = displayWeight ? Math.max(0, Math.min(100, ((person.progressRange - remainingToGoal) / person.progressRange) * 100)) : 0;
       const ringProgress = Math.round(progress);
-      const goalEta = estimateGoalEta(sortedLogs, person.target);
+      const goals = definitionGoals[activePerson] || definitionGoals.martin;
+      const goalEta = estimateGoalEta(sortedLogs, person.target, goals.startWeightKg, goals.weeklyLossTargetKg);
       const timeMeta = systemMeta[activeSystem];
       const systems = orderedSystems(activeSystem);
       const mealItems = dayPlan.items || parseIngredientItems(dayPlan.text || "");
@@ -584,17 +628,20 @@
       const sparkWeights = [...currentLogs].filter((x) => x.weight).slice(-8).map((x) => Number(x.weight)).filter(Boolean);
       const minSpark = sparkWeights.length ? Math.min(...sparkWeights) : 0;
       const maxSpark = sparkWeights.length ? Math.max(...sparkWeights) : 1;
-      const goals = definitionGoals[activePerson] || definitionGoals.martin;
       const currentWeightMetric = latestMetric(sortedLogs, "weight", goals.startWeightKg);
       const currentWaistMetric = latestMetric(sortedLogs, "waist", goals.startWaistCm);
       const currentShouldersMetric = latestMetric(sortedLogs, "shoulders", goals.startShouldersCm);
-      const currentRatio = currentWaistMetric ? currentShouldersMetric / currentWaistMetric : goals.startRatio;
+      const hasWaistData = currentWaistMetric && goals.targetWaistCmMin && goals.targetWaistCmMax;
+      const hasShoulderData = currentShouldersMetric && goals.targetShouldersCm;
+      const hasRatioData = hasWaistData && hasShoulderData;
+      const currentRatio = hasRatioData ? currentShouldersMetric / currentWaistMetric : null;
       const targetWeightMetric = goalMid(goals.targetWeightKgMin, goals.targetWeightKgMax);
-      const targetWaistMetric = goalMid(goals.targetWaistCmMin, goals.targetWaistCmMax);
-      const greekWaistTarget = goals.heightCm * .45;
-      const greekShouldersTarget = greekWaistTarget * goals.goldenRatio;
-      const definitionRatioTarget = goals.targetShouldersCm / targetWaistMetric;
-      const ratioProgress = closenessHigher(currentRatio, definitionRatioTarget);
+      const targetWaistMetric = hasWaistData ? goalMid(goals.targetWaistCmMin, goals.targetWaistCmMax) : null;
+      const greekWaistTarget = goals.heightCm ? goals.heightCm * .45 : null;
+      const greekShouldersTarget = greekWaistTarget && goals.goldenRatio ? greekWaistTarget * goals.goldenRatio : null;
+      const definitionRatioTarget = hasRatioData ? goals.targetShouldersCm / targetWaistMetric : null;
+      const ratioProgress = hasRatioData ? closenessHigher(currentRatio, definitionRatioTarget) : 0;
+      const ratioMissingText = hasWaistData && !hasShoulderData ? "Registra hombros para calcularlo." : "Registra cintura y hombros para calcularlo.";
       const aestheticMetrics = [
         {
           key: "weight",
@@ -603,22 +650,23 @@
           target: `${goals.targetWeightKgMin}-${goals.targetWeightKgMax} kg`,
           progress: closenessLower(currentWeightMetric, targetWeightMetric),
         },
-        {
+        hasWaistData && {
           key: "waist",
           label: "Cintura",
           value: `${formatMetric(currentWaistMetric)} cm`,
           target: `${goals.targetWaistCmMin}-${goals.targetWaistCmMax} cm`,
           progress: closenessLower(currentWaistMetric, targetWaistMetric),
         },
-        {
+        hasShoulderData && {
           key: "shoulders",
           label: "Hombros",
           value: `${formatMetric(currentShouldersMetric)} cm`,
           target: `${goals.targetShouldersCm} cm+`,
           progress: closenessHigher(currentShouldersMetric, goals.targetShouldersCm),
         },
-      ];
-      const definitionProgress = Math.round((ratioProgress * 1.4 + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / 4.4);
+      ].filter(Boolean);
+      const definitionWeight = (hasRatioData ? 1.4 : 0) + aestheticMetrics.length;
+      const definitionProgress = Math.round(((hasRatioData ? ratioProgress * 1.4 : 0) + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / Math.max(1, definitionWeight));
       const actualWorkouts = logs.workouts?.[activePerson] || [];
       const performanceMuscles = buildMusclePerformance(actualWorkouts);
       const visiblePerformanceMuscles = performanceMuscles.filter((muscle) => visibleMuscles[muscle.name] !== false);
@@ -683,12 +731,14 @@
         setStatus("Guardando...");
         try {
           const data = await postAction("addBodyLog", { entry });
+          let fallbackUsed = false;
           if (!data.ok) {
             const fallback = await postAction("add", { entry });
             if (!fallback.ok) throw new Error("No se pudo guardar");
+            fallbackUsed = true;
           }
           setForm(emptyBodyForm());
-          setStatus("Guardado");
+          setStatus(fallbackUsed ? "Guardado en Registros" : "Guardado");
           await loadLogs();
         } catch(e) {
           setStatus("No se pudo guardar");
@@ -722,6 +772,7 @@
         setStatus("Guardando ejercicio...");
         try {
           const data = await postAction("addWorkoutLog", { entry });
+          let fallbackUsed = false;
           if (!data.ok) {
             const fallbackEntry = {
               ...form,
@@ -735,10 +786,11 @@
             };
             const fallback = await postAction("add", { entry: fallbackEntry });
             if (!fallback.ok) throw new Error("No se pudo guardar ejercicio");
+            fallbackUsed = true;
           }
           setSelectedExercise(null);
           setWorkoutForm({ weight: "", reps: "", duration: "", distance: "", notes: "" });
-          setStatus("Ejercicio guardado");
+          setStatus(fallbackUsed ? "Ejercicio en Registros" : "Ejercicio guardado");
           await loadLogs();
         } catch (e) {
           setStatus("No se pudo guardar ejercicio");
@@ -766,6 +818,7 @@
         setStatus("Guardando comida...");
         try {
           const data = await postAction("addMealLog", { entry });
+          let fallbackUsed = false;
           if (!data.ok) {
             const fallback = await postAction("add", {
               entry: {
@@ -780,8 +833,9 @@
               }
             });
             if (!fallback.ok) throw new Error("No se pudo guardar comida");
+            fallbackUsed = true;
           }
-          setStatus("Comida guardada");
+          setStatus(fallbackUsed ? "Comida en Registros" : "Comida guardada");
           await loadLogs();
         } catch (e) {
           setStatus("No se pudo guardar comida");
@@ -813,8 +867,8 @@
         a.click();
       };
 
-      return <div className="min-h-screen text-white">
-          <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-12 pt-4 text-white md:px-8`}>
+      return <div className={`min-h-screen text-white app-shell-${activePerson}`}>
+          <section className={`relative overflow-hidden bg-gradient-to-br ${activePerson === "mama" ? "mama-hero" : timeMeta.scene} px-5 pb-12 pt-4 text-white md:px-8`}>
             {activeSystem === "night" && <div aria-hidden="true">
               <span className="night-glow-halo"></span>
               <span className="night-glow-core"></span>
@@ -854,7 +908,7 @@
 
             <div className="mt-2 grid grid-cols-[1fr_151px] gap-3">
               <div className="min-w-0 pt-4">
-                <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
+                <h2 className="text-[34px] font-normal leading-[1.02] tracking-normal text-white md:text-[48px]">{timeMeta.label},<br />{person.label}</h2>
                 <div className="mt-10 max-w-[218px]">
                   <p className="glow-text text-[12px] font-normal uppercase leading-tight text-white">Objetivo final</p>
                   <p className="glow-text mt-1 text-[13px] font-normal leading-tight text-white">{goalEta}</p>
@@ -990,14 +1044,14 @@
             </div>
           </section>}
 
-          <section className="grid gap-4 lg:grid-cols-[.85fr_1.15fr]">
-            <div className="rounded-[2rem] glass p-5 shadow-sm">
-              <div className="flex items-start justify-between gap-3">
+          <section className="grid min-w-0 gap-4 xl:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
+            <div className="min-w-0 rounded-[2rem] glass p-5 shadow-sm">
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-sm font-light text-white/50">Progreso visual</p>
                   <h3 className="text-2xl font-normal">{progressView === "aesthetic" ? goals.phase : "Rendimiento"}</h3>
                 </div>
-                <div className="flex rounded-full bg-white/10 p-1 ring-1 ring-white/10">
+                <div className="flex w-full rounded-full bg-white/10 p-1 ring-1 ring-white/10 sm:w-auto">
                   <button onClick={() => setProgressView("performance")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "performance" ? "bg-white text-slate-950" : "text-white/60"}`}>Rendimiento</button>
                   <button onClick={() => setProgressView("aesthetic")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "aesthetic" ? "bg-white text-slate-950" : "text-white/60"}`}>Estético</button>
                 </div>
@@ -1008,18 +1062,18 @@
                   <div className="flex items-end justify-between gap-4">
                     <div>
                       <p className="text-xs font-normal uppercase text-amber-200">Índice griego</p>
-                      <p className="mt-1 text-5xl font-normal leading-none text-white">{formatMetric(currentRatio, 2)}</p>
-                      <p className="mt-2 text-sm font-light text-white/55">altura {goals.heightCm} cm · cintura {formatMetric(greekWaistTarget)} · hombros {formatMetric(greekShouldersTarget)}</p>
+                      <p className="mt-1 text-5xl font-normal leading-none text-white">{hasRatioData ? formatMetric(currentRatio, 2) : "—"}</p>
+                      <p className="mt-2 text-sm font-light text-white/55">{hasRatioData ? `altura ${goals.heightCm} cm · cintura ${formatMetric(greekWaistTarget)} · hombros ${formatMetric(greekShouldersTarget)}` : ratioMissingText}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-3xl font-normal text-emerald-300">{goalLabel(ratioProgress)}</p>
+                      <p className="text-3xl font-normal text-emerald-300">{hasRatioData ? goalLabel(ratioProgress) : "—"}</p>
                       <p className="text-xs font-light text-white/45">del objetivo</p>
                     </div>
                   </div>
                   <div className="mt-4 h-3 overflow-hidden rounded-full bg-black/25">
                     <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-lime-300 to-amber-200 shadow-[0_0_18px_rgba(52,211,153,.55)]" style={{ width: `${ratioProgress}%` }}></div>
                   </div>
-                  <p className="mt-2 text-xs font-light text-white/45">Meta definición: {formatMetric(currentRatio, 2)} / {formatMetric(definitionRatioTarget, 2)} = {goalLabel(ratioProgress)}.</p>
+                  <p className="mt-2 text-xs font-light text-white/45">{hasRatioData ? `Meta definición: ${formatMetric(currentRatio, 2)} / ${formatMetric(definitionRatioTarget, 2)} = ${goalLabel(ratioProgress)}.` : "El ratio requiere hombros; peso y cintura sí se calculan."}</p>
                 </div>
 
                 <div className="rounded-[1.6rem] bg-white/[.07] p-4 ring-1 ring-white/10">
@@ -1088,14 +1142,14 @@
               </div>}
             </div>
 
-            <div className="rounded-[2rem] glass p-5 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="min-w-0 rounded-[2rem] glass p-5 shadow-sm">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-light text-white/50">Día y comida</p>
                   <h3 className="text-2xl font-normal">{activeDay}</h3>
                 </div>
-                <div className="flex max-w-full gap-2 overflow-x-auto hide-scroll">
-                  {days.map(d => <button key={d} onClick={() => setDayWithDate(d)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-normal shadow-sm ${activeDay === d ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>{d.slice(0, 3)}</button>)}
+                <div className="grid w-full grid-cols-7 gap-1.5 sm:w-auto sm:flex sm:max-w-full sm:gap-2 sm:overflow-x-auto sm:hide-scroll">
+                  {days.map(d => <button key={d} onClick={() => setDayWithDate(d)} className={`tap min-w-0 rounded-2xl px-2 py-2 text-xs font-normal shadow-sm sm:shrink-0 sm:px-3 sm:text-sm ${activeDay === d ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>{d.slice(0, 3)}</button>)}
                 </div>
               </div>
 

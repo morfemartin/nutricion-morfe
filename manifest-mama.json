@@ -1,0 +1,15 @@
+{
+  "name": "Nutrición Morfe - Aquilrub",
+  "short_name": "Aquilrub",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#421127",
+  "theme_color": "#be185d",
+  "icons": [
+    {
+      "src": "icon-mama.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

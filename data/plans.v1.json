@@ -244,7 +244,7 @@
       }
     },
     "mama": {
-      "label": "Aquilorub",
+      "label": "Aquilrub",
       "modules": ["gym"],
       "routines": {
         "Lunes": {
