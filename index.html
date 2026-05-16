@@ -552,13 +552,13 @@
           <section className="grid gap-4 md:grid-cols-[.92fr_1.08fr]">
             <div className="grid gap-4 md:contents">
               <div className="space-y-4">
-                <div className="rounded-[1.45rem] bg-black/20 p-2 text-white shadow-[inset_0_1px_0_rgba(255,255,255,.08)] ring-1 ring-white/10 backdrop-blur-xl">
-                  <div className="flex items-center justify-between gap-3">
-                    <button onClick={() => moveDay(-1)} className="tap grid h-9 w-9 place-items-center rounded-full bg-white/10 text-xl text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.12)] ring-1 ring-white/10">‹</button>
+                <div className="py-1 text-white">
+                  <div className="flex items-center justify-center gap-6">
+                    <button onClick={() => moveDay(-1)} className="tap grid h-8 w-8 place-items-center text-2xl text-white/70">‹</button>
                     <div className="text-center">
                       <h3 className="text-xl font-normal leading-tight text-white">{activeDay}</h3>
                     </div>
-                    <button onClick={() => moveDay(1)} className="tap grid h-9 w-9 place-items-center rounded-full bg-white/10 text-xl text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.12)] ring-1 ring-white/10">›</button>
+                    <button onClick={() => moveDay(1)} className="tap grid h-8 w-8 place-items-center text-2xl text-white/70">›</button>
                   </div>
                 </div>
 
