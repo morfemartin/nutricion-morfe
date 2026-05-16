@@ -313,6 +313,8 @@
     const definitionGoals = {
       martin: {
         phase: "Definición",
+        heightCm: 180,
+        goldenRatio: 1.618,
         startWeightKg: 84,
         targetWeightKgMin: 77.5,
         targetWeightKgMax: 80,
@@ -328,6 +330,8 @@
       },
       mama: {
         phase: "Definición",
+        heightCm: 165,
+        goldenRatio: 1.5,
         startWeightKg: 79,
         targetWeightKgMin: 74,
         targetWeightKgMax: 76,
@@ -379,6 +383,8 @@
     };
     const closenessLower = (current, target) => current ? clamp((target / current) * 100) : 0;
     const closenessHigher = (current, target) => target ? clamp((current / target) * 100) : 0;
+    const goalMid = (min, max) => (Number(min) + Number(max)) / 2;
+    const phaseLabel = (value) => value <= 0 ? "Base" : `${Math.round(value)}%`;
     const linePoints = (values, min, max, width = 280, height = 130) => {
       const pad = 12;
       const usableW = width - pad * 2;
@@ -583,30 +589,36 @@
       const currentWaistMetric = latestMetric(sortedLogs, "waist", goals.startWaistCm);
       const currentShouldersMetric = latestMetric(sortedLogs, "shoulders", goals.startShouldersCm);
       const currentRatio = currentWaistMetric ? currentShouldersMetric / currentWaistMetric : goals.startRatio;
+      const targetWeightMetric = goalMid(goals.targetWeightKgMin, goals.targetWeightKgMax);
+      const targetWaistMetric = goalMid(goals.targetWaistCmMin, goals.targetWaistCmMax);
+      const greekWaistTarget = goals.heightCm * .45;
+      const greekShouldersTarget = greekWaistTarget * goals.goldenRatio;
+      const definitionRatioTarget = goals.targetShouldersCm / targetWaistMetric;
+      const greekIdealScore = Math.round((closenessHigher(currentRatio, goals.goldenRatio) * .55) + (closenessHigher(currentShouldersMetric, greekShouldersTarget) * .25) + (closenessLower(currentWaistMetric, greekWaistTarget) * .20));
       const aestheticMetrics = [
         {
           key: "weight",
           label: "Peso",
           value: `${formatMetric(currentWeightMetric)} kg`,
           target: `${goals.targetWeightKgMin}-${goals.targetWeightKgMax} kg`,
-          progress: closenessLower(currentWeightMetric, goals.targetWeightKgMax),
+          progress: progressLower(currentWeightMetric, goals.startWeightKg, targetWeightMetric),
         },
         {
           key: "waist",
           label: "Cintura",
           value: `${formatMetric(currentWaistMetric)} cm`,
           target: `${goals.targetWaistCmMin}-${goals.targetWaistCmMax} cm`,
-          progress: closenessLower(currentWaistMetric, goals.targetWaistCmMax),
+          progress: progressLower(currentWaistMetric, goals.startWaistCm, targetWaistMetric),
         },
         {
           key: "shoulders",
           label: "Hombros",
           value: `${formatMetric(currentShouldersMetric)} cm`,
           target: `${goals.targetShouldersCm} cm+`,
-          progress: closenessHigher(currentShouldersMetric, goals.targetShouldersCm),
+          progress: progressHigher(currentShouldersMetric, goals.startShouldersCm, goals.targetShouldersCm),
         },
       ];
-      const ratioProgress = closenessHigher(currentRatio, goals.targetRatio);
+      const ratioProgress = progressHigher(currentRatio, goals.startRatio, definitionRatioTarget);
       const definitionProgress = Math.round((ratioProgress * 1.4 + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / 4.4);
       const actualWorkouts = logs.workouts?.[activePerson] || [];
       const performanceMuscles = buildMusclePerformance(actualWorkouts);
@@ -998,25 +1010,27 @@
                     <div>
                       <p className="text-xs font-normal uppercase text-amber-200">Índice griego</p>
                       <p className="mt-1 text-5xl font-normal leading-none text-white">{formatMetric(currentRatio, 2)}</p>
-                      <p className="mt-2 text-sm font-light text-white/55">hombro / cintura · meta {formatMetric(goals.targetRatio, 2)}+</p>
+                      <p className="mt-2 text-sm font-light text-white/55">altura {goals.heightCm} cm · cintura {formatMetric(greekWaistTarget)} · hombros {formatMetric(greekShouldersTarget)}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-3xl font-normal text-emerald-300">{Math.round(ratioProgress)}%</p>
-                      <p className="text-xs font-light text-white/45">ratio</p>
+                      <p className="text-3xl font-normal text-emerald-300">{greekIdealScore}%</p>
+                      <p className="text-xs font-light text-white/45">del ideal</p>
+                      <p className="mt-1 text-xs font-light text-white/45">{phaseLabel(ratioProgress)} fase</p>
                     </div>
                   </div>
                   <div className="mt-4 h-3 overflow-hidden rounded-full bg-black/25">
-                    <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-lime-300 to-amber-200 shadow-[0_0_18px_rgba(52,211,153,.55)]" style={{ width: `${ratioProgress}%` }}></div>
+                    <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-lime-300 to-amber-200 shadow-[0_0_18px_rgba(52,211,153,.55)]" style={{ width: `${Math.max(4, ratioProgress)}%` }}></div>
                   </div>
+                  <p className="mt-2 text-xs font-light text-white/45">Meta definición: ratio {formatMetric(definitionRatioTarget, 2)} frente a {formatMetric(currentRatio, 2)} actual.</p>
                 </div>
 
                 <div className="rounded-[1.6rem] bg-white/[.07] p-4 ring-1 ring-white/10">
                   <div className="mb-3 flex items-center justify-between">
                     <p className="text-xs font-normal uppercase text-white/55">Fase de definición</p>
-                    <p className="text-sm font-normal text-emerald-300">{definitionProgress}%</p>
+                    <p className="text-sm font-normal text-emerald-300">{phaseLabel(definitionProgress)}</p>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full rounded-full bg-gradient-to-r from-sky-400 via-emerald-300 to-lime-200" style={{ width: `${definitionProgress}%` }}></div>
+                    <div className="h-full rounded-full bg-gradient-to-r from-sky-400 via-emerald-300 to-lime-200" style={{ width: `${Math.max(3, definitionProgress)}%` }}></div>
                   </div>
                   <div className="mt-4 grid gap-3">
                     {aestheticMetrics.map((metric) => <div key={metric.key} className="rounded-2xl bg-white/10 p-3 ring-1 ring-white/10">
@@ -1027,11 +1041,11 @@
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-normal text-amber-200">{metric.target}</p>
-                          <p className="text-xs font-light text-white/40">objetivo</p>
+                          <p className="text-xs font-light text-white/40">{phaseLabel(metric.progress)} fase</p>
                         </div>
                       </div>
                       <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/25">
-                        <div className="h-full rounded-full bg-white" style={{ width: `${metric.progress}%`, background: metric.key === "shoulders" ? "linear-gradient(90deg,#a78bfa,#f0abfc)" : "linear-gradient(90deg,#34d399,#fde68a)" }}></div>
+                        <div className="h-full rounded-full bg-white" style={{ width: `${Math.max(3, metric.progress)}%`, background: metric.key === "shoulders" ? "linear-gradient(90deg,#a78bfa,#f0abfc)" : "linear-gradient(90deg,#34d399,#fde68a)" }}></div>
                       </div>
                     </div>)}
                   </div>
