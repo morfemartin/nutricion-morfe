@@ -246,6 +246,9 @@
     "mama": {
       "label": "Aquilrub",
       "modules": ["gym"],
+      "dietRestrictions": ["no pasta", "no caraotas", "no mayonesa", "no pasta de higado"],
+      "allowedCarbs": ["arepa", "arroz", "lentejas", "platano", "granola"],
+      "snackOptions": ["yogurt con granola", "yogurt con fruta", "yogurt solo", "arepa pequena con queso", "queso", "huevos cocidos", "fruta"],
       "routines": {
         "Lunes": {
           "gym": {
@@ -394,7 +397,7 @@
       "Lunes": {
         "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45-50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
         "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "140 g" }, { "emoji": "🍚", "title": "arroz", "amount": "110 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "130 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "50-60 g" }, { "emoji": "🥫", "title": "pasta de hígado", "amount": "20-25 g" }, { "emoji": "🥄", "title": "mayonesa", "amount": "5-8 g" } ] },
+        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🌾", "title": "granola", "amount": "25-30 g" } ] },
         "Cena": { "items": [ { "emoji": "🍲", "title": "sopa abundante", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "120-140 g" } ] }
       },
       "Martes": {
@@ -406,13 +409,13 @@
       "Miércoles": {
         "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45 g" }, { "emoji": "🥚", "title": "huevos/perico", "amount": "2 huevos" } ] },
         "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "150 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "170 g" }, { "emoji": "🍅", "title": "tomate/vegetales", "amount": "al gusto" } ] },
-        "Merienda": { "items": [ { "emoji": "🥚", "title": "huevo o queso", "amount": "1-2 / 30 g" } ] },
+        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🍎", "title": "fruta opcional", "amount": "1 pequeña" } ] },
         "Cena": { "items": [ { "emoji": "🍲", "title": "sopa abundante", "amount": "al gusto" }, { "emoji": "🥩", "title": "carne molida", "amount": "100-120 g" } ] }
       },
       "Jueves": {
         "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
         "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "150 g" }, { "emoji": "🍚", "title": "arroz", "amount": "120 g" }, { "emoji": "🥑", "title": "aguacate", "amount": "35-40 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "50 g" }, { "emoji": "🥫", "title": "pasta de hígado", "amount": "20 g" }, { "emoji": "🥄", "title": "mayonesa", "amount": "5-8 g" } ] },
+        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🌾", "title": "granola", "amount": "25-30 g" } ] },
         "Cena": { "items": [ { "emoji": "🫘", "title": "lentejas", "amount": "170 g" }, { "emoji": "🥚", "title": "huevo o pollo", "amount": "1 / 100 g" } ] }
       },
       "Viernes": {
@@ -424,13 +427,13 @@
       "Sábado": {
         "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45-50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" } ] },
         "Almuerzo": { "items": [ { "emoji": "🥫", "title": "hígado", "amount": "120-150 g" }, { "emoji": "🍚", "title": "arroz", "amount": "100 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "120 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "50 g" }, { "emoji": "🧀", "title": "queso", "amount": "20-25 g" } ] },
+        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt con granola", "amount": "150 g + 25 g" }, { "emoji": "🧀", "title": "queso opcional", "amount": "25-30 g" } ] },
         "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "130-150 g" }, { "emoji": "🍲", "title": "sopa/vegetales", "amount": "al gusto" } ] }
       },
       "Domingo": {
         "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "50-55 g" }, { "emoji": "🥚", "title": "huevos", "amount": "2 huevos" } ] },
         "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo/carne", "amount": "140 g" }, { "emoji": "🍚", "title": "arroz", "amount": "130 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "130 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🍽️", "title": "fruta, huevo o queso", "amount": "opcional" } ] },
+        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt, fruta, huevo o queso", "amount": "1 opción ligera" } ] },
         "Cena": { "items": [ { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "120-140 g" } ] }
       }
     }
