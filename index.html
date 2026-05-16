@@ -59,12 +59,21 @@
       return { key: "night", icon: "🌙", label: "Buenas noches", scene: "from-indigo-950 via-blue-950 to-blue-700" };
     };
 
+    const SunIcon = () => <svg viewBox="0 0 64 64" className="h-7 w-7" aria-hidden="true">
+      <circle cx="32" cy="32" r="12" fill="currentColor" />
+      <path d="M32 4v9M32 51v9M4 32h9M51 32h9M12 12l7 7M45 45l7 7M52 12l-7 7M19 45l-7 7" stroke="currentColor" strokeWidth="7" strokeLinecap="round" />
+    </svg>;
+
     const SunsetIcon = () => <svg viewBox="0 0 64 64" className="h-7 w-7" aria-hidden="true">
-      <path d="M16 34h32" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <path d="M22 44h20" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <path d="M28 54h8" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <path d="M21 28a11 11 0 0 1 22 0" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <path d="M32 7v8M12 19l6 6M52 19l-6 6" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M14 31h36" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M20 42h24" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M26 53h12" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M22 29a10 10 0 0 1 20 0" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M32 5v8M12 17l6 6M52 17l-6 6" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+    </svg>;
+
+    const MoonIcon = () => <svg viewBox="0 -960 960 960" className="h-7 w-7" aria-hidden="true">
+      <path fill="currentColor" d="M484-80q-84 0-157.5-32t-128-86.5Q144-253 112-326.5T80-484q0-128 72-232t193-146q22-8 41 5.5t18 36.5q-3 85 27 162t90 137q60 60 137 90t162 27q26-1 38.5 17.5T863-345q-44 120-147.5 192.5T484-80Zm0-80q88 0 163-44t118-121q-86-8-163-43.5T464-465q-61-61-97-138t-43-163q-77 43-120.5 118.5T160-484q0 135 94.5 229.5T484-160Zm-20-305Z" />
     </svg>;
 
     const shiftItem = (items, current, direction) => {
@@ -344,9 +353,9 @@
             <div className="mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 text-white/95">
-                <span>☀</span>
+                <SunIcon />
                 <SunsetIcon />
-                <span>☾</span>
+                <MoonIcon />
               </div>
               <div className="flex rounded-full bg-white/90 p-1 shadow-sm">
                 {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-6 w-6 place-items-center rounded-full text-[11px] ${activePerson === key ? "bg-slate-950 text-white" : "text-slate-500"}`} title={p.label}>{p.avatar}</button>)}
