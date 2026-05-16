@@ -26,6 +26,12 @@
     .tap { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .tap:active { transform: scale(.98); }
     .glow-text { text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
+    .night-star {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 0 10px rgba(255, 255, 255, .82), 0 0 22px rgba(125, 211, 252, .42);
+    }
     th, b, strong { font-weight: 400; }
   </style>
 </head>
@@ -378,13 +384,21 @@
 
       return <div className="min-h-screen text-white">
           <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-12 pt-4 text-white md:px-8`}>
-            <div className="mx-auto max-w-6xl">
+            {activeSystem === "night" && <div aria-hidden="true">
+              <span className="night-star h-1 w-1 left-[12%] top-[22%]"></span>
+              <span className="night-star h-1.5 w-1.5 left-[27%] top-[13%]"></span>
+              <span className="night-star h-1 w-1 left-[41%] top-[30%]"></span>
+              <span className="night-star h-1.5 w-1.5 right-[22%] top-[18%]"></span>
+              <span className="night-star h-1 w-1 right-[10%] top-[37%]"></span>
+              <span className="night-star h-1 w-1 left-[63%] bottom-[28%]"></span>
+            </div>}
+            <div className="relative mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 text-white/95">
                 {systems.map((system) => {
                   const Icon = system.Icon;
                   const selected = activeSystem === system.key;
-                  return <button type="button" key={system.key} onClick={() => selectSystem(system.key)} className={`tap grid h-8 w-8 place-items-center rounded-full ${selected ? "text-white" : "text-white/55"}`} aria-label={`Cambiar a sistema ${system.title}`} title={system.title}>
+                  return <button type="button" key={system.key} onClick={() => selectSystem(system.key)} className={`tap grid h-8 w-8 place-items-center rounded-full outline-none focus-visible:ring-1 focus-visible:ring-white/55 ${selected ? "text-white" : "text-white/55"}`} aria-label={`Cambiar a sistema ${system.title}`} title={system.title}>
                     <Icon />
                   </button>;
                 })}
@@ -397,9 +411,9 @@
             <div className="mt-2 grid grid-cols-[1fr_151px] gap-3">
               <div className="min-w-0">
                 <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
-                <div className="mt-5 max-w-[185px]">
-                  <p className="text-[10px] font-normal uppercase leading-tight text-white">Objetivo final</p>
-                  <p className="mt-1 text-[11px] font-normal leading-tight text-white">{goalEta}</p>
+                <div className="mt-7 max-w-[218px]">
+                  <p className="text-[12px] font-normal uppercase leading-tight text-white">Objetivo final</p>
+                  <p className="mt-1 text-[13px] font-normal leading-tight text-white">{goalEta}</p>
                 </div>
               </div>
 
