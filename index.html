@@ -6,13 +6,16 @@
   <meta name="theme-color" content="#12b981" />
   <title>Nutrición Morfe</title>
   <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Poppins, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at top left, rgba(16, 185, 129, .22), transparent 28rem),
         radial-gradient(circle at top right, rgba(244, 114, 182, .18), transparent 25rem),
@@ -50,7 +53,7 @@
 
     const timeOfDayMeta = (date = new Date()) => {
       const hour = date.getHours();
-      if (hour >= 5 && hour < 12) return { key: "morning", icon: "🌅", label: "Buenos días", scene: "from-amber-100 via-orange-300 to-red-500" };
+      if (hour >= 5 && hour < 12) return { key: "morning", icon: "🌅", label: "Buenos dias", scene: "from-yellow-200 via-orange-400 to-red-700" };
       if (hour >= 12 && hour < 19) return { key: "afternoon", icon: "☀️", label: "Buenas tardes", scene: "from-sky-300 via-orange-200 to-orange-500" };
       return { key: "night", icon: "🌙", label: "Buenas noches", scene: "from-indigo-950 via-blue-950 to-blue-700" };
     };
@@ -329,41 +332,38 @@
 
       return <div className="min-h-screen px-4 py-4 md:px-8 md:py-6">
         <main className="mx-auto max-w-6xl space-y-4 md:space-y-5">
-          <section className={`relative overflow-hidden rounded-[1.8rem] bg-gradient-to-br ${timeMeta.scene}`}>
-            <div className="absolute inset-0 bg-white/62"></div>
-            <div className="relative grid grid-cols-[132px_1fr_58px] items-start gap-3 px-4 py-5 md:grid-cols-[160px_1fr_76px] md:px-6 md:py-6">
-              <div>
-                <div className="relative grid h-28 w-28 place-items-center rounded-full bg-emerald-100 md:h-32 md:w-32">
-                  <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#16a34a ${ringProgress * 3.6}deg, rgba(15,23,42,.10) 0deg)` }}></div>
-                  <div className="relative grid h-20 w-20 place-items-center rounded-full bg-white text-center shadow-inner md:h-24 md:w-24">
-                    <div>
-                      <p className="text-2xl font-black text-slate-950 md:text-3xl">{latestWeight || "—"}</p>
-                      <p className="text-[10px] font-bold text-slate-500 md:text-xs">kg actuales</p>
-                    </div>
+          <section className={`relative overflow-hidden rounded-[1.65rem] bg-gradient-to-br ${timeMeta.scene} px-5 py-4 text-white`}>
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-2 text-xl font-semibold text-white/95">
+                <span>☀</span>
+                <span>♨</span>
+                <span>☾</span>
+              </div>
+              <div className="flex rounded-full bg-white/90 p-1 shadow-sm">
+                {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-6 w-6 place-items-center rounded-full text-[11px] ${activePerson === key ? "bg-slate-950 text-white" : "text-slate-500"}`} title={p.label}>{p.avatar}</button>)}
+              </div>
+            </div>
+
+            <div className="mt-3 grid grid-cols-[1fr_104px] gap-3">
+              <div className="min-w-0">
+                <h2 className="text-[28px] font-medium leading-[1.08] tracking-normal text-white">{timeMeta.label},<br />{person.label}</h2>
+              </div>
+
+              <div className="relative grid h-[104px] w-[104px] place-items-center rounded-full bg-white/65">
+                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(#ffffff ${ringProgress * 3.6}deg, rgba(255,255,255,.52) 0deg)` }}></div>
+                <div className="absolute right-1 top-2 h-8 w-8 rounded-full bg-red-800/70"></div>
+                <div className="relative grid h-[74px] w-[74px] place-items-center rounded-full bg-orange-400 text-center shadow-inner">
+                  <div>
+                    <p className="text-2xl font-black leading-none text-white">{latestWeight || "—"}</p>
+                    <p className="mt-1 text-[7px] font-black uppercase leading-none text-white">Peso actual</p>
                   </div>
                 </div>
-                <div className="mt-3">
-                  <p className="text-[10px] font-black uppercase text-emerald-700 md:text-xs">Objetivo final</p>
-                  <p className="text-2xl font-black leading-none text-emerald-700 md:text-3xl">{person.target} kg</p>
-                </div>
               </div>
+            </div>
 
-              <div className="min-w-0 pt-2">
-                <p className="text-xs font-bold text-emerald-700 md:text-sm">{clock}</p>
-                <h2 className="text-3xl font-black leading-none tracking-tight text-slate-950 md:text-5xl">{timeMeta.label}, {person.label}</h2>
-                <div className="mt-4">
-                  <p className="text-[10px] font-black uppercase text-emerald-700 md:text-xs">Estimación</p>
-                  <p className="max-w-sm text-sm font-black leading-tight text-emerald-700 md:text-lg">{goalEta}</p>
-                  <p className="mt-1 max-w-xs text-[11px] font-bold leading-tight text-slate-500 md:text-xs">Basado en la bajada semanal de tus registros.</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-end gap-3">
-                <div className="text-5xl leading-none md:text-6xl" title={timeMeta.label}>{timeMeta.icon}</div>
-                <div className="flex rounded-2xl bg-white/70 p-1 shadow-sm ring-1 ring-slate-200">
-                  {Object.entries(people).map(([key, p]) => <button key={key} onClick={() => setActivePerson(key)} className={`tap grid h-7 w-7 place-items-center rounded-xl text-xs ${activePerson === key ? "bg-slate-950 text-white" : "text-slate-500"}`} title={p.label}>{p.avatar}</button>)}
-                </div>
-              </div>
+            <div className="mt-1 max-w-[185px] pb-1">
+              <p className="text-[10px] font-black uppercase leading-tight text-white">Objetivo final</p>
+              <p className="mt-1 text-[11px] font-semibold leading-tight text-white">{goalEta}</p>
             </div>
           </section>
 
