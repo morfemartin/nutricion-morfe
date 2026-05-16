@@ -371,11 +371,12 @@
                 <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
               </div>
 
-              <div className="relative grid h-[116px] w-[116px] place-items-center rounded-full bg-white/18 shadow-[inset_0_1px_10px_rgba(255,255,255,.45),0_18px_45px_rgba(0,0,0,.18)] ring-1 ring-white/55 backdrop-blur-xl">
-                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(rgba(255,255,255,.92) ${ringProgress * 3.6}deg, rgba(255,255,255,.30) 0deg)` }}></div>
-                <div className="absolute inset-[10px] rounded-full bg-white/8 backdrop-blur-xl"></div>
-                <div className="absolute right-1 top-3 h-8 w-8 rounded-full bg-red-900/45 shadow-[inset_0_1px_8px_rgba(255,255,255,.20)] backdrop-blur-md"></div>
-                <div className="relative grid h-[76px] w-[76px] place-items-center rounded-full bg-orange-500/30 text-center shadow-[inset_0_1px_12px_rgba(255,255,255,.32)] ring-1 ring-white/35 backdrop-blur-2xl">
+              <div className="relative grid h-[116px] w-[116px] place-items-center rounded-full bg-white/12 shadow-[inset_0_2px_18px_rgba(255,255,255,.42),inset_0_-18px_30px_rgba(255,255,255,.12),0_22px_45px_rgba(0,0,0,.20)] ring-1 ring-white/45 backdrop-blur-2xl">
+                <div className="absolute -inset-1 rounded-full opacity-90 blur-md" style={{ background: `conic-gradient(rgba(255,255,255,.72) ${ringProgress * 3.6}deg, transparent 0deg)` }}></div>
+                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(rgba(255,255,255,.96) ${ringProgress * 3.6}deg, rgba(255,255,255,.22) 0deg)` }}></div>
+                <div className="absolute inset-[8px] rounded-full bg-white/12 shadow-[inset_0_1px_16px_rgba(255,255,255,.35)] backdrop-blur-xl"></div>
+                <div className="absolute inset-[18px] rounded-full bg-orange-400/12 shadow-[inset_0_1px_18px_rgba(255,255,255,.30)] backdrop-blur-2xl"></div>
+                <div className="relative grid h-[76px] w-[76px] place-items-center rounded-full bg-orange-500/24 text-center shadow-[inset_0_1px_16px_rgba(255,255,255,.36),0_0_26px_rgba(255,255,255,.18)] ring-1 ring-white/30 backdrop-blur-2xl">
                   <div>
                     <p className="glow-text text-2xl font-normal leading-none text-white">{latestWeight || "—"}</p>
                     <p className="glow-text mt-1 text-[7px] font-normal uppercase leading-none text-white">Peso actual</p>
