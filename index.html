@@ -31,9 +31,25 @@
         radial-gradient(ellipse at 22% 106%, rgba(255, 233, 93, .98) 0%, rgba(255, 206, 65, .82) 10%, rgba(255, 104, 20, .68) 25%, rgba(90, 14, 4, .74) 50%, rgba(38, 6, 0, .98) 100%),
         linear-gradient(150deg, #260600 0%, #581006 44%, #f03a08 100%) !important;
     }
+    .afternoon-hero {
+      background:
+        radial-gradient(ellipse at 78% 102%, rgba(255, 226, 89, .94) 0%, rgba(255, 145, 37, .78) 16%, rgba(198, 38, 8, .68) 34%, rgba(69, 8, 3, .88) 64%, rgba(28, 4, 0, 1) 100%),
+        linear-gradient(150deg, #1c0400 0%, #4f0b04 44%, #d73507 100%) !important;
+    }
+    .night-hero {
+      background:
+        radial-gradient(ellipse at 77% 110%, rgba(97, 176, 255, .72) 0%, rgba(34, 94, 245, .58) 22%, rgba(16, 33, 104, .78) 48%, rgba(5, 8, 33, .98) 100%),
+        linear-gradient(150deg, #050821 0%, #11194b 48%, #1d4ed8 100%) !important;
+    }
     .morning-sun-halo,
     .morning-sun-core,
-    .morning-sun-veil {
+    .morning-sun-veil,
+    .afternoon-sun-halo,
+    .afternoon-sun-core,
+    .afternoon-sun-veil,
+    .night-glow-halo,
+    .night-glow-core,
+    .night-glow-veil {
       position: absolute;
       pointer-events: none;
       border-radius: 999px;
@@ -61,6 +77,54 @@
       width: 20rem;
       background: rgba(250, 64, 10, .32);
       filter: blur(38px);
+    }
+    .afternoon-sun-halo {
+      right: -10%;
+      bottom: -42%;
+      height: 16rem;
+      width: 23rem;
+      background: rgba(255, 174, 45, .38);
+      filter: blur(25px);
+    }
+    .afternoon-sun-core {
+      right: 7%;
+      bottom: -31%;
+      height: 8.5rem;
+      width: 14rem;
+      background: rgba(255, 210, 80, .82);
+      filter: blur(15px);
+    }
+    .afternoon-sun-veil {
+      right: 11%;
+      bottom: -4%;
+      height: 8.5rem;
+      width: 23rem;
+      background: rgba(255, 75, 12, .34);
+      filter: blur(40px);
+    }
+    .night-glow-halo {
+      right: -12%;
+      bottom: -38%;
+      height: 17rem;
+      width: 22rem;
+      background: rgba(96, 165, 250, .26);
+      filter: blur(28px);
+    }
+    .night-glow-core {
+      right: 9%;
+      bottom: -30%;
+      height: 9rem;
+      width: 12rem;
+      background: rgba(147, 197, 253, .38);
+      filter: blur(18px);
+    }
+    .night-glow-veil {
+      right: 20%;
+      bottom: -4%;
+      height: 9rem;
+      width: 20rem;
+      background: rgba(37, 99, 235, .28);
+      filter: blur(42px);
     }
     .night-star {
       position: absolute;
@@ -104,8 +168,8 @@
 
     const systemMeta = {
       morning: { key: "morning", label: "Buenos dias", scene: "morning-hero", defaultMeal: "Desayuno", title: "Mañana", Icon: null },
-      afternoon: { key: "afternoon", label: "Buenas tardes", scene: "from-sky-300 via-orange-300 to-red-600", defaultMeal: "Almuerzo", title: "Tarde", Icon: null },
-      night: { key: "night", label: "Buenas noches", scene: "from-indigo-950 via-blue-950 to-blue-700", defaultMeal: "Cena", title: "Noche", Icon: null },
+      afternoon: { key: "afternoon", label: "Buenas tardes", scene: "afternoon-hero", defaultMeal: "Almuerzo", title: "Tarde", Icon: null },
+      night: { key: "night", label: "Buenas noches", scene: "night-hero", defaultMeal: "Cena", title: "Noche", Icon: null },
     };
 
     const orderedSystems = (activeKey) => {
@@ -421,6 +485,9 @@
       return <div className="min-h-screen text-white">
           <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-12 pt-4 text-white md:px-8`}>
             {activeSystem === "night" && <div aria-hidden="true">
+              <span className="night-glow-halo"></span>
+              <span className="night-glow-core"></span>
+              <span className="night-glow-veil"></span>
               <span className="night-star h-1 w-1 left-[12%] top-[22%]"></span>
               <span className="night-star h-1.5 w-1.5 left-[27%] top-[13%]"></span>
               <span className="night-star h-1 w-1 left-[41%] top-[30%]"></span>
@@ -432,6 +499,11 @@
               <span className="morning-sun-halo"></span>
               <span className="morning-sun-core"></span>
               <span className="morning-sun-veil"></span>
+            </div>}
+            {activeSystem === "afternoon" && <div aria-hidden="true">
+              <span className="afternoon-sun-halo"></span>
+              <span className="afternoon-sun-core"></span>
+              <span className="afternoon-sun-veil"></span>
             </div>}
             <div className="relative mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
