@@ -26,6 +26,42 @@
     .tap { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .tap:active { transform: scale(.98); }
     .glow-text { text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
+    .morning-hero {
+      background:
+        radial-gradient(ellipse at 22% 106%, rgba(255, 233, 93, .98) 0%, rgba(255, 206, 65, .82) 10%, rgba(255, 104, 20, .68) 25%, rgba(90, 14, 4, .74) 50%, rgba(38, 6, 0, .98) 100%),
+        linear-gradient(150deg, #260600 0%, #581006 44%, #f03a08 100%) !important;
+    }
+    .morning-sun-halo,
+    .morning-sun-core,
+    .morning-sun-veil {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+    }
+    .morning-sun-halo {
+      left: -6%;
+      bottom: -46%;
+      height: 17rem;
+      width: 20rem;
+      background: rgba(255, 229, 91, .42);
+      filter: blur(24px);
+    }
+    .morning-sun-core {
+      left: 11%;
+      bottom: -34%;
+      height: 9rem;
+      width: 11rem;
+      background: rgba(255, 236, 107, .92);
+      filter: blur(13px);
+    }
+    .morning-sun-veil {
+      left: 18%;
+      bottom: -10%;
+      height: 10rem;
+      width: 20rem;
+      background: rgba(250, 64, 10, .32);
+      filter: blur(38px);
+    }
     .night-star {
       position: absolute;
       border-radius: 999px;
@@ -67,7 +103,7 @@
     };
 
     const systemMeta = {
-      morning: { key: "morning", label: "Buenos dias", scene: "from-yellow-200 via-orange-400 to-red-700", defaultMeal: "Desayuno", title: "Mañana", Icon: null },
+      morning: { key: "morning", label: "Buenos dias", scene: "morning-hero", defaultMeal: "Desayuno", title: "Mañana", Icon: null },
       afternoon: { key: "afternoon", label: "Buenas tardes", scene: "from-sky-300 via-orange-300 to-red-600", defaultMeal: "Almuerzo", title: "Tarde", Icon: null },
       night: { key: "night", label: "Buenas noches", scene: "from-indigo-950 via-blue-950 to-blue-700", defaultMeal: "Cena", title: "Noche", Icon: null },
     };
@@ -392,6 +428,11 @@
               <span className="night-star h-1 w-1 right-[10%] top-[37%]"></span>
               <span className="night-star h-1 w-1 left-[63%] bottom-[28%]"></span>
             </div>}
+            {activeSystem === "morning" && <div aria-hidden="true">
+              <span className="morning-sun-halo"></span>
+              <span className="morning-sun-core"></span>
+              <span className="morning-sun-veil"></span>
+            </div>}
             <div className="relative mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 text-white/95">
@@ -412,8 +453,8 @@
               <div className="min-w-0">
                 <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
                 <div className="mt-10 max-w-[218px]">
-                  <p className="text-[12px] font-normal uppercase leading-tight text-white">Objetivo final</p>
-                  <p className="mt-1 text-[13px] font-normal leading-tight text-white">{goalEta}</p>
+                  <p className="glow-text text-[12px] font-normal uppercase leading-tight text-white">Objetivo final</p>
+                  <p className="glow-text mt-1 text-[13px] font-normal leading-tight text-white">{goalEta}</p>
                 </div>
               </div>
 
