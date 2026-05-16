@@ -412,6 +412,38 @@
       if (distance !== null) return distance;
       return 1;
     };
+    const demoWorkoutLogs = () => {
+      const today = new Date(`${todayISO()}T12:00:00`);
+      const muscles = [
+        { muscle: "Hombros", exercise: "Press hombro", base: 18, step: 1.1 },
+        { muscle: "Pecho", exercise: "Press pecho", base: 34, step: .9 },
+        { muscle: "Espalda", exercise: "Dominadas asistidas", base: 8, step: .7 },
+        { muscle: "Brazos", exercise: "Curl bíceps", base: 13, step: .55 },
+        { muscle: "Antebrazo", exercise: "Curl muñeca", base: 10, step: .45 },
+        { muscle: "Pierna", exercise: "Prensa segura", base: 55, step: 1.8 },
+        { muscle: "Abdomen", exercise: "Plancha", base: 35, step: 2.2, tracking: "timed" },
+        { muscle: "Cardio", exercise: "Running base", base: 5, step: .35, tracking: "distance" },
+      ];
+      return muscles.flatMap((item, muscleIndex) => Array.from({ length: 8 }, (_, weekIndex) => {
+        const date = new Date(today);
+        date.setDate(date.getDate() - (7 - weekIndex) * 7 - (muscleIndex % 3));
+        const wave = Math.sin((weekIndex + muscleIndex) * .9) * item.step;
+        const value = Math.max(1, item.base + weekIndex * item.step + wave);
+        return {
+          id: `demo-${item.muscle}-${weekIndex}`,
+          person: "martin",
+          date: isoFromLocalDate(date),
+          module: item.muscle === "Cardio" ? "home" : "gym",
+          exercise: item.exercise,
+          muscle: item.muscle,
+          tracking: item.tracking || "weighted",
+          weight: item.tracking ? "" : value.toFixed(1),
+          reps: item.tracking ? "" : "10",
+          duration: item.tracking === "timed" ? value.toFixed(0) : "",
+          distance: item.tracking === "distance" ? value.toFixed(1) : "",
+        };
+      }));
+    };
     const buildMusclePerformance = (workouts = []) => {
       const today = new Date(`${todayISO()}T12:00:00`);
       const buckets = {};
@@ -565,8 +597,9 @@
       const numericWeights = sortedLogs.filter((x) => x.weight).slice(0, 7).map((x) => Number(x.weight)).filter(Boolean);
       const avg7 = numericWeights.length ? (numericWeights.reduce((a, b) => a + b, 0) / numericWeights.length).toFixed(1) : "—";
       const latestWeight = latest?.weight ? Number(latest.weight) : null;
-      const remainingToGoal = latestWeight ? Math.max(0, latestWeight - person.target) : person.progressRange;
-      const progress = latestWeight ? Math.max(0, Math.min(100, ((person.progressRange - remainingToGoal) / person.progressRange) * 100)) : 0;
+      const displayWeight = latestWeight || person.start;
+      const remainingToGoal = displayWeight ? Math.max(0, displayWeight - person.target) : person.progressRange;
+      const progress = displayWeight ? Math.max(0, Math.min(100, ((person.progressRange - remainingToGoal) / person.progressRange) * 100)) : 0;
       const ringProgress = Math.round(progress);
       const goalEta = estimateGoalEta(sortedLogs, person.target);
       const timeMeta = systemMeta[activeSystem];
@@ -606,7 +639,9 @@
       ];
       const ratioProgress = progressHigher(currentRatio, goals.startRatio, goals.targetRatio);
       const definitionProgress = Math.round((ratioProgress * 1.4 + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / 4.4);
-      const performanceMuscles = buildMusclePerformance(logs.workouts?.[activePerson] || []);
+      const actualWorkouts = logs.workouts?.[activePerson] || [];
+      const performanceIsDemo = activePerson === "martin" && !actualWorkouts.length;
+      const performanceMuscles = buildMusclePerformance(performanceIsDemo ? demoWorkoutLogs() : actualWorkouts);
       const visiblePerformanceMuscles = performanceMuscles.filter((muscle) => visibleMuscles[muscle.name] !== false);
       const performanceValues = visiblePerformanceMuscles.flatMap((muscle) => muscle.values.filter((value) => value !== null));
       const performanceMin = performanceValues.length ? Math.min(...performanceValues) : 0;
@@ -855,7 +890,7 @@
                 </svg>
                 <div className="relative grid h-[94px] w-[94px] place-items-center text-center">
                   <div>
-                    <p className="glow-text text-3xl font-normal leading-none text-white">{latestWeight || "—"}</p>
+                    <p className="glow-text text-3xl font-normal leading-none text-white">{displayWeight || "—"}</p>
                     <p className="glow-text mt-1 text-[8px] font-normal uppercase leading-none text-white">Peso actual</p>
                   </div>
                 </div>
@@ -1046,7 +1081,7 @@
                       <p className="text-xs font-normal uppercase text-white/50">Carga por músculo</p>
                       <p className="text-sm font-light text-white/55">Últimas 8 semanas</p>
                     </div>
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white/70">{performanceValues.length ? "activo" : "sin datos"}</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white/70">{performanceIsDemo ? "demo 2 meses" : performanceValues.length ? "activo" : "sin datos"}</span>
                   </div>
                   <div className="relative h-40 overflow-hidden rounded-[1.4rem] bg-black/25">
                     {performanceValues.length ? <svg viewBox="0 0 280 130" className="h-full w-full" preserveAspectRatio="none" aria-label="Tendencia de rendimiento por músculo">
