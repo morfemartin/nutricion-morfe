@@ -353,7 +353,7 @@
       };
 
       return <div className="min-h-screen text-white">
-          <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-9 pt-5 text-white md:px-8`}>
+          <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-12 pt-4 text-white md:px-8`}>
             <div className="mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 text-white/95">
@@ -366,9 +366,13 @@
               </div>
             </div>
 
-            <div className="mt-3 grid grid-cols-[1fr_151px] gap-3">
+            <div className="mt-2 grid grid-cols-[1fr_151px] gap-3">
               <div className="min-w-0">
                 <h2 className="text-[40px] font-normal leading-[1.02] tracking-normal text-white md:text-[56px]">{timeMeta.label},<br />{person.label}</h2>
+                <div className="mt-5 max-w-[185px]">
+                  <p className="text-[10px] font-normal uppercase leading-tight text-white">Objetivo final</p>
+                  <p className="mt-1 text-[11px] font-normal leading-tight text-white">{goalEta}</p>
+                </div>
               </div>
 
               <div className="relative grid h-[151px] w-[151px] place-items-center">
@@ -386,10 +390,6 @@
               </div>
             </div>
 
-            <div className="mt-1 max-w-[185px] pb-1">
-              <p className="text-[10px] font-normal uppercase leading-tight text-white">Objetivo final</p>
-              <p className="mt-1 text-[11px] font-normal leading-tight text-white">{goalEta}</p>
-            </div>
             </div>
           </section>
 
