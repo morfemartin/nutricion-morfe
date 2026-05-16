@@ -1,9 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Templo griego Nutrición Morfe">
-  <rect width="512" height="512" rx="128" fill="#bef264"/>
-  <circle cx="256" cy="256" r="166" fill="#07140d" opacity=".96"/>
-  <path d="M128 188 256 116l128 72H128Z" fill="#f8ffe8"/>
-  <path d="M156 204h200v26H156z" fill="#d9f99d"/>
-  <path d="M176 250h32v96h-32zM240 250h32v96h-32zM304 250h32v96h-32z" fill="#f8ffe8"/>
-  <path d="M148 358h216v30H148z" fill="#d9f99d"/>
-  <path d="M128 402h256v28H128z" fill="#f8ffe8"/>
+  <defs>
+    <radialGradient id="morfeMorningGlow" cx="74%" cy="86%" r="82%">
+      <stop offset="0%" stop-color="#ffe66d"/>
+      <stop offset="24%" stop-color="#ff9f32"/>
+      <stop offset="55%" stop-color="#f04a16"/>
+      <stop offset="100%" stop-color="#240400"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#morfeMorningGlow)"/>
+  <path d="M128 204 256 126l128 78H128Z" fill="#fff"/>
+  <path d="M154 222h204v26H154z" fill="#fff"/>
+  <path d="M178 270h32v98h-32zM240 270h32v98h-32zM302 270h32v98h-32z" fill="#fff"/>
+  <path d="M148 386h216v28H148z" fill="#fff"/>
+  <path d="M126 430h260v26H126z" fill="#fff"/>
 </svg>

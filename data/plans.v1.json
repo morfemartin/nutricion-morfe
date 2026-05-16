@@ -249,20 +249,33 @@
       "routines": {
         "Lunes": {
           "gym": {
-            "icon": "🏋️",
+            "icon": "✨",
             "type": "Gym",
-            "title": "Espalda + brazos",
-            "detail": "Cuerpo completo simple, técnica cómoda y sensación de avance.",
+            "title": "Pecho + hombro + espalda ligera + spinning",
+            "detail": "Día parecido al lunes de Martín, con spinning como cardio principal.",
             "exercises": [
-              { "id": "mom-mon-pulldown", "icon": "⬇️", "name": "Jalón al pecho", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-mon-row", "icon": "🚣", "name": "Remo en máquina", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-mon-curl", "icon": "💪", "name": "Curl bíceps máquina o mancuerna", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-mon-triceps", "icon": "🔱", "name": "Tríceps en polea o máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-mon-laterals", "icon": "🦾", "name": "Elevaciones laterales", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
+              { "id": "mom-mon-spinning", "icon": "🚴", "name": "Spinning", "sets": 1, "reps": "30-45 min", "intensity": "Moderada", "tracking": "timed" },
+              { "id": "mom-fri-chest-press", "icon": "🏋️", "name": "Press pecho máquina", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
+              { "id": "mom-fri-row", "icon": "🚣", "name": "Remo ligero máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
+              { "id": "mom-fri-shoulder", "icon": "🦾", "name": "Press hombro máquina/mancuernas", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
+              { "id": "mom-fri-face-pull", "icon": "🪢", "name": "Face pull", "sets": 3, "reps": "12-15", "intensity": "Suave/Moderada", "tracking": "weighted" },
+              { "id": "mom-fri-pec", "icon": "🛡️", "name": "Pec deck o aperturas", "sets": 2, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
+              { "id": "mom-fri-abs", "icon": "🧘", "name": "Abdomen simple", "sets": 2, "reps": "12-15", "intensity": "Suave", "tracking": "bodyweight" }
             ]
           }
         },
         "Martes": {
+          "gym": {
+            "icon": "🚶",
+            "type": "Activo",
+            "title": "Cardio suave / pasos",
+            "detail": "Movimiento suave para acompañar el día de running de Martín.",
+            "exercises": [
+              { "id": "mom-wed-walk", "icon": "🚶", "name": "Caminata tranquila", "sets": 1, "reps": "20-40 min", "intensity": "Suave", "tracking": "timed" }
+            ]
+          }
+        },
+        "Miércoles": {
           "gym": {
             "icon": "🦵",
             "type": "Gym",
@@ -277,45 +290,33 @@
             ]
           }
         },
-        "Miércoles": {
+        "Jueves": {
           "gym": {
-            "icon": "🚶",
-            "type": "Activo",
-            "title": "Caminata / pasos",
-            "detail": "Actividad suave para mover gasto sin fatigar.",
+            "icon": "🏋️",
+            "type": "Gym",
+            "title": "Espalda + brazos",
+            "detail": "Día parecido al jueves de espalda de Martín, adaptado a técnica cómoda.",
             "exercises": [
-              { "id": "mom-wed-walk", "icon": "🚶", "name": "Caminata tranquila", "sets": 1, "reps": "20-40 min", "intensity": "Suave", "tracking": "timed" }
+              { "id": "mom-mon-pulldown", "icon": "⬇️", "name": "Jalón al pecho", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
+              { "id": "mom-mon-row", "icon": "🚣", "name": "Remo en máquina", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
+              { "id": "mom-mon-curl", "icon": "💪", "name": "Curl bíceps máquina o mancuerna", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
+              { "id": "mom-mon-triceps", "icon": "🔱", "name": "Tríceps en polea o máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
+              { "id": "mom-mon-laterals", "icon": "🦾", "name": "Elevaciones laterales", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
             ]
           }
         },
-        "Jueves": {
+        "Viernes": {
           "gym": {
             "icon": "🍑",
             "type": "Gym",
             "title": "Pierna: femoral + glúteo",
-            "detail": "Rutina compartida con Martín, adaptando cargas.",
+            "detail": "Segundo bloque de pierna de la semana, adaptando cargas.",
             "exercises": [
               { "id": "mom-thu-curl", "icon": "🦿", "name": "Curl femoral sentado/acostado", "sets": 4, "reps": "10-12", "intensity": "Fuerte", "tracking": "weighted" },
               { "id": "mom-thu-rdl", "icon": "🏋️", "name": "Peso muerto rumano con mancuernas", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
               { "id": "mom-thu-lunges", "icon": "🧱", "name": "Zancadas o búlgaras asistidas", "sets": 2, "reps": "8-10 por pierna", "intensity": "Moderada", "tracking": "weighted" },
               { "id": "mom-thu-abduction", "icon": "⚙️", "name": "Abducciones en máquina", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
               { "id": "mom-thu-calves", "icon": "🦵", "name": "Pantorrillas", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
-            ]
-          }
-        },
-        "Viernes": {
-          "gym": {
-            "icon": "✨",
-            "type": "Gym",
-            "title": "Pecho + hombro + espalda ligera",
-            "detail": "Cerrar la semana con constancia, no con castigo.",
-            "exercises": [
-              { "id": "mom-fri-chest-press", "icon": "🏋️", "name": "Press pecho máquina", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-fri-row", "icon": "🚣", "name": "Remo ligero máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-shoulder", "icon": "🦾", "name": "Press hombro máquina/mancuernas", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-face-pull", "icon": "🪢", "name": "Face pull", "sets": 3, "reps": "12-15", "intensity": "Suave/Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-pec", "icon": "🛡️", "name": "Pec deck o aperturas", "sets": 2, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-abs", "icon": "🧘", "name": "Abdomen simple", "sets": 2, "reps": "12-15", "intensity": "Suave", "tracking": "bodyweight" }
             ]
           }
         },
