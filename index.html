@@ -17,18 +17,18 @@
     body {
       font-family: Poppins, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(16, 185, 129, .22), transparent 28rem),
-        radial-gradient(circle at top right, rgba(244, 114, 182, .18), transparent 25rem),
-        linear-gradient(180deg, #f8fafc 0%, #eef7f1 46%, #f9fafb 100%);
+        radial-gradient(circle at top left, rgba(244, 114, 182, .12), transparent 25rem),
+        radial-gradient(circle at top right, rgba(59, 130, 246, .12), transparent 28rem),
+        linear-gradient(180deg, #050509 0%, #0b0d13 54%, #050509 100%);
     }
     .hide-scroll::-webkit-scrollbar { display: none; }
-    .glass { background: rgba(255, 255, 255, .74); backdrop-filter: blur(18px); }
+    .glass { background: rgba(255, 255, 255, .08); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .08); }
     .tap { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .tap:active { transform: scale(.98); }
     th, b, strong { font-weight: 400; }
   </style>
 </head>
-<body class="text-slate-950">
+<body class="text-white">
   <div id="root"></div>
   <script type="text/babel">
     const SHEET_API_URL = "https://script.google.com/macros/s/AKfycby9jIu1KAEwT2CdNI8zvU5afuazzQ38RenIZRMdAoXDT7uJLW-e3OhO_YYRmMs-by6W/exec";
@@ -58,6 +58,14 @@
       if (hour >= 12 && hour < 19) return { key: "afternoon", icon: "☀️", label: "Buenas tardes", scene: "from-sky-300 via-orange-200 to-orange-500" };
       return { key: "night", icon: "🌙", label: "Buenas noches", scene: "from-indigo-950 via-blue-950 to-blue-700" };
     };
+
+    const SunsetIcon = () => <svg viewBox="0 0 64 64" className="h-7 w-7" aria-hidden="true">
+      <path d="M16 34h32" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M22 44h20" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M28 54h8" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M21 28a11 11 0 0 1 22 0" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <path d="M32 7v8M12 19l6 6M52 19l-6 6" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+    </svg>;
 
     const shiftItem = (items, current, direction) => {
       const index = items.indexOf(current);
@@ -331,13 +339,13 @@
         a.click();
       };
 
-      return <div className="min-h-screen px-4 py-4 md:px-8 md:py-6">
-        <main className="mx-auto max-w-6xl space-y-4 md:space-y-5">
-          <section className={`relative overflow-hidden rounded-[1.65rem] bg-gradient-to-br ${timeMeta.scene} px-5 py-4 text-white`}>
+      return <div className="min-h-screen text-white">
+          <section className={`relative overflow-hidden bg-gradient-to-br ${timeMeta.scene} px-5 pb-9 pt-5 text-white md:px-8`}>
+            <div className="mx-auto max-w-6xl">
             <div className="flex items-start justify-between gap-3">
-              <div className="flex items-center gap-2 text-xl font-normal text-white/95">
+              <div className="flex items-center gap-3 text-white/95">
                 <span>☀</span>
-                <span>♨</span>
+                <SunsetIcon />
                 <span>☾</span>
               </div>
               <div className="flex rounded-full bg-white/90 p-1 shadow-sm">
@@ -366,49 +374,51 @@
               <p className="text-[10px] font-normal uppercase leading-tight text-white">Objetivo final</p>
               <p className="mt-1 text-[11px] font-normal leading-tight text-white">{goalEta}</p>
             </div>
+            </div>
           </section>
 
+        <main className="mx-auto max-w-6xl space-y-4 px-4 py-4 md:space-y-5 md:px-8 md:py-6">
           <section className="grid gap-4 md:grid-cols-[.92fr_1.08fr]">
             <div className="grid gap-4 md:contents">
               <div className="space-y-4">
-                <div className="rounded-[1.7rem] bg-white/90 p-4 text-slate-950 shadow-sm">
+                <div className="rounded-[1.7rem] bg-white/10 p-4 text-white ring-1 ring-white/10">
                   <div className="flex items-center justify-between gap-3">
-                    <button onClick={() => moveDay(-1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-slate-950 text-white">‹</button>
+                    <button onClick={() => moveDay(-1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-white text-slate-950">‹</button>
                     <div className="text-center">
-                      <p className="text-xs font-normal uppercase text-slate-500">Día de la semana</p>
+                      <p className="text-xs font-normal uppercase text-white/50">Día de la semana</p>
                       <h3 className="text-3xl font-normal">{activeDay}</h3>
                     </div>
-                    <button onClick={() => moveDay(1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-slate-950 text-white">›</button>
+                    <button onClick={() => moveDay(1)} className="tap grid h-11 w-11 place-items-center rounded-2xl bg-white text-slate-950">›</button>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between gap-3 rounded-[1.4rem] bg-slate-100 p-2">
-                    <button onClick={() => moveMeal(-1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white shadow-sm">‹</button>
+                  <div className="mt-4 flex items-center justify-between gap-3 rounded-[1.4rem] bg-white/10 p-2">
+                    <button onClick={() => moveMeal(-1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white/15 text-white">‹</button>
                     <div className="text-center">
-                      <p className="text-xs font-normal uppercase text-slate-500">{clock}</p>
+                      <p className="text-xs font-normal uppercase text-white/50">{clock}</p>
                       <p className="text-2xl font-normal">{meal.emoji} {activeMeal}</p>
                     </div>
-                    <button onClick={() => moveMeal(1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white shadow-sm">›</button>
+                    <button onClick={() => moveMeal(1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white/15 text-white">›</button>
                   </div>
                 </div>
 
-                <div className={`rounded-[1.7rem] bg-gradient-to-br ${meal.accent} p-4 text-slate-950 shadow-sm`}>
+                <div className="rounded-[1.7rem] bg-white/10 p-4 text-white ring-1 ring-white/10">
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs font-normal uppercase text-slate-600">Lo que toca comer</p>
+                      <p className="text-xs font-normal uppercase text-white/50">Lo que toca comer</p>
                       <h3 className="text-2xl font-normal">{activeMeal}</h3>
                     </div>
-                    <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-normal">{meal.hint}</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white">{meal.hint}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                    {mealItems.map((item, index) => <div key={`${item.title}-${index}`} className="rounded-2xl bg-white/75 p-3 shadow-sm">
+                    {mealItems.map((item, index) => <div key={`${item.title}-${index}`} className="rounded-2xl bg-white/10 p-3 ring-1 ring-white/10">
                       <div className="text-2xl">{item.emoji}</div>
                       <p className="mt-2 text-sm font-normal leading-tight">{item.title}</p>
-                      <p className="mt-1 text-xs font-light text-slate-500">{item.amount || "al gusto"}</p>
+                      <p className="mt-1 text-xs font-light text-white/50">{item.amount || "al gusto"}</p>
                     </div>)}
                   </div>
                 </div>
 
-                <div className="rounded-[1.7rem] bg-slate-950 p-4 text-white shadow-sm">
+                <div className="rounded-[1.7rem] bg-white/10 p-4 text-white ring-1 ring-white/10">
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <p className="text-xs font-normal uppercase text-white/50">Rutina actual</p>
@@ -425,22 +435,22 @@
           <section className="rounded-[2rem] glass p-5 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <p className="text-sm font-light text-slate-500">Registro rápido</p>
+                <p className="text-sm font-light text-white/50">Registro rápido</p>
                 <h3 className="text-2xl font-normal">{person.label}</h3>
               </div>
-              <div className="flex items-center gap-2 text-xs font-light text-slate-600">
+              <div className="flex items-center gap-2 text-xs font-light text-white/50">
                 <span>{status}</span>
-                <span className="rounded-2xl bg-white px-3 py-2 shadow-sm">{todaysLogs.length} hoy</span>
+                <span className="rounded-2xl bg-white/10 px-3 py-2 text-white shadow-sm">{todaysLogs.length} hoy</span>
               </div>
             </div>
 
             <div className="mt-4 grid gap-2 md:grid-cols-6">
-              <input className="rounded-2xl bg-white/80 p-3 font-light outline-none ring-1 ring-white/70 md:col-span-2" type="date" value={form.date} onChange={e => handleDate(e.target.value)} />
-              <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Peso kg" value={form.weight} onChange={e => setForm({...form, weight: e.target.value})} />
-              <input inputMode="decimal" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Cintura cm" value={form.waist} onChange={e => setForm({...form, waist: e.target.value})} />
-              <input inputMode="numeric" className="rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70" placeholder="Pasos" value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} />
-              <button disabled={loading} onClick={addLog} className="tap rounded-2xl bg-slate-950 p-3 font-normal text-white shadow-lg shadow-slate-950/15">{loading ? "Guardando..." : "+ Guardar"}</button>
-              <textarea className="min-h-20 rounded-2xl bg-white/80 p-3 outline-none ring-1 ring-white/70 md:col-span-6" placeholder="Notas: hambre, fuerza, sueño..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} />
+              <input className="rounded-2xl bg-white/10 p-3 font-light text-white outline-none ring-1 ring-white/10 md:col-span-2" type="date" value={form.date} onChange={e => handleDate(e.target.value)} />
+              <input inputMode="decimal" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Peso kg" value={form.weight} onChange={e => setForm({...form, weight: e.target.value})} />
+              <input inputMode="decimal" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Cintura cm" value={form.waist} onChange={e => setForm({...form, waist: e.target.value})} />
+              <input inputMode="numeric" className="rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40" placeholder="Pasos" value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} />
+              <button disabled={loading} onClick={addLog} className="tap rounded-2xl bg-white p-3 font-normal text-slate-950 shadow-lg shadow-black/15">{loading ? "Guardando..." : "+ Guardar"}</button>
+              <textarea className="min-h-20 rounded-2xl bg-white/10 p-3 text-white outline-none ring-1 ring-white/10 placeholder:text-white/40 md:col-span-6" placeholder="Notas: hambre, fuerza, sueño..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} />
             </div>
           </section>
 
@@ -448,73 +458,73 @@
             <div className="rounded-[2rem] glass p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-light text-slate-500">Progreso visual</p>
+                  <p className="text-sm font-light text-white/50">Progreso visual</p>
                   <h3 className="text-2xl font-normal">{latest?.weight || "—"} kg</h3>
                 </div>
-                <div className="rounded-2xl bg-white px-3 py-2 text-right shadow-sm">
-                  <p className="text-xs font-light text-slate-500">Prom. 7</p>
+                <div className="rounded-2xl bg-white/10 px-3 py-2 text-right shadow-sm">
+                  <p className="text-xs font-light text-white/50">Prom. 7</p>
                   <p className="font-normal">{avg7} kg</p>
                 </div>
               </div>
-              <div className="mt-5 h-4 overflow-hidden rounded-full bg-white">
+              <div className="mt-5 h-4 overflow-hidden rounded-full bg-white/10">
                 <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-lime-300" style={{ width: `${progress}%` }}></div>
               </div>
-              <div className="mt-4 flex h-24 items-end gap-2 rounded-[1.4rem] bg-white/70 p-3">
+              <div className="mt-4 flex h-24 items-end gap-2 rounded-[1.4rem] bg-white/10 p-3">
                 {sparkWeights.length ? sparkWeights.map((value, index) => {
                   const height = maxSpark === minSpark ? 52 : 28 + ((value - minSpark) / (maxSpark - minSpark)) * 52;
                   return <div key={`${value}-${index}`} className="flex-1 rounded-t-xl bg-gradient-to-t from-emerald-600 to-lime-300" style={{ height }} title={`${value} kg`}></div>
-                }) : <div className="grid h-full w-full place-items-center text-sm font-light text-slate-400">Sin pesos todavía</div>}
+                }) : <div className="grid h-full w-full place-items-center text-sm font-light text-white/40">Sin pesos todavía</div>}
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-white/75 p-3"><p className="text-xs font-light text-slate-500">Meta</p><p className="font-normal">{person.goal}</p></div>
-                <div className="rounded-2xl bg-white/75 p-3"><p className="text-xs font-light text-slate-500">Plan</p><p className="font-normal">{person.calories}</p></div>
+                <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/50">Meta</p><p className="font-normal">{person.goal}</p></div>
+                <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/50">Plan</p><p className="font-normal">{person.calories}</p></div>
               </div>
             </div>
 
             <div className="rounded-[2rem] glass p-5 shadow-sm">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-light text-slate-500">Día y comida</p>
+                  <p className="text-sm font-light text-white/50">Día y comida</p>
                   <h3 className="text-2xl font-normal">{activeDay}</h3>
                 </div>
                 <div className="flex max-w-full gap-2 overflow-x-auto hide-scroll">
-                  {days.map(d => <button key={d} onClick={() => setActiveDay(d)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-normal shadow-sm ${activeDay === d ? "bg-slate-950 text-white" : "bg-white/80"}`}>{d.slice(0, 3)}</button>)}
+                  {days.map(d => <button key={d} onClick={() => setActiveDay(d)} className={`tap shrink-0 rounded-2xl px-3 py-2 text-sm font-normal shadow-sm ${activeDay === d ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>{d.slice(0, 3)}</button>)}
                 </div>
               </div>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {(showFullDay ? mealOrder : [activeMeal]).map((mealName) => <button key={mealName} onClick={() => setActiveMeal(mealName)} className={`tap rounded-[1.5rem] p-4 text-left shadow-sm ${activeMeal === mealName ? "bg-slate-950 text-white" : "bg-white/80"}`}>
+                {(showFullDay ? mealOrder : [activeMeal]).map((mealName) => <button key={mealName} onClick={() => setActiveMeal(mealName)} className={`tap rounded-[1.5rem] p-4 text-left shadow-sm ${activeMeal === mealName ? "bg-white text-slate-950" : "bg-white/10 text-white"}`}>
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">{mealMeta[mealName].emoji}</span>
                     <h4 className="font-normal">{mealName}</h4>
                   </div>
-                  <p className={`mt-2 text-sm leading-relaxed ${activeMeal === mealName ? "text-white/70" : "text-slate-600"}`}>{dayPlan.meals[mealName]}</p>
+                  <p className={`mt-2 text-sm leading-relaxed ${activeMeal === mealName ? "text-slate-600" : "text-white/60"}`}>{dayPlan.meals[mealName]}</p>
                 </button>)}
               </div>
 
-              <button onClick={() => setShowFullDay(!showFullDay)} className="tap mt-4 rounded-2xl bg-white px-4 py-3 text-sm font-normal shadow-sm">{showFullDay ? "Ver solo ahora" : "Ver todo el día"}</button>
+              <button onClick={() => setShowFullDay(!showFullDay)} className="tap mt-4 rounded-2xl bg-white/10 px-4 py-3 text-sm font-normal text-white shadow-sm">{showFullDay ? "Ver solo ahora" : "Ver todo el día"}</button>
             </div>
           </section>
 
           <section className="rounded-[2rem] glass p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-light text-slate-500">Historial</p>
+                <p className="text-sm font-light text-white/50">Historial</p>
                 <h3 className="text-2xl font-normal">{person.label}</h3>
               </div>
-              <span className="rounded-2xl bg-white px-3 py-2 text-sm font-normal shadow-sm">{currentLogs.length} total</span>
+              <span className="rounded-2xl bg-white/10 px-3 py-2 text-sm font-normal shadow-sm">{currentLogs.length} total</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[720px] text-sm">
-                <thead><tr className="border-b border-slate-200 text-left text-slate-500"><th className="py-3">Fecha</th><th>Peso</th><th>Cintura</th><th>Pasos</th><th>Notas</th><th></th></tr></thead>
+                <thead><tr className="border-b border-white/10 text-left text-white/50"><th className="py-3">Fecha</th><th>Peso</th><th>Cintura</th><th>Pasos</th><th>Notas</th><th></th></tr></thead>
                 <tbody>
-                  {sortedLogs.slice(0, 12).map(r => <tr key={r.id} className="border-b border-slate-100 last:border-0">
+                  {sortedLogs.slice(0, 12).map(r => <tr key={r.id} className="border-b border-white/10 last:border-0">
                     <td className="py-3 font-normal">{normalizeDate(r.date)}</td>
                     <td>{r.weight ? `${r.weight} kg` : "—"}</td>
                     <td>{r.waist ? `${r.waist} cm` : "—"}</td>
                     <td>{r.steps || "—"}</td>
-                    <td className="max-w-sm truncate text-slate-600">{r.notes || "—"}</td>
-                    <td className="text-right"><button onClick={() => deleteLog(r.id)} className="tap rounded-xl bg-white px-3 py-2 shadow-sm">🗑️</button></td>
+                    <td className="max-w-sm truncate text-white/60">{r.notes || "—"}</td>
+                    <td className="text-right"><button onClick={() => deleteLog(r.id)} className="tap rounded-xl bg-white/10 px-3 py-2 shadow-sm">🗑️</button></td>
                   </tr>)}
                   {!sortedLogs.length && <tr><td colSpan="6" className="py-8 text-center font-light text-slate-400">Todavía no hay registros</td></tr>}
                 </tbody>
