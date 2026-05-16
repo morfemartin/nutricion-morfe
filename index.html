@@ -310,6 +310,132 @@
       },
     };
 
+    const definitionGoals = {
+      martin: {
+        phase: "Definición",
+        startWeightKg: 84,
+        targetWeightKgMin: 77.5,
+        targetWeightKgMax: 80,
+        startWaistCm: 86,
+        targetWaistCmMin: 79,
+        targetWaistCmMax: 82,
+        startShouldersCm: 124.5,
+        targetShouldersCm: 132,
+        startRatio: 124.5 / 86,
+        targetRatio: 1.6,
+        calories: "2250-2350 kcal",
+        weeklyLoss: "0.5-0.7 kg/sem",
+      },
+      mama: {
+        phase: "Definición",
+        startWeightKg: 79,
+        targetWeightKgMin: 74,
+        targetWeightKgMax: 76,
+        startWaistCm: 86,
+        targetWaistCmMin: 80,
+        targetWaistCmMax: 82,
+        startShouldersCm: 110,
+        targetShouldersCm: 112,
+        startRatio: 110 / 86,
+        targetRatio: 1.38,
+        calories: "1550-1750 kcal",
+        weeklyLoss: "0.4-0.6 kg/sem",
+      },
+    };
+
+    const muscleMeta = {
+      Hombros: { color: "#a78bfa", glow: "rgba(167,139,250,.35)" },
+      Pecho: { color: "#fb7185", glow: "rgba(251,113,133,.35)" },
+      Espalda: { color: "#60a5fa", glow: "rgba(96,165,250,.35)" },
+      Brazos: { color: "#f59e0b", glow: "rgba(245,158,11,.35)" },
+      Antebrazo: { color: "#facc15", glow: "rgba(250,204,21,.3)" },
+      Pierna: { color: "#34d399", glow: "rgba(52,211,153,.32)" },
+      Abdomen: { color: "#f472b6", glow: "rgba(244,114,182,.3)" },
+      Cardio: { color: "#22d3ee", glow: "rgba(34,211,238,.28)" },
+    };
+
+    const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
+    const numberValue = (value) => {
+      const match = String(value ?? "").replace(",", ".").match(/-?\d+(?:\.\d+)?/);
+      if (!match) return null;
+      const number = Number(match[0]);
+      return Number.isFinite(number) ? number : null;
+    };
+    const formatMetric = (value, decimals = 1) => {
+      if (value === null || value === undefined || Number.isNaN(value)) return "—";
+      return Number(value).toFixed(decimals).replace(/\.0$/, "");
+    };
+    const latestMetric = (entries, key, fallback) => {
+      const found = entries.find((entry) => numberValue(entry[key]) !== null);
+      return found ? numberValue(found[key]) : fallback;
+    };
+    const progressLower = (current, start, target) => {
+      if (current === null || start === target) return 0;
+      return clamp(((start - current) / (start - target)) * 100);
+    };
+    const progressHigher = (current, start, target) => {
+      if (current === null || start === target) return 0;
+      return clamp(((current - start) / (target - start)) * 100);
+    };
+    const linePoints = (values, min, max, width = 280, height = 130) => {
+      const pad = 12;
+      const usableW = width - pad * 2;
+      const usableH = height - pad * 2;
+      const range = max === min ? 1 : max - min;
+      return values.map((value, index) => {
+        if (value === null || value === undefined) return null;
+        const x = pad + (values.length === 1 ? usableW / 2 : (index / (values.length - 1)) * usableW);
+        const y = pad + usableH - ((value - min) / range) * usableH;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).filter(Boolean).join(" ");
+    };
+    const muscleForExercise = (name = "", module = "") => {
+      const text = `${name} ${module}`.toLowerCase();
+      if (/running|caminata|cardio|trote|series|km/.test(text)) return "Cardio";
+      if (/abdomen|abs|plancha|pallof|dead bug|crunch/.test(text)) return "Abdomen";
+      if (/pierna|gemelo|pantorrilla|cuádriceps|cuadriceps|femoral|prensa|sentadilla|búlgar|bulgar|hip thrust|sissy/.test(text)) return "Pierna";
+      if (/antebrazo|muñeca|agarre|pronación|pronacion|supinación|supinacion/.test(text)) return "Antebrazo";
+      if (/bíceps|biceps|tríceps|triceps|curl|martillo|fondos/.test(text)) return "Brazos";
+      if (/dominada|jalón|jalon|remo|pull-over|pullover|espalda/.test(text)) return "Espalda";
+      if (/press|pecho|apertura|cruce|pec/.test(text)) return "Pecho";
+      if (/hombro|lateral|face pull|deltoide|elevación|elevacion|reverse/.test(text)) return "Hombros";
+      return "Hombros";
+    };
+    const workoutScore = (log) => {
+      const weight = numberValue(log.weight);
+      const reps = numberValue(log.reps);
+      const duration = numberValue(log.duration);
+      const distance = numberValue(log.distance);
+      if (weight !== null) return weight;
+      if (reps !== null) return reps;
+      if (duration !== null) return duration;
+      if (distance !== null) return distance;
+      return 1;
+    };
+    const buildMusclePerformance = (workouts = []) => {
+      const today = new Date(`${todayISO()}T12:00:00`);
+      const buckets = {};
+      workouts.forEach((log) => {
+        const date = normalizeDate(log.date);
+        if (!date) return;
+        const daysAgo = Math.floor((today - new Date(`${date}T12:00:00`)) / 86400000);
+        const week = Math.floor(Math.max(0, daysAgo) / 7);
+        if (week > 7) return;
+        const muscle = muscleMeta[log.muscle] ? log.muscle : muscleForExercise(log.exercise, log.module);
+        const score = workoutScore(log);
+        buckets[muscle] = buckets[muscle] || Array(8).fill(null);
+        buckets[muscle][7 - week] = Math.max(buckets[muscle][7 - week] || 0, score);
+      });
+      return Object.keys(muscleMeta).map((name) => {
+        const values = buckets[name] || Array(8).fill(null);
+        const filled = values.filter((value) => value !== null);
+        const latest = filled[filled.length - 1];
+        const previous = filled[filled.length - 2];
+        const delta = latest !== undefined && previous !== undefined ? latest - previous : null;
+        return { name, values, latest, previous, delta, ...muscleMeta[name] };
+      });
+    };
+
     const routineModuleMeta = {
       morning: { label: "Mañana", short: "AM" },
       gym: { label: "Gym", short: "Gym" },
@@ -345,6 +471,8 @@
       const [activeDay, setActiveDay] = React.useState(dayFromDate(now));
       const [activeMeal, setActiveMeal] = React.useState(mealFromHour(now));
       const [activeSystem, setActiveSystem] = React.useState(systemFromDate(now));
+      const [progressView, setProgressView] = React.useState("aesthetic");
+      const [visibleMuscles, setVisibleMuscles] = React.useState({});
       const [showFullDay, setShowFullDay] = React.useState(false);
       const [plans, setPlans] = React.useState(null);
       const [planStatus, setPlanStatus] = React.useState("Cargando planes...");
@@ -448,6 +576,41 @@
       const sparkWeights = [...currentLogs].filter((x) => x.weight).slice(-8).map((x) => Number(x.weight)).filter(Boolean);
       const minSpark = sparkWeights.length ? Math.min(...sparkWeights) : 0;
       const maxSpark = sparkWeights.length ? Math.max(...sparkWeights) : 1;
+      const goals = definitionGoals[activePerson] || definitionGoals.martin;
+      const currentWeightMetric = latestMetric(sortedLogs, "weight", goals.startWeightKg);
+      const currentWaistMetric = latestMetric(sortedLogs, "waist", goals.startWaistCm);
+      const currentShouldersMetric = latestMetric(sortedLogs, "shoulders", goals.startShouldersCm);
+      const currentRatio = currentWaistMetric ? currentShouldersMetric / currentWaistMetric : goals.startRatio;
+      const aestheticMetrics = [
+        {
+          key: "weight",
+          label: "Peso",
+          value: `${formatMetric(currentWeightMetric)} kg`,
+          target: `${goals.targetWeightKgMin}-${goals.targetWeightKgMax} kg`,
+          progress: progressLower(currentWeightMetric, goals.startWeightKg, goals.targetWeightKgMax),
+        },
+        {
+          key: "waist",
+          label: "Cintura",
+          value: `${formatMetric(currentWaistMetric)} cm`,
+          target: `${goals.targetWaistCmMin}-${goals.targetWaistCmMax} cm`,
+          progress: progressLower(currentWaistMetric, goals.startWaistCm, goals.targetWaistCmMax),
+        },
+        {
+          key: "shoulders",
+          label: "Hombros",
+          value: `${formatMetric(currentShouldersMetric)} cm`,
+          target: `${goals.targetShouldersCm} cm+`,
+          progress: progressHigher(currentShouldersMetric, goals.startShouldersCm, goals.targetShouldersCm),
+        },
+      ];
+      const ratioProgress = progressHigher(currentRatio, goals.startRatio, goals.targetRatio);
+      const definitionProgress = Math.round((ratioProgress * 1.4 + aestheticMetrics.reduce((sum, metric) => sum + metric.progress, 0)) / 4.4);
+      const performanceMuscles = buildMusclePerformance(logs.workouts?.[activePerson] || []);
+      const visiblePerformanceMuscles = performanceMuscles.filter((muscle) => visibleMuscles[muscle.name] !== false);
+      const performanceValues = visiblePerformanceMuscles.flatMap((muscle) => muscle.values.filter((value) => value !== null));
+      const performanceMin = performanceValues.length ? Math.min(...performanceValues) : 0;
+      const performanceMax = performanceValues.length ? Math.max(...performanceValues) : 1;
 
       const setToday = () => {
         const date = new Date();
@@ -472,6 +635,9 @@
         const nextSystem = systemMeta[key];
         setActiveSystem(key);
         setActiveMeal(nextSystem.defaultMeal);
+      };
+      const toggleMuscle = (name) => {
+        setVisibleMuscles((prev) => ({ ...prev, [name]: prev[name] === false }));
       };
 
       const addLog = async () => {
@@ -528,6 +694,7 @@
           routineTitle: routine.title,
           exerciseId: selectedExercise.id,
           exercise: selectedExercise.name,
+          muscle: muscleForExercise(selectedExercise.name, routineModule),
           tracking: selectedExercise.tracking,
           weight: workoutForm.weight,
           reps: workoutForm.reps,
@@ -811,29 +978,99 @@
 
           <section className="grid gap-4 lg:grid-cols-[.85fr_1.15fr]">
             <div className="rounded-[2rem] glass p-5 shadow-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-light text-white/50">Progreso visual</p>
-                  <h3 className="text-2xl font-normal">{latest?.weight || "—"} kg</h3>
+                  <h3 className="text-2xl font-normal">{progressView === "aesthetic" ? goals.phase : "Rendimiento"}</h3>
                 </div>
-                <div className="rounded-2xl bg-white/10 px-3 py-2 text-right shadow-sm">
-                  <p className="text-xs font-light text-white/50">Prom. 7</p>
-                  <p className="font-normal">{avg7} kg</p>
+                <div className="flex rounded-full bg-white/10 p-1 ring-1 ring-white/10">
+                  <button onClick={() => setProgressView("aesthetic")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "aesthetic" ? "bg-white text-slate-950" : "text-white/60"}`}>Estético</button>
+                  <button onClick={() => setProgressView("performance")} className={`tap rounded-full px-3 py-2 text-xs font-normal ${progressView === "performance" ? "bg-white text-slate-950" : "text-white/60"}`}>Rendimiento</button>
                 </div>
               </div>
-              <div className="mt-5 h-4 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-lime-300" style={{ width: `${progress}%` }}></div>
-              </div>
-              <div className="mt-4 flex h-24 items-end gap-2 rounded-[1.4rem] bg-white/10 p-3">
-                {sparkWeights.length ? sparkWeights.map((value, index) => {
-                  const height = maxSpark === minSpark ? 52 : 28 + ((value - minSpark) / (maxSpark - minSpark)) * 52;
-                  return <div key={`${value}-${index}`} className="flex-1 rounded-t-xl bg-gradient-to-t from-emerald-600 to-lime-300" style={{ height }} title={`${value} kg`}></div>
-                }) : <div className="grid h-full w-full place-items-center text-sm font-light text-white/40">Sin pesos todavía</div>}
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/50">Meta</p><p className="font-normal">{person.goal}</p></div>
-                <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/50">Plan</p><p className="font-normal">{person.calories}</p></div>
-              </div>
+
+              {progressView === "aesthetic" && <div className="mt-5 space-y-4">
+                <div className="rounded-[1.6rem] bg-white/10 p-4 ring-1 ring-white/10">
+                  <div className="flex items-end justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-normal uppercase text-amber-200">Índice griego</p>
+                      <p className="mt-1 text-5xl font-normal leading-none text-white">{formatMetric(currentRatio, 2)}</p>
+                      <p className="mt-2 text-sm font-light text-white/55">hombro / cintura · meta {formatMetric(goals.targetRatio, 2)}+</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-3xl font-normal text-emerald-300">{Math.round(ratioProgress)}%</p>
+                      <p className="text-xs font-light text-white/45">ratio</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 h-3 overflow-hidden rounded-full bg-black/25">
+                    <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-lime-300 to-amber-200 shadow-[0_0_18px_rgba(52,211,153,.55)]" style={{ width: `${ratioProgress}%` }}></div>
+                  </div>
+                </div>
+
+                <div className="rounded-[1.6rem] bg-white/[.07] p-4 ring-1 ring-white/10">
+                  <div className="mb-3 flex items-center justify-between">
+                    <p className="text-xs font-normal uppercase text-white/55">Fase de definición</p>
+                    <p className="text-sm font-normal text-emerald-300">{definitionProgress}%</p>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full rounded-full bg-gradient-to-r from-sky-400 via-emerald-300 to-lime-200" style={{ width: `${definitionProgress}%` }}></div>
+                  </div>
+                  <div className="mt-4 grid gap-3">
+                    {aestheticMetrics.map((metric) => <div key={metric.key} className="rounded-2xl bg-white/10 p-3 ring-1 ring-white/10">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-xs font-light text-white/45">{metric.label}</p>
+                          <p className="text-lg font-normal text-white">{metric.value}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-normal text-amber-200">{metric.target}</p>
+                          <p className="text-xs font-light text-white/40">objetivo</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/25">
+                        <div className="h-full rounded-full bg-white" style={{ width: `${metric.progress}%`, background: metric.key === "shoulders" ? "linear-gradient(90deg,#a78bfa,#f0abfc)" : "linear-gradient(90deg,#34d399,#fde68a)" }}></div>
+                      </div>
+                    </div>)}
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+                    <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/45">Plan</p><p className="font-normal">{goals.calories}</p></div>
+                    <div className="rounded-2xl bg-white/10 p-3"><p className="text-xs font-light text-white/45">Ritmo</p><p className="font-normal">{goals.weeklyLoss}</p></div>
+                  </div>
+                </div>
+              </div>}
+
+              {progressView === "performance" && <div className="mt-5 space-y-4">
+                <div className="rounded-[1.6rem] bg-white/10 p-4 ring-1 ring-white/10">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-normal uppercase text-white/50">Carga por músculo</p>
+                      <p className="text-sm font-light text-white/55">Últimas 8 semanas</p>
+                    </div>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-normal text-white/70">{performanceValues.length ? "activo" : "sin datos"}</span>
+                  </div>
+                  <div className="relative h-40 overflow-hidden rounded-[1.4rem] bg-black/25">
+                    {performanceValues.length ? <svg viewBox="0 0 280 130" className="h-full w-full" preserveAspectRatio="none" aria-label="Tendencia de rendimiento por músculo">
+                      {[30, 65, 100].map((y) => <line key={y} x1="12" x2="268" y1={y} y2={y} stroke="rgba(255,255,255,.08)" strokeWidth="1" />)}
+                      {visiblePerformanceMuscles.map((muscle) => <polyline key={muscle.name} fill="none" stroke={muscle.color} strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" points={linePoints(muscle.values, performanceMin, performanceMax)} style={{ filter: `drop-shadow(0 0 9px ${muscle.glow})` }} />)}
+                    </svg> : <div className="grid h-full place-items-center px-6 text-center text-sm font-light text-white/45">Registra ejercicios para ver fuerza, reps o duración por músculo.</div>}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  {performanceMuscles.map((muscle) => {
+                    const active = visibleMuscles[muscle.name] !== false;
+                    const hasDelta = muscle.delta !== null && muscle.delta !== undefined;
+                    const trend = !hasDelta ? "—" : muscle.delta > 0 ? `↑ ${formatMetric(Math.abs(muscle.delta))}` : muscle.delta < 0 ? `↓ ${formatMetric(Math.abs(muscle.delta))}` : "igual";
+                    return <button key={muscle.name} onClick={() => toggleMuscle(muscle.name)} className="tap rounded-2xl p-3 text-left ring-1" style={{ backgroundColor: active ? muscle.glow : "rgba(255,255,255,.05)", borderColor: active ? muscle.color : "rgba(255,255,255,.08)" }}>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-sm font-normal text-white">{muscle.name}</p>
+                        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: muscle.color, boxShadow: active ? `0 0 12px ${muscle.color}` : "none" }}></span>
+                      </div>
+                      <p className={`mt-1 text-xs font-light ${hasDelta && muscle.delta < 0 ? "text-rose-200" : "text-emerald-200"}`}>{trend}</p>
+                    </button>;
+                  })}
+                </div>
+              </div>}
             </div>
 
             <div className="rounded-[2rem] glass p-5 shadow-sm">

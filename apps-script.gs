@@ -15,7 +15,7 @@ const SHEETS = {
   },
   workouts: {
     name: "Workout_Log",
-    headers: ["id", "person", "date", "day", "module", "routineTitle", "exerciseId", "exercise", "tracking", "weight", "reps", "duration", "distance", "intensity", "notes", "createdAt"]
+    headers: ["id", "person", "date", "day", "module", "routineTitle", "exerciseId", "exercise", "tracking", "weight", "reps", "duration", "distance", "intensity", "notes", "createdAt", "muscle"]
   }
 };
 
@@ -68,23 +68,39 @@ function getOrCreateSheet(config) {
   const ss = getSpreadsheet();
   let sheet = ss.getSheetByName(config.name);
   if (!sheet) sheet = ss.insertSheet(config.name);
-  const firstRow = sheet.getRange(1, 1, 1, config.headers.length).getValues()[0];
-  const hasHeaders = firstRow.some(Boolean);
-  if (!hasHeaders) sheet.getRange(1, 1, 1, config.headers.length).setValues([config.headers]);
+  const width = Math.max(sheet.getLastColumn(), config.headers.length, 1);
+  const firstRow = sheet.getRange(1, 1, 1, width).getValues()[0];
+  const headers = firstRow.filter(Boolean);
+  if (!headers.length) {
+    sheet.getRange(1, 1, 1, config.headers.length).setValues([config.headers]);
+    return sheet;
+  }
+  const missing = config.headers.filter((header) => headers.indexOf(header) === -1);
+  if (missing.length) {
+    sheet.getRange(1, headers.length + 1, 1, missing.length).setValues([missing]);
+  }
   return sheet;
+}
+
+function sheetHeaders(sheet, config) {
+  const width = Math.max(sheet.getLastColumn(), config.headers.length, 1);
+  const headers = sheet.getRange(1, 1, 1, width).getValues()[0].filter(Boolean);
+  return headers.length ? headers : config.headers;
 }
 
 function appendByHeaders(config, entry) {
   const sheet = getOrCreateSheet(config);
-  sheet.appendRow(config.headers.map((key) => entry[key] || ""));
+  const headers = sheetHeaders(sheet, config);
+  sheet.appendRow(headers.map((key) => entry[key] || ""));
 }
 
 function rowsByHeaders(config) {
   const sheet = getOrCreateSheet(config);
+  const headers = sheetHeaders(sheet, config);
   const values = sheet.getDataRange().getValues();
   return values.slice(1).filter((row) => row.some(Boolean)).map((row) => {
     const entry = {};
-    config.headers.forEach((key, index) => entry[key] = row[index]);
+    headers.forEach((key, index) => entry[key] = row[index]);
     return entry;
   });
 }
