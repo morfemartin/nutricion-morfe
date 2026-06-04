@@ -31,32 +31,42 @@ function doPost(e) {
     const body = JSON.parse(e.postData.contents || "{}");
     const action = body.action;
     if (action === "addBodyLog") {
-      appendByHeaders(SHEETS.body, body.entry || {});
+      withWriteLock(() => appendByHeaders(SHEETS.body, body.entry || {}));
       return jsonResponse({ ok: true });
     }
     if (action === "addMealLog") {
-      appendByHeaders(SHEETS.meals, body.entry || {});
+      withWriteLock(() => appendByHeaders(SHEETS.meals, body.entry || {}));
       return jsonResponse({ ok: true });
     }
     if (action === "addWorkoutLog") {
-      appendByHeaders(SHEETS.workouts, body.entry || {});
+      withWriteLock(() => appendByHeaders(SHEETS.workouts, body.entry || {}));
       return jsonResponse({ ok: true });
     }
     if (action === "deleteLog") {
-      deleteEntryEverywhere(body.id);
+      withWriteLock(() => deleteEntryEverywhere(body.id));
       return jsonResponse({ ok: true });
     }
     if (action === "add") {
-      appendByHeaders(SHEETS.legacy, body.entry || {});
+      withWriteLock(() => appendByHeaders(SHEETS.legacy, body.entry || {}));
       return jsonResponse({ ok: true });
     }
     if (action === "delete") {
-      deleteEntry(SHEETS.legacy, body.id);
+      withWriteLock(() => deleteEntry(SHEETS.legacy, body.id));
       return jsonResponse({ ok: true });
     }
     return jsonResponse({ ok: false, error: "Accion no valida" });
   } catch (error) {
     return jsonResponse({ ok: false, error: String(error) });
+  }
+}
+
+function withWriteLock(callback) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    return callback();
+  } finally {
+    lock.releaseLock();
   }
 }
 
