@@ -1,10 +1,12 @@
 {
   "name": "Nutrición Morfe - Aquilrub",
   "short_name": "Aquilrub",
-  "start_url": "./",
+  "id": "./mama.html?profile=mama",
+  "start_url": "./mama.html?person=mama",
   "display": "standalone",
   "background_color": "#421127",
   "theme_color": "#be185d",
+  "scope": "./",
   "icons": [
     {
       "src": "icon-mama-192.png",

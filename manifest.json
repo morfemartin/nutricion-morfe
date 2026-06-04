@@ -1,10 +1,12 @@
 {
   "name": "Nutrición Morfe",
   "short_name": "Morfe",
+  "id": "./?profile=martin",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#08221c",
   "theme_color": "#12b981",
+  "scope": "./",
   "icons": [
     {
       "src": "icon-192.png",

@@ -365,10 +365,17 @@
     };
 
     const defaultRoutine = { icon: "🗓️", type: "Plan", title: "Sin rutina cargada", detail: "Revisa data/plans.v1.json.", exercises: [] };
+    const initialPerson = () => {
+      const params = new URLSearchParams(window.location.search);
+      const value = params.get("person") || params.get("profile");
+      if (value === "mama" || value === "aquilrub") return "mama";
+      if (window.location.pathname.toLowerCase().includes("mama")) return "mama";
+      return "martin";
+    };
 
     function App() {
       const now = new Date();
-      const [activePerson, setActivePerson] = React.useState("martin");
+      const [activePerson, setActivePerson] = React.useState(initialPerson);
       const [activeDay, setActiveDay] = React.useState(dayFromDate(now));
       const [activeMeal, setActiveMeal] = React.useState(mealFromHour(now));
       const [activeSystem, setActiveSystem] = React.useState(systemFromDate(now));

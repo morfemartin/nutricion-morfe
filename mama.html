@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#be185d" />
+  <title>Aquilrub</title>
+  <link id="app-manifest" rel="manifest" href="./manifest-mama.json" />
+  <link id="app-icon" rel="icon" href="./icon-mama-192.png" type="image/png" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" href="./icon-mama-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    body {
+      font-family: Poppins, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(244, 114, 182, .12), transparent 25rem),
+        radial-gradient(circle at top right, rgba(59, 130, 246, .12), transparent 28rem),
+        linear-gradient(180deg, #050509 0%, #0b0d13 54%, #050509 100%);
+    }
+    .hide-scroll::-webkit-scrollbar { display: none; }
+    .glass { background: rgba(255, 255, 255, .08); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .08); }
+    .tap { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+    .tap:active { transform: scale(.98); }
+    .glow-text { text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
+    .morning-hero {
+      background:
+        radial-gradient(ellipse at 82% 104%, rgba(255, 234, 108, .98) 0%, rgba(255, 178, 50, .86) 17%, rgba(247, 96, 18, .74) 35%, rgba(91, 10, 3, .9) 66%, rgba(32, 4, 0, 1) 100%),
+        linear-gradient(150deg, #200400 0%, #5b0a03 48%, #f55f10 100%) !important;
+    }
+    .afternoon-hero {
+      background:
+        radial-gradient(ellipse at 78% 102%, rgba(255, 229, 97, .96) 0%, rgba(255, 190, 70, .82) 17%, rgba(247, 128, 42, .56) 34%, rgba(29, 78, 216, .38) 58%, rgba(7, 18, 54, .98) 100%),
+        linear-gradient(150deg, #071236 0%, #12306f 45%, #ffd05b 100%) !important;
+    }
+    .night-hero {
+      background:
+        radial-gradient(ellipse at 77% 110%, rgba(97, 176, 255, .72) 0%, rgba(34, 94, 245, .58) 22%, rgba(16, 33, 104, .78) 48%, rgba(5, 8, 33, .98) 100%),
+        linear-gradient(150deg, #050821 0%, #11194b 48%, #1d4ed8 100%) !important;
+    }
+    .mama-hero {
+      background:
+        radial-gradient(ellipse at 80% 105%, rgba(251, 207, 232, .86) 0%, rgba(244, 114, 182, .64) 24%, rgba(190, 24, 93, .72) 54%, rgba(70, 8, 36, .98) 100%),
+        linear-gradient(145deg, #461126 0%, #9f1239 52%, #f9a8d4 100%) !important;
+    }
+    .morning-sun-halo,
+    .morning-sun-core,
+    .morning-sun-veil,
+    .afternoon-sun-halo,
+    .afternoon-sun-core,
+    .afternoon-sun-veil,
+    .night-glow-halo,
+    .night-glow-core,
+    .night-glow-veil {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+    }
+    .morning-sun-halo {
+      right: -10%;
+      bottom: -42%;
+      height: 17rem;
+      width: 20rem;
+      background: rgba(255, 229, 91, .42);
+      filter: blur(24px);
+    }
+    .morning-sun-core {
+      right: 7%;
+      bottom: -31%;
+      height: 9rem;
+      width: 11rem;
+      background: rgba(255, 236, 107, .92);
+      filter: blur(13px);
+    }
+    .morning-sun-veil {
+      right: 10%;
+      bottom: -4%;
+      height: 10rem;
+      width: 20rem;
+      background: rgba(250, 64, 10, .32);
+      filter: blur(38px);
+    }
+    .afternoon-sun-halo {
+      right: -10%;
+      bottom: -42%;
+      height: 16rem;
+      width: 23rem;
+      background: rgba(255, 174, 45, .38);
+      filter: blur(25px);
+    }
+    .afternoon-sun-core {
+      right: 7%;
+      bottom: -31%;
+      height: 8.5rem;
+      width: 14rem;
+      background: rgba(255, 210, 80, .82);
+      filter: blur(15px);
+    }
+    .afternoon-sun-veil {
+      right: 11%;
+      bottom: -4%;
+      height: 8.5rem;
+      width: 23rem;
+      background: rgba(59, 130, 246, .26);
+      filter: blur(40px);
+    }
+    .night-glow-halo {
+      right: -12%;
+      bottom: -38%;
+      height: 17rem;
+      width: 22rem;
+      background: rgba(96, 165, 250, .26);
+      filter: blur(28px);
+    }
+    .night-glow-core {
+      right: 9%;
+      bottom: -30%;
+      height: 9rem;
+      width: 12rem;
+      background: rgba(147, 197, 253, .38);
+      filter: blur(18px);
+    }
+    .night-glow-veil {
+      right: 20%;
+      bottom: -4%;
+      height: 9rem;
+      width: 20rem;
+      background: rgba(37, 99, 235, .28);
+      filter: blur(42px);
+    }
+    .night-star {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 0 10px rgba(255, 255, 255, .82), 0 0 22px rgba(125, 211, 252, .42);
+    }
+    .app-shell-martin {
+      background:
+        radial-gradient(circle at 14% 6%, rgba(16, 185, 129, .30), transparent 18rem),
+        radial-gradient(circle at 92% 18%, rgba(245, 158, 11, .16), transparent 22rem),
+        radial-gradient(circle at 50% 78%, rgba(37, 99, 235, .16), transparent 28rem),
+        linear-gradient(180deg, #03110d 0%, #08221c 42%, #07121d 76%, #030607 100%);
+      background-attachment: fixed;
+    }
+    .app-shell-mama {
+      background:
+        radial-gradient(circle at 18% 8%, rgba(251, 207, 232, .42), transparent 17rem),
+        radial-gradient(circle at 90% 22%, rgba(244, 114, 182, .30), transparent 22rem),
+        linear-gradient(180deg, #2a0717 0%, #421127 46%, #12060d 100%);
+    }
+    th, b, strong { font-weight: 400; }
+  </style>
+</head>
+<body class="text-white">
+  <div id="root"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>

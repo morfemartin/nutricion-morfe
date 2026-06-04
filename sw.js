@@ -1,7 +1,8 @@
-const CACHE_NAME = "nutricion-morfe-v44";
+const CACHE_NAME = "nutricion-morfe-v45";
 const ASSETS = [
   "./",
   "./index.html",
+  "./mama.html",
   "./app.js",
   "./manifest.json",
   "./manifest-mama.json",
