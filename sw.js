@@ -1,9 +1,12 @@
-const CACHE_NAME = "nutricion-morfe-v45";
+const CACHE_NAME = "nutricion-morfe-v47";
 const ASSETS = [
   "./",
   "./index.html",
   "./mama.html",
+  "./styles.css",
   "./app.js",
+  "./vendor/react.production.min.js",
+  "./vendor/react-dom.production.min.js",
   "./manifest.json",
   "./manifest-mama.json",
   "./icon.svg",
@@ -34,5 +37,17 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  const url = new URL(event.request.url);
+  if (event.request.method !== "GET" || url.origin !== self.location.origin) return;
+
+  event.respondWith(
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request).then((response) => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        return response;
+      });
+    })
+  );
 });

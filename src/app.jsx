@@ -409,7 +409,7 @@
       React.useEffect(() => {
         const loadPlans = async () => {
           try {
-            const res = await fetch(`${PLAN_DATA_URL}?v=${Date.now()}`);
+            const res = await fetch(PLAN_DATA_URL);
             if (!res.ok) throw new Error("No se pudo cargar el plan");
             const data = await res.json();
             setPlans(data);
@@ -463,7 +463,10 @@
         }
       };
 
-      React.useEffect(() => { loadLogs(); }, []);
+      React.useEffect(() => {
+        const timer = setTimeout(loadLogs, 250);
+        return () => clearTimeout(timer);
+      }, []);
 
       React.useEffect(() => {
         const icon = document.getElementById("app-icon");
