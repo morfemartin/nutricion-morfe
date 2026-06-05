@@ -675,9 +675,7 @@
       ],
       "dietRestrictions": [
         "no pasta",
-        "no caraotas",
-        "no mayonesa",
-        "no pasta de higado"
+        "no caraotas"
       ],
       "allowedCarbs": [
         "arepa",
@@ -688,12 +686,8 @@
       ],
       "snackOptions": [
         "yogurt con granola",
-        "yogurt con fruta",
-        "yogurt solo",
-        "arepa pequena con queso",
-        "queso",
-        "huevos cocidos",
-        "fruta"
+        "pan con pasta de higado y mayonesa",
+        "arepa con huevos"
       ],
       "routines": {
         "Lunes": {
@@ -998,7 +992,7 @@
     "martin": {
       "Lunes": {
         "Desayuno": {
-          "maxKcal": 590,
+          "maxKcal": 550,
           "items": [
             {
               "code": "M_AREPA_HUEVOS",
@@ -1009,7 +1003,7 @@
           ]
         },
         "Almuerzo": {
-          "maxKcal": 820,
+          "maxKcal": 800,
           "items": [
             {
               "code": "M_POLLO",
@@ -1028,41 +1022,53 @@
               "emoji": "🫘",
               "title": "Lentejas guisadas",
               "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         },
         "Merienda": {
-          "maxKcal": 350,
+          "maxKcal": 400,
           "items": [
             {
-              "code": "M_PAN_HIGADO",
-              "emoji": "🥪",
-              "title": "Pan + pasta de hígado + mayonesa",
-              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
             }
           ]
         },
         "Cena": {
-          "maxKcal": 590,
+          "maxKcal": 650,
           "items": [
             {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa abundante",
-              "amount": "al gusto"
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
             },
             {
-              "code": "M_POLLO",
-              "emoji": "🍗",
-              "title": "Pollo guisado",
-              "amount": "180-200 g"
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         }
       },
       "Martes": {
         "Desayuno": {
-          "maxKcal": 560,
+          "maxKcal": 550,
           "items": [
             {
               "code": "M_PAN_HUEVOS",
@@ -1073,7 +1079,7 @@
           ]
         },
         "Almuerzo": {
-          "maxKcal": 790,
+          "maxKcal": 800,
           "items": [
             {
               "code": "M_CARNE",
@@ -1092,22 +1098,28 @@
               "emoji": "🫘",
               "title": "Lentejas guisadas",
               "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         },
         "Merienda": {
-          "maxKcal": 260,
+          "maxKcal": 400,
           "items": [
             {
-              "code": "M_HUEVOS_COCIDOS",
-              "emoji": "🥚",
-              "title": "Huevos cocidos",
-              "amount": "3 huevos"
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
             }
           ]
         },
         "Cena": {
-          "maxKcal": 560,
+          "maxKcal": 650,
           "items": [
             {
               "code": "M_POLLO",
@@ -1116,15 +1128,15 @@
               "amount": "200 g"
             },
             {
-              "code": "M_AGUACATE",
-              "emoji": "🥑",
-              "title": "Aguacate",
-              "amount": "50 g"
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
             },
             {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa",
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
             }
           ]
@@ -1132,7 +1144,7 @@
       },
       "Miércoles": {
         "Desayuno": {
-          "maxKcal": 590,
+          "maxKcal": 550,
           "items": [
             {
               "code": "M_AREPA_HUEVOS",
@@ -1143,7 +1155,7 @@
           ]
         },
         "Almuerzo": {
-          "maxKcal": 820,
+          "maxKcal": 800,
           "items": [
             {
               "code": "M_POLLO",
@@ -1162,81 +1174,17 @@
               "emoji": "🫘",
               "title": "Lentejas guisadas",
               "amount": "180 g"
-            }
-          ]
-        },
-        "Merienda": {
-          "maxKcal": 350,
-          "items": [
-            {
-              "code": "M_PAN",
-              "emoji": "🥪",
-              "title": "Pan",
-              "amount": "70 g"
             },
             {
-              "code": "M_QUESO_HUEVOS",
-              "emoji": "🧀",
-              "title": "Queso o huevos",
-              "amount": "30 g / 2 huevos"
-            }
-          ]
-        },
-        "Cena": {
-          "maxKcal": 590,
-          "items": [
-            {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa",
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
-            },
-            {
-              "code": "M_CARNE",
-              "emoji": "🥩",
-              "title": "Carne molida guisada",
-              "amount": "150 g"
-            }
-          ]
-        }
-      },
-      "Jueves": {
-        "Desayuno": {
-          "maxKcal": 590,
-          "items": [
-            {
-              "code": "M_AREPA_HUEVOS",
-              "emoji": "🫓",
-              "title": "Arepa + huevos",
-              "amount": "70 g harina + 3 huevos"
-            }
-          ]
-        },
-        "Almuerzo": {
-          "maxKcal": 820,
-          "items": [
-            {
-              "code": "M_POLLO",
-              "emoji": "🍗",
-              "title": "Pollo guisado",
-              "amount": "200 g"
-            },
-            {
-              "code": "M_ARROZ",
-              "emoji": "🍚",
-              "title": "Arroz cocido",
-              "amount": "180 g"
-            },
-            {
-              "code": "M_LENTEJAS",
-              "emoji": "🫘",
-              "title": "Lentejas guisadas",
-              "amount": "180 g"
             }
           ]
         },
         "Merienda": {
-          "maxKcal": 350,
+          "maxKcal": 400,
           "items": [
             {
               "code": "M_PAN_HIGADO",
@@ -1247,13 +1195,13 @@
           ]
         },
         "Cena": {
-          "maxKcal": 590,
+          "maxKcal": 650,
           "items": [
             {
               "code": "M_CARNE",
               "emoji": "🥩",
               "title": "Carne molida guisada",
-              "amount": "160 g"
+              "amount": "170 g"
             },
             {
               "code": "M_LENTEJAS",
@@ -1262,17 +1210,93 @@
               "amount": "180 g"
             },
             {
-              "code": "M_HARINA_PAN",
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
+        }
+      },
+      "Jueves": {
+        "Desayuno": {
+          "maxKcal": 550,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "Harina o pan",
-              "amount": "50 g / 75 g"
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 800,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 400,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 650,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         }
       },
       "Viernes": {
         "Desayuno": {
-          "maxKcal": 590,
+          "maxKcal": 550,
           "items": [
             {
               "code": "M_PAN_HUEVOS",
@@ -1283,117 +1307,7 @@
           ]
         },
         "Almuerzo": {
-          "maxKcal": 820,
-          "items": [
-            {
-              "code": "M_CARNE",
-              "emoji": "🥩",
-              "title": "Carne molida guisada",
-              "amount": "170 g"
-            },
-            {
-              "code": "M_ARROZ",
-              "emoji": "🍚",
-              "title": "Arroz cocido",
-              "amount": "180 g"
-            },
-            {
-              "code": "M_LENTEJAS",
-              "emoji": "🫘",
-              "title": "Lentejas guisadas",
-              "amount": "180 g"
-            }
-          ]
-        },
-        "Merienda": {
-          "maxKcal": 260,
-          "items": [
-            {
-              "code": "M_HUEVOS_COCIDOS",
-              "emoji": "🥚",
-              "title": "Huevos cocidos",
-              "amount": "3 huevos"
-            }
-          ]
-        },
-        "Cena": {
-          "maxKcal": 590,
-          "items": [
-            {
-              "code": "M_POLLO",
-              "emoji": "🍗",
-              "title": "Pollo guisado",
-              "amount": "180-200 g"
-            },
-            {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa",
-              "amount": "al gusto"
-            },
-            {
-              "code": "M_PLATANO",
-              "emoji": "🍌",
-              "title": "Plátano",
-              "amount": "150 g"
-            }
-          ]
-        }
-      },
-      "Sábado": {
-        "Desayuno": {
-          "maxKcal": 560,
-          "items": [
-            {
-              "code": "M_AREPA_HUEVOS",
-              "emoji": "🫓",
-              "title": "Arepa + huevos",
-              "amount": "70 g harina + 3 huevos"
-            }
-          ]
-        },
-        "Almuerzo": {
-          "maxKcal": 790,
-          "items": [
-            {
-              "code": "M_CARNE",
-              "emoji": "🥩",
-              "title": "Carne molida guisada",
-              "amount": "170 g"
-            },
-            {
-              "code": "M_ARROZ",
-              "emoji": "🍚",
-              "title": "Arroz cocido",
-              "amount": "180 g"
-            },
-            {
-              "code": "M_LENTEJAS",
-              "emoji": "🫘",
-              "title": "Lentejas guisadas",
-              "amount": "180 g"
-            }
-          ]
-        },
-        "Merienda": {
-          "maxKcal": 340,
-          "items": [
-            {
-              "code": "M_PAN",
-              "emoji": "🥪",
-              "title": "Pan",
-              "amount": "70-80 g"
-            },
-            {
-              "code": "M_QUESO",
-              "emoji": "🧀",
-              "title": "Queso",
-              "amount": "30 g"
-            }
-          ]
-        },
-        "Cena": {
-          "maxKcal": 560,
+          "maxKcal": 800,
           "items": [
             {
               "code": "M_POLLO",
@@ -1402,23 +1316,63 @@
               "amount": "200 g"
             },
             {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa",
-              "amount": "al gusto"
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
             },
             {
-              "code": "M_AGUACATE",
-              "emoji": "🥑",
-              "title": "Aguacate",
-              "amount": "40-50 g"
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 400,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 650,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         }
       },
-      "Domingo": {
+      "Sábado": {
         "Desayuno": {
-          "maxKcal": 675,
+          "maxKcal": 550,
           "items": [
             {
               "code": "M_AREPA_HUEVOS",
@@ -1429,7 +1383,83 @@
           ]
         },
         "Almuerzo": {
-          "maxKcal": 945,
+          "maxKcal": 800,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 400,
+          "items": [
+            {
+              "code": "M_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 650,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
+        }
+      },
+      "Domingo": {
+        "Desayuno": {
+          "maxKcal": 500,
+          "items": [
+            {
+              "code": "PRE_CARRERA",
+              "emoji": "🥪",
+              "title": "Pan o arepa pre-carrera",
+              "amount": "100 g pan o 60 g harina"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 950,
           "items": [
             {
               "code": "M_POLLO",
@@ -1448,46 +1478,46 @@
               "emoji": "🫘",
               "title": "Lentejas guisadas",
               "amount": "180 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         },
         "Merienda": {
-          "maxKcal": 405,
+          "maxKcal": 500,
           "items": [
             {
-              "code": "M_HARINA_PAN",
-              "emoji": "🫓",
-              "title": "Harina o pan",
-              "amount": "60 g / 90 g"
-            },
-            {
-              "code": "M_HUEVOS",
-              "emoji": "🥚",
-              "title": "Huevos",
-              "amount": "2-3 huevos"
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
             }
           ]
         },
         "Cena": {
-          "maxKcal": 675,
+          "maxKcal": 750,
           "items": [
             {
-              "code": "M_SOPA",
-              "emoji": "🍲",
-              "title": "Sopa",
-              "amount": "al gusto"
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
             },
             {
-              "code": "M_POLLO",
-              "emoji": "🍗",
-              "title": "Pollo guisado",
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
               "amount": "180 g"
             },
             {
-              "code": "M_PLATANO",
-              "emoji": "🍌",
-              "title": "Plátano",
-              "amount": "150 g"
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
           ]
         }
@@ -1496,486 +1526,534 @@
     "mama": {
       "Lunes": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
+              "code": "A_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "harina",
-              "amount": "45-50 g"
-            },
-            {
-              "emoji": "🥚",
-              "title": "perico",
-              "amount": "2 huevos"
-            },
-            {
-              "emoji": "🍅",
-              "title": "tomate",
-              "amount": "al gusto"
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 440
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
+              "code": "A_POLLO",
               "emoji": "🍗",
-              "title": "pollo",
-              "amount": "140 g"
+              "title": "Pollo guisado",
+              "amount": "150 g"
             },
             {
+              "code": "A_ARROZ",
               "emoji": "🍚",
-              "title": "arroz",
+              "title": "Arroz cocido",
               "amount": "110 g"
             },
             {
+              "code": "A_LENTEJAS",
               "emoji": "🫘",
-              "title": "lentejas",
-              "amount": "130 g"
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 610
+          ]
         },
         "Merienda": {
+          "maxKcal": 300,
           "items": [
             {
+              "code": "A_YOGURT",
               "emoji": "🥣",
-              "title": "yogurt",
-              "amount": "150-180 g"
-            },
-            {
-              "emoji": "🌾",
-              "title": "granola",
-              "amount": "25-30 g"
+              "title": "Yogurt + granola",
+              "amount": "180 g yogurt + 25 g granola"
             }
-          ],
-          "maxKcal": 260
+          ]
         },
         "Cena": {
+          "maxKcal": 500,
           "items": [
             {
-              "emoji": "🍲",
-              "title": "sopa abundante",
-              "amount": "al gusto"
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "120 g"
             },
             {
-              "emoji": "🍗",
-              "title": "pollo",
-              "amount": "120-140 g"
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 440
+          ]
         }
       },
       "Martes": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
-              "emoji": "🥚",
-              "title": "huevos cocidos",
-              "amount": "2 huevos"
-            },
-            {
-              "emoji": "🍅",
-              "title": "tomate",
-              "amount": "al gusto"
-            },
-            {
-              "emoji": "🧀",
-              "title": "queso opcional",
-              "amount": "30 g"
+              "code": "A_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 410
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
+              "code": "A_CARNE",
               "emoji": "🥩",
-              "title": "carne molida",
+              "title": "Carne molida guisada",
               "amount": "120 g"
             },
             {
+              "code": "A_ARROZ",
               "emoji": "🍚",
-              "title": "arroz",
-              "amount": "100-120 g"
+              "title": "Arroz cocido",
+              "amount": "110 g"
             },
             {
+              "code": "A_LENTEJAS",
               "emoji": "🫘",
-              "title": "lentejas",
-              "amount": "130 g"
-            }
-          ],
-          "maxKcal": 580
-        },
-        "Merienda": {
-          "items": [
-            {
-              "emoji": "🫓",
-              "title": "harina",
-              "amount": "40 g"
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
             },
             {
-              "emoji": "🧀",
-              "title": "queso",
-              "amount": "25 g"
-            }
-          ],
-          "maxKcal": 250
-        },
-        "Cena": {
-          "items": [
-            {
-              "emoji": "🍗",
-              "title": "pollo",
-              "amount": "130 g"
-            },
-            {
-              "emoji": "🥑",
-              "title": "aguacate",
-              "amount": "40 g"
-            },
-            {
-              "emoji": "🍲",
-              "title": "sopa",
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
             }
-          ],
-          "maxKcal": 410
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 300,
+          "items": [
+            {
+              "code": "A_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "180 g yogurt + 25 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 500,
+          "items": [
+            {
+              "code": "A_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "150 g"
+            },
+            {
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
         }
       },
       "Miércoles": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
+              "code": "A_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "harina",
-              "amount": "45 g"
-            },
-            {
-              "emoji": "🥚",
-              "title": "huevos/perico",
-              "amount": "2 huevos"
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 440
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
+              "code": "A_POLLO",
               "emoji": "🍗",
-              "title": "pollo",
+              "title": "Pollo guisado",
               "amount": "150 g"
             },
             {
-              "emoji": "🫘",
-              "title": "lentejas",
-              "amount": "170 g"
+              "code": "A_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "110 g"
             },
             {
-              "emoji": "🍅",
-              "title": "tomate/vegetales",
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
             }
-          ],
-          "maxKcal": 610
+          ]
         },
         "Merienda": {
+          "maxKcal": 300,
           "items": [
             {
-              "emoji": "🥣",
-              "title": "yogurt",
-              "amount": "150-180 g"
-            },
-            {
-              "emoji": "🍎",
-              "title": "fruta opcional",
-              "amount": "1 pequeña"
+              "code": "A_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "50 g pan + 20 g pasta de hígado + 5 g mayonesa"
             }
-          ],
-          "maxKcal": 260
+          ]
         },
         "Cena": {
+          "maxKcal": 500,
           "items": [
             {
-              "emoji": "🍲",
-              "title": "sopa abundante",
-              "amount": "al gusto"
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "120 g"
             },
             {
-              "emoji": "🥩",
-              "title": "carne molida",
-              "amount": "100-120 g"
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 440
+          ]
         }
       },
       "Jueves": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
-              "emoji": "🫓",
-              "title": "harina",
-              "amount": "50 g"
-            },
-            {
+              "code": "A_PERICO",
               "emoji": "🥚",
-              "title": "perico",
-              "amount": "2 huevos"
-            },
-            {
-              "emoji": "🍅",
-              "title": "tomate",
-              "amount": "al gusto"
+              "title": "Perico",
+              "amount": "2 huevos + tomate"
             }
-          ],
-          "maxKcal": 440
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
-              "emoji": "🍗",
-              "title": "pollo",
-              "amount": "150 g"
-            },
-            {
-              "emoji": "🍚",
-              "title": "arroz",
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
               "amount": "120 g"
             },
             {
-              "emoji": "🥑",
-              "title": "aguacate",
-              "amount": "35-40 g"
+              "code": "A_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "110 g"
+            },
+            {
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 610
+          ]
         },
         "Merienda": {
+          "maxKcal": 300,
           "items": [
             {
+              "code": "A_YOGURT",
               "emoji": "🥣",
-              "title": "yogurt",
-              "amount": "150-180 g"
-            },
-            {
-              "emoji": "🌾",
-              "title": "granola",
-              "amount": "25-30 g"
+              "title": "Yogurt + granola",
+              "amount": "180 g yogurt + 25 g granola"
             }
-          ],
-          "maxKcal": 260
+          ]
         },
         "Cena": {
+          "maxKcal": 500,
           "items": [
             {
-              "emoji": "🫘",
-              "title": "lentejas",
-              "amount": "170 g"
+              "code": "A_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "150 g"
             },
             {
-              "emoji": "🥚",
-              "title": "huevo o pollo",
-              "amount": "1 / 100 g"
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 440
+          ]
         }
       },
       "Viernes": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
-              "emoji": "🥚",
-              "title": "huevos",
-              "amount": "2 huevos"
-            },
-            {
+              "code": "A_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "harina",
-              "amount": "40 g"
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 440
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
-              "emoji": "🥩",
-              "title": "carne molida",
-              "amount": "130 g"
+              "code": "A_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "150 g"
             },
             {
+              "code": "A_ARROZ",
               "emoji": "🍚",
-              "title": "arroz",
-              "amount": "120 g"
+              "title": "Arroz cocido",
+              "amount": "110 g"
             },
             {
-              "emoji": "🍅",
-              "title": "tomate",
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
             }
-          ],
-          "maxKcal": 610
+          ]
         },
         "Merienda": {
+          "maxKcal": 300,
           "items": [
             {
-              "emoji": "🧀",
-              "title": "queso o huevos",
-              "amount": "30 g / 2"
+              "code": "A_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "180 g yogurt + 25 g granola"
             }
-          ],
-          "maxKcal": 260
+          ]
         },
         "Cena": {
+          "maxKcal": 500,
           "items": [
             {
-              "emoji": "🍲",
-              "title": "sopa",
-              "amount": "al gusto"
-            },
-            {
-              "emoji": "🍗",
-              "title": "pollo",
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
               "amount": "120 g"
             },
             {
-              "emoji": "🍌",
-              "title": "plátano",
-              "amount": "80-100 g"
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 440
+          ]
         }
       },
       "Sábado": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
+              "code": "A_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "harina",
-              "amount": "45-50 g"
-            },
-            {
-              "emoji": "🥚",
-              "title": "perico",
-              "amount": "2 huevos"
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 400
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
-              "emoji": "🥫",
-              "title": "hígado",
-              "amount": "120-150 g"
-            },
-            {
-              "emoji": "🍚",
-              "title": "arroz",
-              "amount": "100 g"
-            },
-            {
-              "emoji": "🫘",
-              "title": "lentejas",
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
               "amount": "120 g"
-            }
-          ],
-          "maxKcal": 560
-        },
-        "Merienda": {
-          "items": [
-            {
-              "emoji": "🥣",
-              "title": "yogurt con granola",
-              "amount": "150 g + 25 g"
             },
             {
-              "emoji": "🧀",
-              "title": "queso opcional",
-              "amount": "25-30 g"
-            }
-          ],
-          "maxKcal": 240
-        },
-        "Cena": {
-          "items": [
-            {
-              "emoji": "🍗",
-              "title": "pollo",
-              "amount": "130-150 g"
+              "code": "A_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "110 g"
             },
             {
-              "emoji": "🍲",
-              "title": "sopa/vegetales",
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
               "amount": "al gusto"
             }
-          ],
-          "maxKcal": 400
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 300,
+          "items": [
+            {
+              "code": "A_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "50 g pan + 20 g pasta de hígado + 5 g mayonesa"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 500,
+          "items": [
+            {
+              "code": "A_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "150 g"
+            },
+            {
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
+            }
+          ]
         }
       },
       "Domingo": {
         "Desayuno": {
+          "maxKcal": 400,
           "items": [
             {
+              "code": "A_AREPA_HUEVOS",
               "emoji": "🫓",
-              "title": "harina",
-              "amount": "50-55 g"
-            },
-            {
-              "emoji": "🥚",
-              "title": "huevos",
-              "amount": "2 huevos"
+              "title": "Arepa + huevos",
+              "amount": "45-50 g harina + 2 huevos"
             }
-          ],
-          "maxKcal": 410
+          ]
         },
         "Almuerzo": {
+          "maxKcal": 600,
           "items": [
             {
+              "code": "A_POLLO",
               "emoji": "🍗",
-              "title": "pollo/carne",
-              "amount": "140 g"
+              "title": "Pollo guisado",
+              "amount": "150 g"
             },
             {
+              "code": "A_ARROZ",
               "emoji": "🍚",
-              "title": "arroz",
-              "amount": "130 g"
+              "title": "Arroz cocido",
+              "amount": "110 g"
             },
             {
+              "code": "A_LENTEJAS",
               "emoji": "🫘",
-              "title": "lentejas",
-              "amount": "130 g"
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 580
+          ]
         },
         "Merienda": {
+          "maxKcal": 300,
           "items": [
             {
+              "code": "A_YOGURT",
               "emoji": "🥣",
-              "title": "yogurt, fruta, huevo o queso",
-              "amount": "1 opción ligera"
+              "title": "Yogurt + granola",
+              "amount": "180 g yogurt + 25 g granola"
             }
-          ],
-          "maxKcal": 250
+          ]
         },
         "Cena": {
+          "maxKcal": 500,
           "items": [
             {
-              "emoji": "🍲",
-              "title": "sopa",
-              "amount": "al gusto"
+              "code": "A_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "120 g"
             },
             {
-              "emoji": "🍗",
-              "title": "pollo",
-              "amount": "120-140 g"
+              "code": "A_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "150 g"
+            },
+            {
+              "code": "ENSALADA",
+              "emoji": "🥗",
+              "title": "Ensalada",
+              "amount": "al gusto"
             }
-          ],
-          "maxKcal": 410
+          ]
         }
       }
     }
@@ -2034,6 +2112,54 @@
       "emoji": "🥚",
       "title": "Pan + huevos",
       "amount": "100 g pan + 3 huevos"
+    },
+    "A_POLLO": {
+      "code": "A_POLLO",
+      "emoji": "🍗",
+      "title": "Pollo guisado",
+      "amount": "150 g"
+    },
+    "A_CARNE": {
+      "code": "A_CARNE",
+      "emoji": "🥩",
+      "title": "Carne molida guisada",
+      "amount": "120 g"
+    },
+    "A_ARROZ": {
+      "code": "A_ARROZ",
+      "emoji": "🍚",
+      "title": "Arroz cocido",
+      "amount": "110 g"
+    },
+    "A_LENTEJAS": {
+      "code": "A_LENTEJAS",
+      "emoji": "🫘",
+      "title": "Lentejas guisadas",
+      "amount": "150 g"
+    },
+    "A_YOGURT": {
+      "code": "A_YOGURT",
+      "emoji": "🥣",
+      "title": "Yogurt + granola",
+      "amount": "180 g yogurt + 25 g granola"
+    },
+    "A_PAN_HIGADO": {
+      "code": "A_PAN_HIGADO",
+      "emoji": "🥪",
+      "title": "Pan + pasta de hígado + mayonesa",
+      "amount": "50 g pan + 20 g pasta de hígado + 5 g mayonesa"
+    },
+    "A_AREPA_HUEVOS": {
+      "code": "A_AREPA_HUEVOS",
+      "emoji": "🫓",
+      "title": "Arepa + huevos",
+      "amount": "45-50 g harina + 2 huevos"
+    },
+    "A_PERICO": {
+      "code": "A_PERICO",
+      "emoji": "🥚",
+      "title": "Perico",
+      "amount": "2 huevos + tomate"
     }
   }
 }

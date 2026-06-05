@@ -1,4 +1,4 @@
-const CACHE_NAME = "nutricion-morfe-v49";
+const CACHE_NAME = "nutricion-morfe-v50";
 const ASSETS = [
   "./",
   "./index.html",
