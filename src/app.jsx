@@ -278,7 +278,7 @@
       return clamp(((start - current) / (start - target)) * 100);
     };
     const rangeText = (min, max, unit) => min === max ? `${min} ${unit}` : `${min}-${max} ${unit}`;
-    const linePoints = (values, min, max, width = 280, height = 130) => {
+    const linePointList = (values, min, max, width = 280, height = 130) => {
       const pad = 12;
       const usableW = width - pad * 2;
       const usableH = height - pad * 2;
@@ -287,8 +287,13 @@
         if (value === null || value === undefined) return null;
         const x = pad + (values.length === 1 ? usableW / 2 : (index / (values.length - 1)) * usableW);
         const y = pad + usableH - ((value - min) / range) * usableH;
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      }).filter(Boolean).join(" ");
+        return { x, y };
+      }).filter(Boolean);
+    };
+    const linePoints = (values, min, max, width = 280, height = 130) => {
+      return linePointList(values, min, max, width, height)
+        .map((point) => `${point.x.toFixed(1)},${point.y.toFixed(1)}`)
+        .join(" ");
     };
     const muscleForExercise = (name = "", module = "") => {
       const text = `${name} ${module}`.toLowerCase();
@@ -297,9 +302,9 @@
       if (/pierna|gemelo|pantorrilla|cuádriceps|cuadriceps|femoral|prensa|sentadilla|búlgar|bulgar|hip thrust|sissy/.test(text)) return "Pierna";
       if (/antebrazo|muñeca|agarre|pronación|pronacion|supinación|supinacion/.test(text)) return "Antebrazo";
       if (/bíceps|biceps|tríceps|triceps|curl|martillo|fondos/.test(text)) return "Brazos";
+      if (/hombro|\blateral\b|face pull|deltoide|elevación|elevacion|reverse/.test(text)) return "Hombros";
       if (/dominada|jalón|jalon|remo|pull-over|pullover|espalda/.test(text)) return "Espalda";
       if (/press|pecho|apertura|cruce|pec/.test(text)) return "Pecho";
-      if (/hombro|lateral|face pull|deltoide|elevación|elevacion|reverse/.test(text)) return "Hombros";
       return "Hombros";
     };
     const workoutScore = (log) => {
@@ -312,6 +317,60 @@
       if (duration !== null) return duration;
       if (distance !== null) return distance;
       return 1;
+    };
+    const cleanLegacyValue = (value) => {
+      const clean = String(value || "").trim();
+      return clean === "—" ? "" : clean;
+    };
+    const legacyWorkoutFromLog = (entry) => {
+      const notes = String(entry.notes || "");
+      if (!/^Workout:/i.test(notes)) return null;
+      const parts = notes.replace(/^Workout:\s*/i, "").split("·").map((part) => part.trim());
+      const readField = (label) => {
+        const part = parts.find((item) => item.toLowerCase().startsWith(label));
+        return cleanLegacyValue(part ? part.slice(label.length).trim() : "");
+      };
+      const day = parts[0] || dayFromDate(new Date(`${normalizeDate(entry.date)}T12:00:00`));
+      const module = parts[1] || "gym";
+      const exercise = parts[2] || "Ejercicio";
+      const weight = readField("peso");
+      const reps = readField("reps");
+      const duration = readField("duración");
+      const distance = readField("distancia");
+      return {
+        id: entry.id,
+        person: entry.person,
+        date: normalizeDate(entry.date),
+        day,
+        module,
+        routineTitle: "Registros",
+        exercise,
+        tracking: weight ? "weighted" : duration ? "timed" : distance ? "distance" : reps ? "bodyweight" : "completion",
+        weight,
+        reps,
+        duration,
+        distance,
+        intensity: readField("intensidad"),
+        notes: "",
+        createdAt: entry.createdAt,
+        muscle: muscleForExercise(exercise, module),
+      };
+    };
+    const legacyWorkoutsByPerson = (logs = {}) => ({
+      martin: (logs.martin || []).map(legacyWorkoutFromLog).filter(Boolean),
+      mama: (logs.mama || []).map(legacyWorkoutFromLog).filter(Boolean),
+    });
+    const mergeWorkoutLogs = (structured = {}, legacy = {}) => {
+      const result = { martin: [], mama: [] };
+      Object.keys(result).forEach((personKey) => {
+        const seen = new Set();
+        [...(structured[personKey] || []), ...(legacy[personKey] || [])].forEach((entry) => {
+          if (!entry?.id || seen.has(entry.id)) return;
+          seen.add(entry.id);
+          result[personKey].push(entry);
+        });
+      });
+      return result;
     };
     const buildMusclePerformance = (workouts = []) => {
       const today = new Date(`${todayISO()}T12:00:00`);
@@ -363,7 +422,7 @@
       if (!items.length) return "Plan no cargado";
       return items.map((item) => `${item.title} ${item.amount || ""}`.trim()).join(" + ");
     };
-    const mealKcalLabel = (plan) => plan?.maxKcal ? `Máximo ${plan.maxKcal} kcal` : "Kcal por definir";
+    const mealKcalLabel = (plan) => plan?.maxKcal ? `${plan.maxKcal} kcal` : "Kcal por definir";
 
     const defaultRoutine = { icon: "🗓️", type: "Plan", title: "Sin rutina cargada", detail: "Revisa data/plans.v1.json.", exercises: [] };
     const initialPerson = () => {
@@ -424,14 +483,15 @@
       }, []);
 
       const normalizeLogs = (data) => {
+        const legacyWorkoutLogs = legacyWorkoutsByPerson(data.logs || {});
         if (data.body || data.meals || data.workouts) {
           return {
             body: { martin: [], mama: [], ...(data.body || {}) },
             meals: { martin: [], mama: [], ...(data.meals || {}) },
-            workouts: { martin: [], mama: [], ...(data.workouts || {}) },
+            workouts: mergeWorkoutLogs({ martin: [], mama: [], ...(data.workouts || {}) }, legacyWorkoutLogs),
           };
         }
-        return { body: { martin: [], mama: [], ...(data.logs || {}) }, meals: { martin: [], mama: [] }, workouts: { martin: [], mama: [] } };
+        return { body: { martin: [], mama: [], ...(data.logs || {}) }, meals: { martin: [], mama: [] }, workouts: legacyWorkoutLogs };
       };
 
       const postAction = async (action, payload) => {
@@ -854,15 +914,12 @@
                     <button onClick={() => moveMeal(1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white/15 text-white">›</button>
                   </div>
                   <div className="grid gap-2">
-                    {mealItems.map((item, index) => <div key={`${item.title}-${index}`} className="relative rounded-2xl bg-white/10 p-3 pr-24 ring-1 ring-white/10">
-                      <p className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-normal leading-tight text-amber-200">{item.amount || "al gusto"}</p>
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-10 w-10 place-items-center text-2xl">{item.emoji}</div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-normal leading-tight">{item.title}</p>
-                          {item.code && <p className="mt-1 text-[11px] font-light leading-tight text-white/45">{item.code}</p>}
-                        </div>
+                    {mealItems.map((item, index) => <div key={`${item.title}-${index}`} className="grid grid-cols-[auto_minmax(0,1fr)_minmax(6rem,8.5rem)] items-center gap-3 rounded-2xl bg-white/10 p-3 ring-1 ring-white/10">
+                      <div className="grid h-10 w-10 place-items-center text-2xl">{item.emoji}</div>
+                      <div className="min-w-0">
+                        <p className="break-words text-sm font-normal leading-tight">{item.title}</p>
                       </div>
+                      <p className="break-words text-right text-sm font-normal leading-tight text-amber-200">{item.amount || "al gusto"}</p>
                     </div>)}
                   </div>
                   <button disabled={!mealItems.length} onClick={addMealLog} className="tap mt-3 w-full rounded-2xl bg-white p-3 text-sm font-normal text-slate-950 disabled:opacity-50">{status === "Guardando comida..." ? "Guardando..." : "Comida hecha"}</button>
@@ -1066,7 +1123,14 @@
                   <div className="relative h-40 overflow-hidden rounded-[1.4rem] bg-black/25">
                     {performanceValues.length ? <svg viewBox="0 0 280 130" className="h-full w-full" preserveAspectRatio="none" aria-label="Tendencia de rendimiento por músculo">
                       {[30, 65, 100].map((y) => <line key={y} x1="12" x2="268" y1={y} y2={y} stroke="rgba(255,255,255,.08)" strokeWidth="1" />)}
-                      {visiblePerformanceMuscles.map((muscle) => <polyline key={muscle.name} fill="none" stroke={muscle.color} strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" points={linePoints(muscle.values, performanceMin, performanceMax)} style={{ filter: `drop-shadow(0 0 9px ${muscle.glow})` }} />)}
+                      {visiblePerformanceMuscles.map((muscle) => {
+                        const points = linePointList(muscle.values, performanceMin, performanceMax);
+                        if (!points.length) return null;
+                        return <g key={muscle.name} style={{ filter: `drop-shadow(0 0 9px ${muscle.glow})` }}>
+                          <polyline fill="none" stroke={muscle.color} strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" points={linePoints(muscle.values, performanceMin, performanceMax)} />
+                          {points.map((point, index) => <circle key={index} cx={point.x} cy={point.y} r="3.2" fill={muscle.color} />)}
+                        </g>;
+                      })}
                     </svg> : <div className="grid h-full place-items-center px-6 text-center text-sm font-light text-white/45">Registra ejercicios para ver fuerza, reps o duración por músculo.</div>}
                   </div>
                 </div>

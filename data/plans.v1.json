@@ -1046,10 +1046,16 @@
           "maxKcal": 590,
           "items": [
             {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa abundante",
+              "amount": "al gusto"
+            },
+            {
               "code": "M_POLLO",
               "emoji": "🍗",
               "title": "Pollo guisado",
-              "amount": "200 g"
+              "amount": "180-200 g"
             }
           ]
         }
@@ -1090,13 +1096,13 @@
           ]
         },
         "Merienda": {
-          "maxKcal": 340,
+          "maxKcal": 260,
           "items": [
             {
-              "code": "M_YOGURT",
-              "emoji": "🥣",
-              "title": "Yogurt + granola",
-              "amount": "250 g yogurt + 40 g granola"
+              "code": "M_HUEVOS_COCIDOS",
+              "emoji": "🥚",
+              "title": "Huevos cocidos",
+              "amount": "3 huevos"
             }
           ]
         },
@@ -1108,6 +1114,18 @@
               "emoji": "🍗",
               "title": "Pollo guisado",
               "amount": "200 g"
+            },
+            {
+              "code": "M_AGUACATE",
+              "emoji": "🥑",
+              "title": "Aguacate",
+              "amount": "50 g"
+            },
+            {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa",
+              "amount": "al gusto"
             }
           ]
         }
@@ -1151,10 +1169,16 @@
           "maxKcal": 350,
           "items": [
             {
-              "code": "M_YOGURT",
-              "emoji": "🥣",
-              "title": "Yogurt + granola",
-              "amount": "250 g yogurt + 40 g granola"
+              "code": "M_PAN",
+              "emoji": "🥪",
+              "title": "Pan",
+              "amount": "70 g"
+            },
+            {
+              "code": "M_QUESO_HUEVOS",
+              "emoji": "🧀",
+              "title": "Queso o huevos",
+              "amount": "30 g / 2 huevos"
             }
           ]
         },
@@ -1162,16 +1186,16 @@
           "maxKcal": 590,
           "items": [
             {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa",
+              "amount": "al gusto"
+            },
+            {
               "code": "M_CARNE",
               "emoji": "🥩",
               "title": "Carne molida guisada",
-              "amount": "170 g"
-            },
-            {
-              "code": "M_LENTEJAS",
-              "emoji": "🫘",
-              "title": "Lentejas guisadas",
-              "amount": "180 g"
+              "amount": "150 g"
             }
           ]
         }
@@ -1229,13 +1253,19 @@
               "code": "M_CARNE",
               "emoji": "🥩",
               "title": "Carne molida guisada",
-              "amount": "170 g"
+              "amount": "160 g"
             },
             {
               "code": "M_LENTEJAS",
               "emoji": "🫘",
               "title": "Lentejas guisadas",
               "amount": "180 g"
+            },
+            {
+              "code": "M_HARINA_PAN",
+              "emoji": "🫓",
+              "title": "Harina o pan",
+              "amount": "50 g / 75 g"
             }
           ]
         }
@@ -1276,13 +1306,13 @@
           ]
         },
         "Merienda": {
-          "maxKcal": 350,
+          "maxKcal": 260,
           "items": [
             {
-              "code": "M_YOGURT",
-              "emoji": "🥣",
-              "title": "Yogurt + granola",
-              "amount": "250 g yogurt + 40 g granola"
+              "code": "M_HUEVOS_COCIDOS",
+              "emoji": "🥚",
+              "title": "Huevos cocidos",
+              "amount": "3 huevos"
             }
           ]
         },
@@ -1293,7 +1323,19 @@
               "code": "M_POLLO",
               "emoji": "🍗",
               "title": "Pollo guisado",
-              "amount": "200 g"
+              "amount": "180-200 g"
+            },
+            {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa",
+              "amount": "al gusto"
+            },
+            {
+              "code": "M_PLATANO",
+              "emoji": "🍌",
+              "title": "Plátano",
+              "amount": "150 g"
             }
           ]
         }
@@ -1337,10 +1379,16 @@
           "maxKcal": 340,
           "items": [
             {
-              "code": "M_YOGURT",
-              "emoji": "🥣",
-              "title": "Yogurt + granola",
-              "amount": "250 g yogurt + 40 g granola"
+              "code": "M_PAN",
+              "emoji": "🥪",
+              "title": "Pan",
+              "amount": "70-80 g"
+            },
+            {
+              "code": "M_QUESO",
+              "emoji": "🧀",
+              "title": "Queso",
+              "amount": "30 g"
             }
           ]
         },
@@ -1352,6 +1400,18 @@
               "emoji": "🍗",
               "title": "Pollo guisado",
               "amount": "200 g"
+            },
+            {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa",
+              "amount": "al gusto"
+            },
+            {
+              "code": "M_AGUACATE",
+              "emoji": "🥑",
+              "title": "Aguacate",
+              "amount": "40-50 g"
             }
           ]
         }
@@ -1395,10 +1455,16 @@
           "maxKcal": 405,
           "items": [
             {
-              "code": "M_PAN_HIGADO",
-              "emoji": "🥪",
-              "title": "Pan + pasta de hígado + mayonesa",
-              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+              "code": "M_HARINA_PAN",
+              "emoji": "🫓",
+              "title": "Harina o pan",
+              "amount": "60 g / 90 g"
+            },
+            {
+              "code": "M_HUEVOS",
+              "emoji": "🥚",
+              "title": "Huevos",
+              "amount": "2-3 huevos"
             }
           ]
         },
@@ -1406,16 +1472,22 @@
           "maxKcal": 675,
           "items": [
             {
+              "code": "M_SOPA",
+              "emoji": "🍲",
+              "title": "Sopa",
+              "amount": "al gusto"
+            },
+            {
               "code": "M_POLLO",
               "emoji": "🍗",
               "title": "Pollo guisado",
-              "amount": "200 g"
+              "amount": "180 g"
             },
             {
-              "code": "M_ARROZ_DOMINGO",
-              "emoji": "🍚",
-              "title": "Arroz cocido domingo",
-              "amount": "220 g"
+              "code": "M_PLATANO",
+              "emoji": "🍌",
+              "title": "Plátano",
+              "amount": "150 g"
             }
           ]
         }
