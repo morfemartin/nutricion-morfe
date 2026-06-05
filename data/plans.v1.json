@@ -1,11 +1,20 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-16",
-  "mealOrder": ["Desayuno", "Almuerzo", "Merienda", "Cena"],
+  "updatedAt": "2026-06-05",
+  "mealOrder": [
+    "Desayuno",
+    "Almuerzo",
+    "Merienda",
+    "Cena"
+  ],
   "profiles": {
     "martin": {
       "label": "Martín",
-      "modules": ["morning", "gym", "home"],
+      "modules": [
+        "morning",
+        "gym",
+        "home"
+      ],
       "routines": {
         "Lunes": {
           "morning": {
@@ -14,8 +23,24 @@
             "title": "Activación + foco",
             "detail": "Arranque suave para llegar fresco al gym.",
             "exercises": [
-              { "id": "mon-am-water", "icon": "💧", "name": "Agua + caminata ligera", "sets": 1, "reps": "10 min", "intensity": "Suave", "tracking": "timed" },
-              { "id": "mon-am-mobility", "icon": "🧘", "name": "Movilidad hombros/cadera", "sets": 1, "reps": "6-8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "mon-am-water",
+                "icon": "💧",
+                "name": "Agua + caminata ligera",
+                "sets": 1,
+                "reps": "10 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              },
+              {
+                "id": "mon-am-mobility",
+                "icon": "🧘",
+                "name": "Movilidad hombros/cadera",
+                "sets": 1,
+                "reps": "6-8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "gym": {
@@ -24,12 +49,60 @@
             "title": "Hombro prioridad + pecho superior",
             "detail": "Prioridad estética: hombros/cintura. Evita presión abdominal por las hernias.",
             "exercises": [
-              { "id": "mon-lateral-machine", "icon": "🦾", "name": "Elevación lateral máquina", "sets": 4, "reps": "10-15", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mon-lateral-partial", "icon": "🔥", "name": "Elevación lateral parcial/mecánica", "sets": 2, "reps": "15-25", "intensity": "Muy fuerte", "tracking": "weighted" },
-              { "id": "mon-incline-press", "icon": "🏋️", "name": "Press inclinado máquina", "sets": 4, "reps": "6-10", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mon-low-high-cable", "icon": "🧲", "name": "Cruce en polea bajo a alto", "sets": 3, "reps": "12-15", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "mon-dips", "icon": "💪", "name": "Fondos controlados", "sets": 3, "reps": "6-10", "intensity": "Fuerte", "tracking": "bodyweight" },
-              { "id": "mon-pec-deck", "icon": "🛡️", "name": "Pec deck", "sets": 2, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
+              {
+                "id": "mon-lateral-machine",
+                "icon": "🦾",
+                "name": "Elevación lateral máquina",
+                "sets": 4,
+                "reps": "10-15",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mon-lateral-partial",
+                "icon": "🔥",
+                "name": "Elevación lateral parcial/mecánica",
+                "sets": 2,
+                "reps": "15-25",
+                "intensity": "Muy fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mon-incline-press",
+                "icon": "🏋️",
+                "name": "Press inclinado máquina",
+                "sets": 4,
+                "reps": "6-10",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mon-low-high-cable",
+                "icon": "🧲",
+                "name": "Cruce en polea bajo a alto",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mon-dips",
+                "icon": "💪",
+                "name": "Fondos controlados",
+                "sets": 3,
+                "reps": "6-10",
+                "intensity": "Fuerte",
+                "tracking": "bodyweight"
+              },
+              {
+                "id": "mon-pec-deck",
+                "icon": "🛡️",
+                "name": "Pec deck",
+                "sets": 2,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              }
             ]
           },
           "home": {
@@ -38,7 +111,15 @@
             "title": "Recuperación",
             "detail": "Pasos suaves y movilidad. Nada heroico.",
             "exercises": [
-              { "id": "mon-home-walk", "icon": "🚶", "name": "Caminata suave", "sets": 1, "reps": "15-25 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "mon-home-walk",
+                "icon": "🚶",
+                "name": "Caminata suave",
+                "sets": 1,
+                "reps": "15-25 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         },
@@ -49,7 +130,15 @@
             "title": "Preparar cardio",
             "detail": "Mover articulaciones y llegar ligero al running.",
             "exercises": [
-              { "id": "tue-am-mobility", "icon": "🧘", "name": "Movilidad tobillo/cadera", "sets": 1, "reps": "8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "tue-am-mobility",
+                "icon": "🧘",
+                "name": "Movilidad tobillo/cadera",
+                "sets": 1,
+                "reps": "8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "gym": {
@@ -58,9 +147,33 @@
             "title": "Running de calidad",
             "detail": "Calentamiento suave, bloque de intensidad y vuelta a la calma.",
             "exercises": [
-              { "id": "tue-run-warmup", "icon": "🌡️", "name": "Calentamiento", "sets": 1, "reps": "8-10 min", "intensity": "Suave", "tracking": "timed" },
-              { "id": "tue-run-sprints", "icon": "⚡", "name": "Series 20 s fuerte", "sets": 6, "reps": "6-8 rondas", "intensity": "Muy fuerte", "tracking": "completion" },
-              { "id": "tue-run-cooldown", "icon": "🫁", "name": "Enfriamiento", "sets": 1, "reps": "5-8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "tue-run-warmup",
+                "icon": "🌡️",
+                "name": "Calentamiento",
+                "sets": 1,
+                "reps": "8-10 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              },
+              {
+                "id": "tue-run-sprints",
+                "icon": "⚡",
+                "name": "Series 20 s fuerte",
+                "sets": 6,
+                "reps": "6-8 rondas",
+                "intensity": "Muy fuerte",
+                "tracking": "completion"
+              },
+              {
+                "id": "tue-run-cooldown",
+                "icon": "🫁",
+                "name": "Enfriamiento",
+                "sets": 1,
+                "reps": "5-8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "home": {
@@ -69,11 +182,51 @@
             "title": "Antebrazo + cuello",
             "detail": "Trabajo de casa controlado. Cero dolor, cero mareo.",
             "exercises": [
-              { "id": "tue-wrist-curl", "icon": "✊", "name": "Curl muñeca", "sets": 2, "reps": "20", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "tue-reverse-wrist", "icon": "🤲", "name": "Curl muñeca inverso", "sets": 2, "reps": "15-20", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "tue-pronation", "icon": "🔧", "name": "Pronación/supinación mancuerna", "sets": 2, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "tue-grip-hold", "icon": "🪨", "name": "Isométrico agarre mancuerna", "sets": 2, "reps": "30-45 s", "intensity": "Fuerte", "tracking": "timed" },
-              { "id": "tue-neck-flexion", "icon": "🧠", "name": "Flexión cuello con toalla/mano", "sets": 2, "reps": "15-20", "intensity": "Suave", "tracking": "bodyweight" }
+              {
+                "id": "tue-wrist-curl",
+                "icon": "✊",
+                "name": "Curl muñeca",
+                "sets": 2,
+                "reps": "20",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "tue-reverse-wrist",
+                "icon": "🤲",
+                "name": "Curl muñeca inverso",
+                "sets": 2,
+                "reps": "15-20",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "tue-pronation",
+                "icon": "🔧",
+                "name": "Pronación/supinación mancuerna",
+                "sets": 2,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "tue-grip-hold",
+                "icon": "🪨",
+                "name": "Isométrico agarre mancuerna",
+                "sets": 2,
+                "reps": "30-45 s",
+                "intensity": "Fuerte",
+                "tracking": "timed"
+              },
+              {
+                "id": "tue-neck-flexion",
+                "icon": "🧠",
+                "name": "Flexión cuello con toalla/mano",
+                "sets": 2,
+                "reps": "15-20",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              }
             ]
           }
         },
@@ -84,7 +237,15 @@
             "title": "Activación segura",
             "detail": "Preparar piernas y abdomen sin presión.",
             "exercises": [
-              { "id": "wed-am-bracing", "icon": "🧘", "name": "Respiración + movilidad", "sets": 1, "reps": "8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "wed-am-bracing",
+                "icon": "🧘",
+                "name": "Respiración + movilidad",
+                "sets": 1,
+                "reps": "8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "gym": {
@@ -93,14 +254,78 @@
             "title": "Pierna segura + abs",
             "detail": "Trabajo completo, sin ejercicios que molesten la hernia.",
             "exercises": [
-              { "id": "wed-calves", "icon": "🦵", "name": "Gemelos de pie o sentado", "sets": 5, "reps": "10-15", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "wed-leg-extension", "icon": "⚙️", "name": "Extensión de cuádriceps con pausa", "sets": 4, "reps": "12-15", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "wed-leg-curl", "icon": "🦿", "name": "Curl femoral sentado", "sets": 4, "reps": "10-15", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "wed-sissy", "icon": "🏋️", "name": "Sissy squat asistido en Smith", "sets": 3, "reps": "8-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "wed-bulgarian", "icon": "🧱", "name": "Búlgaras ligeras/opcionales", "sets": 2, "reps": "10 por pierna", "intensity": "Suave/Moderada", "tracking": "weighted" },
-              { "id": "wed-pallof", "icon": "🧲", "name": "Pallof press", "sets": 3, "reps": "10-15 por lado", "intensity": "Suave/Moderada", "tracking": "weighted" },
-              { "id": "wed-dead-bug", "icon": "🪲", "name": "Dead bug", "sets": 3, "reps": "8-12 por lado", "intensity": "Suave", "tracking": "bodyweight" },
-              { "id": "wed-side-plank", "icon": "🧱", "name": "Plancha lateral", "sets": 2, "reps": "20-40 s por lado", "intensity": "Suave/Moderada", "tracking": "timed" }
+              {
+                "id": "wed-calves",
+                "icon": "🦵",
+                "name": "Gemelos de pie o sentado",
+                "sets": 5,
+                "reps": "10-15",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-leg-extension",
+                "icon": "⚙️",
+                "name": "Extensión de cuádriceps con pausa",
+                "sets": 4,
+                "reps": "12-15",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-leg-curl",
+                "icon": "🦿",
+                "name": "Curl femoral sentado",
+                "sets": 4,
+                "reps": "10-15",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-sissy",
+                "icon": "🏋️",
+                "name": "Sissy squat asistido en Smith",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-bulgarian",
+                "icon": "🧱",
+                "name": "Búlgaras ligeras/opcionales",
+                "sets": 2,
+                "reps": "10 por pierna",
+                "intensity": "Suave/Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-pallof",
+                "icon": "🧲",
+                "name": "Pallof press",
+                "sets": 3,
+                "reps": "10-15 por lado",
+                "intensity": "Suave/Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "wed-dead-bug",
+                "icon": "🪲",
+                "name": "Dead bug",
+                "sets": 3,
+                "reps": "8-12 por lado",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              },
+              {
+                "id": "wed-side-plank",
+                "icon": "🧱",
+                "name": "Plancha lateral",
+                "sets": 2,
+                "reps": "20-40 s por lado",
+                "intensity": "Suave/Moderada",
+                "tracking": "timed"
+              }
             ]
           },
           "home": {
@@ -109,7 +334,15 @@
             "title": "Movilidad ligera",
             "detail": "Descargar piernas y cuidar abdomen.",
             "exercises": [
-              { "id": "wed-home-stretch", "icon": "🧘", "name": "Movilidad ligera", "sets": 1, "reps": "8-12 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "wed-home-stretch",
+                "icon": "🧘",
+                "name": "Movilidad ligera",
+                "sets": 1,
+                "reps": "8-12 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         },
@@ -120,7 +353,15 @@
             "title": "Activación espalda",
             "detail": "Preparar hombros y escápulas.",
             "exercises": [
-              { "id": "thu-am-shoulders", "icon": "🧘", "name": "Movilidad hombros/escápulas", "sets": 1, "reps": "8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "thu-am-shoulders",
+                "icon": "🧘",
+                "name": "Movilidad hombros/escápulas",
+                "sets": 1,
+                "reps": "8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "gym": {
@@ -129,13 +370,69 @@
             "title": "Espalda + hombro 2",
             "detail": "Día clave para amplitud visual y deltoide lateral/posterior.",
             "exercises": [
-              { "id": "thu-pullups", "icon": "🧗", "name": "Dominadas", "sets": 4, "reps": "5-10", "intensity": "Fuerte", "tracking": "bodyweight" },
-              { "id": "thu-lat-pulldown", "icon": "⬇️", "name": "Jalón neutro o unilateral", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "thu-row-machine", "icon": "🚣", "name": "Remo máquina pecho apoyado", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "thu-pullover", "icon": "🪽", "name": "Pull-over máquina", "sets": 3, "reps": "10-15", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "thu-cable-lateral", "icon": "🦾", "name": "Elevación lateral polea unilateral", "sets": 3, "reps": "12-18", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "thu-reverse-pec", "icon": "🔁", "name": "Reverse pec deck", "sets": 3, "reps": "12-20", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "thu-face-pull", "icon": "🪢", "name": "Face pull", "sets": 2, "reps": "15-20", "intensity": "Moderada", "tracking": "weighted" }
+              {
+                "id": "thu-pullups",
+                "icon": "🧗",
+                "name": "Dominadas",
+                "sets": 4,
+                "reps": "5-10",
+                "intensity": "Fuerte",
+                "tracking": "bodyweight"
+              },
+              {
+                "id": "thu-lat-pulldown",
+                "icon": "⬇️",
+                "name": "Jalón neutro o unilateral",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "thu-row-machine",
+                "icon": "🚣",
+                "name": "Remo máquina pecho apoyado",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "thu-pullover",
+                "icon": "🪽",
+                "name": "Pull-over máquina",
+                "sets": 3,
+                "reps": "10-15",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "thu-cable-lateral",
+                "icon": "🦾",
+                "name": "Elevación lateral polea unilateral",
+                "sets": 3,
+                "reps": "12-18",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "thu-reverse-pec",
+                "icon": "🔁",
+                "name": "Reverse pec deck",
+                "sets": 3,
+                "reps": "12-20",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "thu-face-pull",
+                "icon": "🪢",
+                "name": "Face pull",
+                "sets": 2,
+                "reps": "15-20",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              }
             ]
           },
           "home": {
@@ -144,7 +441,15 @@
             "title": "Cuello seguro",
             "detail": "Cero dolor, cero mareo, cero movimientos bruscos.",
             "exercises": [
-              { "id": "thu-neck-extension", "icon": "🧠", "name": "Extensión cuello con toalla/mano", "sets": 2, "reps": "15-20", "intensity": "Suave", "tracking": "bodyweight" }
+              {
+                "id": "thu-neck-extension",
+                "icon": "🧠",
+                "name": "Extensión cuello con toalla/mano",
+                "sets": 2,
+                "reps": "15-20",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              }
             ]
           }
         },
@@ -155,7 +460,15 @@
             "title": "Preparar brazos",
             "detail": "Movilidad y energía antes de cerrar semana.",
             "exercises": [
-              { "id": "fri-am-mobility", "icon": "🧘", "name": "Movilidad hombro/codo", "sets": 1, "reps": "6-8 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "fri-am-mobility",
+                "icon": "🧘",
+                "name": "Movilidad hombro/codo",
+                "sets": 1,
+                "reps": "6-8 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "gym": {
@@ -164,13 +477,69 @@
             "title": "Brazos + pecho/fondos + antebrazo",
             "detail": "Volumen controlado, técnica limpia y abdomen sin valsalva fuerte.",
             "exercises": [
-              { "id": "fri-triceps-machine", "icon": "🔱", "name": "Máquina de tríceps favorita", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "fri-biceps-machine", "icon": "💪", "name": "Curl bíceps máquina", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "fri-dips", "icon": "🏋️", "name": "Fondos", "sets": 3, "reps": "6-10", "intensity": "Fuerte", "tracking": "bodyweight" },
-              { "id": "fri-cable-cross", "icon": "🧲", "name": "Cruce en polea medio/bajo", "sets": 3, "reps": "12-15", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "fri-hammer", "icon": "🔨", "name": "Curl martillo", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "fri-reverse-curl", "icon": "🔁", "name": "Curl invertido", "sets": 3, "reps": "10-15", "intensity": "Moderada/Fuerte", "tracking": "weighted" },
-              { "id": "fri-wrist-grip", "icon": "✊", "name": "Curl muñeca o agarre", "sets": 2, "reps": "15-25", "intensity": "Moderada/Fuerte", "tracking": "weighted" }
+              {
+                "id": "fri-triceps-machine",
+                "icon": "🔱",
+                "name": "Máquina de tríceps favorita",
+                "sets": 4,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "fri-biceps-machine",
+                "icon": "💪",
+                "name": "Curl bíceps máquina",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "fri-dips",
+                "icon": "🏋️",
+                "name": "Fondos",
+                "sets": 3,
+                "reps": "6-10",
+                "intensity": "Fuerte",
+                "tracking": "bodyweight"
+              },
+              {
+                "id": "fri-cable-cross",
+                "icon": "🧲",
+                "name": "Cruce en polea medio/bajo",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "fri-hammer",
+                "icon": "🔨",
+                "name": "Curl martillo",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "fri-reverse-curl",
+                "icon": "🔁",
+                "name": "Curl invertido",
+                "sets": 3,
+                "reps": "10-15",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "fri-wrist-grip",
+                "icon": "✊",
+                "name": "Curl muñeca o agarre",
+                "sets": 2,
+                "reps": "15-25",
+                "intensity": "Moderada/Fuerte",
+                "tracking": "weighted"
+              }
             ]
           },
           "home": {
@@ -179,7 +548,15 @@
             "title": "Recuperación activa",
             "detail": "Descargar brazos y caminar suave.",
             "exercises": [
-              { "id": "fri-home-walk", "icon": "🚶", "name": "Caminata suave", "sets": 1, "reps": "15-25 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "fri-home-walk",
+                "icon": "🚶",
+                "name": "Caminata suave",
+                "sets": 1,
+                "reps": "15-25 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         },
@@ -190,7 +567,15 @@
             "title": "Descanso",
             "detail": "Recuperar energía.",
             "exercises": [
-              { "id": "sat-rest", "icon": "🌿", "name": "Descanso total", "sets": 1, "reps": "Libre", "intensity": "Suave", "tracking": "completion" }
+              {
+                "id": "sat-rest",
+                "icon": "🌿",
+                "name": "Descanso total",
+                "sets": 1,
+                "reps": "Libre",
+                "intensity": "Suave",
+                "tracking": "completion"
+              }
             ]
           },
           "gym": {
@@ -199,7 +584,15 @@
             "title": "Descanso activo",
             "detail": "Pasos, movilidad y recuperación. Nada heroico.",
             "exercises": [
-              { "id": "sat-walk", "icon": "🚶", "name": "Caminata suave opcional", "sets": 1, "reps": "20-40 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "sat-walk",
+                "icon": "🚶",
+                "name": "Caminata suave opcional",
+                "sets": 1,
+                "reps": "20-40 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "home": {
@@ -208,7 +601,15 @@
             "title": "Cuello opcional",
             "detail": "Solo si te sientes fresco.",
             "exercises": [
-              { "id": "sat-neck-laterals", "icon": "🧠", "name": "Laterales cuello", "sets": 2, "reps": "12-15 por lado", "intensity": "Suave", "tracking": "bodyweight" }
+              {
+                "id": "sat-neck-laterals",
+                "icon": "🧠",
+                "name": "Laterales cuello",
+                "sets": 2,
+                "reps": "12-15 por lado",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              }
             ]
           }
         },
@@ -219,7 +620,15 @@
             "title": "Running base",
             "detail": "Cardio largo con comida suficiente antes y después.",
             "exercises": [
-              { "id": "sun-long-run", "icon": "🏃", "name": "Running base", "sets": 1, "reps": "10 km+", "intensity": "Moderada", "tracking": "distance" }
+              {
+                "id": "sun-long-run",
+                "icon": "🏃",
+                "name": "Running base",
+                "sets": 1,
+                "reps": "10 km+",
+                "intensity": "Moderada",
+                "tracking": "distance"
+              }
             ]
           },
           "gym": {
@@ -228,7 +637,15 @@
             "title": "Movilidad ligera",
             "detail": "Recuperar después del fondo.",
             "exercises": [
-              { "id": "sun-mobility", "icon": "🧘", "name": "Movilidad ligera opcional", "sets": 1, "reps": "8-12 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "sun-mobility",
+                "icon": "🧘",
+                "name": "Movilidad ligera opcional",
+                "sets": 1,
+                "reps": "8-12 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           },
           "home": {
@@ -237,7 +654,15 @@
             "title": "Resumen y descanso",
             "detail": "Cerrar semana y preparar lunes.",
             "exercises": [
-              { "id": "sun-review", "icon": "📝", "name": "Revisar semana", "sets": 1, "reps": "3 min", "intensity": "Suave", "tracking": "completion" }
+              {
+                "id": "sun-review",
+                "icon": "📝",
+                "name": "Revisar semana",
+                "sets": 1,
+                "reps": "3 min",
+                "intensity": "Suave",
+                "tracking": "completion"
+              }
             ]
           }
         }
@@ -245,10 +670,31 @@
     },
     "mama": {
       "label": "Aquilrub",
-      "modules": ["gym"],
-      "dietRestrictions": ["no pasta", "no caraotas", "no mayonesa", "no pasta de higado"],
-      "allowedCarbs": ["arepa", "arroz", "lentejas", "platano", "granola"],
-      "snackOptions": ["yogurt con granola", "yogurt con fruta", "yogurt solo", "arepa pequena con queso", "queso", "huevos cocidos", "fruta"],
+      "modules": [
+        "gym"
+      ],
+      "dietRestrictions": [
+        "no pasta",
+        "no caraotas",
+        "no mayonesa",
+        "no pasta de higado"
+      ],
+      "allowedCarbs": [
+        "arepa",
+        "arroz",
+        "lentejas",
+        "platano",
+        "granola"
+      ],
+      "snackOptions": [
+        "yogurt con granola",
+        "yogurt con fruta",
+        "yogurt solo",
+        "arepa pequena con queso",
+        "queso",
+        "huevos cocidos",
+        "fruta"
+      ],
       "routines": {
         "Lunes": {
           "gym": {
@@ -257,13 +703,69 @@
             "title": "Pecho + hombro + espalda ligera + spinning",
             "detail": "Día parecido al lunes de Martín, con spinning como cardio principal.",
             "exercises": [
-              { "id": "mom-mon-spinning", "icon": "🚴", "name": "Spinning", "sets": 1, "reps": "30-45 min", "intensity": "Moderada", "tracking": "timed" },
-              { "id": "mom-fri-chest-press", "icon": "🏋️", "name": "Press pecho máquina", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-fri-row", "icon": "🚣", "name": "Remo ligero máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-shoulder", "icon": "🦾", "name": "Press hombro máquina/mancuernas", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-face-pull", "icon": "🪢", "name": "Face pull", "sets": 3, "reps": "12-15", "intensity": "Suave/Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-pec", "icon": "🛡️", "name": "Pec deck o aperturas", "sets": 2, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-fri-abs", "icon": "🧘", "name": "Abdomen simple", "sets": 2, "reps": "12-15", "intensity": "Suave", "tracking": "bodyweight" }
+              {
+                "id": "mom-mon-spinning",
+                "icon": "🚴",
+                "name": "Spinning",
+                "sets": 1,
+                "reps": "30-45 min",
+                "intensity": "Moderada",
+                "tracking": "timed"
+              },
+              {
+                "id": "mom-fri-chest-press",
+                "icon": "🏋️",
+                "name": "Press pecho máquina",
+                "sets": 4,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-fri-row",
+                "icon": "🚣",
+                "name": "Remo ligero máquina",
+                "sets": 3,
+                "reps": "10-12",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-fri-shoulder",
+                "icon": "🦾",
+                "name": "Press hombro máquina/mancuernas",
+                "sets": 3,
+                "reps": "8-10",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-fri-face-pull",
+                "icon": "🪢",
+                "name": "Face pull",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Suave/Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-fri-pec",
+                "icon": "🛡️",
+                "name": "Pec deck o aperturas",
+                "sets": 2,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-fri-abs",
+                "icon": "🧘",
+                "name": "Abdomen simple",
+                "sets": 2,
+                "reps": "12-15",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              }
             ]
           }
         },
@@ -274,7 +776,15 @@
             "title": "Cardio suave / pasos",
             "detail": "Movimiento suave para acompañar el día de running de Martín.",
             "exercises": [
-              { "id": "mom-wed-walk", "icon": "🚶", "name": "Caminata tranquila", "sets": 1, "reps": "20-40 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "mom-wed-walk",
+                "icon": "🚶",
+                "name": "Caminata tranquila",
+                "sets": 1,
+                "reps": "20-40 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         },
@@ -285,11 +795,51 @@
             "title": "Pierna: cuádriceps + glúteo",
             "detail": "Fuerza básica y controlada para proteger músculo.",
             "exercises": [
-              { "id": "mom-tue-squat", "icon": "🏋️", "name": "Sentadilla en máquina / Smith / hack suave", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-tue-press", "icon": "🦵", "name": "Prensa", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-tue-thrust", "icon": "🍑", "name": "Hip thrust máquina", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-tue-extension", "icon": "⚙️", "name": "Extensión de cuádriceps", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-tue-abs", "icon": "🧘", "name": "Abdomen simple", "sets": 2, "reps": "12-15", "intensity": "Suave", "tracking": "bodyweight" }
+              {
+                "id": "mom-tue-squat",
+                "icon": "🏋️",
+                "name": "Sentadilla en máquina / Smith / hack suave",
+                "sets": 3,
+                "reps": "8-10",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-tue-press",
+                "icon": "🦵",
+                "name": "Prensa",
+                "sets": 3,
+                "reps": "10-12",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-tue-thrust",
+                "icon": "🍑",
+                "name": "Hip thrust máquina",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-tue-extension",
+                "icon": "⚙️",
+                "name": "Extensión de cuádriceps",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-tue-abs",
+                "icon": "🧘",
+                "name": "Abdomen simple",
+                "sets": 2,
+                "reps": "12-15",
+                "intensity": "Suave",
+                "tracking": "bodyweight"
+              }
             ]
           }
         },
@@ -300,11 +850,51 @@
             "title": "Espalda + brazos",
             "detail": "Día parecido al jueves de espalda de Martín, adaptado a técnica cómoda.",
             "exercises": [
-              { "id": "mom-mon-pulldown", "icon": "⬇️", "name": "Jalón al pecho", "sets": 4, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-mon-row", "icon": "🚣", "name": "Remo en máquina", "sets": 3, "reps": "8-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-mon-curl", "icon": "💪", "name": "Curl bíceps máquina o mancuerna", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-mon-triceps", "icon": "🔱", "name": "Tríceps en polea o máquina", "sets": 3, "reps": "10-12", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-mon-laterals", "icon": "🦾", "name": "Elevaciones laterales", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
+              {
+                "id": "mom-mon-pulldown",
+                "icon": "⬇️",
+                "name": "Jalón al pecho",
+                "sets": 4,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-mon-row",
+                "icon": "🚣",
+                "name": "Remo en máquina",
+                "sets": 3,
+                "reps": "8-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-mon-curl",
+                "icon": "💪",
+                "name": "Curl bíceps máquina o mancuerna",
+                "sets": 3,
+                "reps": "10-12",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-mon-triceps",
+                "icon": "🔱",
+                "name": "Tríceps en polea o máquina",
+                "sets": 3,
+                "reps": "10-12",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-mon-laterals",
+                "icon": "🦾",
+                "name": "Elevaciones laterales",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              }
             ]
           }
         },
@@ -315,11 +905,51 @@
             "title": "Pierna: femoral + glúteo",
             "detail": "Segundo bloque de pierna de la semana, adaptando cargas.",
             "exercises": [
-              { "id": "mom-thu-curl", "icon": "🦿", "name": "Curl femoral sentado/acostado", "sets": 4, "reps": "10-12", "intensity": "Fuerte", "tracking": "weighted" },
-              { "id": "mom-thu-rdl", "icon": "🏋️", "name": "Peso muerto rumano con mancuernas", "sets": 3, "reps": "8-10", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-thu-lunges", "icon": "🧱", "name": "Zancadas o búlgaras asistidas", "sets": 2, "reps": "8-10 por pierna", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-thu-abduction", "icon": "⚙️", "name": "Abducciones en máquina", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" },
-              { "id": "mom-thu-calves", "icon": "🦵", "name": "Pantorrillas", "sets": 3, "reps": "12-15", "intensity": "Moderada", "tracking": "weighted" }
+              {
+                "id": "mom-thu-curl",
+                "icon": "🦿",
+                "name": "Curl femoral sentado/acostado",
+                "sets": 4,
+                "reps": "10-12",
+                "intensity": "Fuerte",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-thu-rdl",
+                "icon": "🏋️",
+                "name": "Peso muerto rumano con mancuernas",
+                "sets": 3,
+                "reps": "8-10",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-thu-lunges",
+                "icon": "🧱",
+                "name": "Zancadas o búlgaras asistidas",
+                "sets": 2,
+                "reps": "8-10 por pierna",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-thu-abduction",
+                "icon": "⚙️",
+                "name": "Abducciones en máquina",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              },
+              {
+                "id": "mom-thu-calves",
+                "icon": "🦵",
+                "name": "Pantorrillas",
+                "sets": 3,
+                "reps": "12-15",
+                "intensity": "Moderada",
+                "tracking": "weighted"
+              }
             ]
           }
         },
@@ -330,7 +960,15 @@
             "title": "Descanso activo",
             "detail": "Paseo, movilidad o tareas ligeras.",
             "exercises": [
-              { "id": "mom-sat-walk", "icon": "🚶", "name": "Paseo suave", "sets": 1, "reps": "20-40 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "mom-sat-walk",
+                "icon": "🚶",
+                "name": "Paseo suave",
+                "sets": 1,
+                "reps": "20-40 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         },
@@ -341,7 +979,15 @@
             "title": "Caminata larga",
             "detail": "Movimiento tranquilo y buena hidratación.",
             "exercises": [
-              { "id": "mom-sun-walk", "icon": "👟", "name": "Caminata larga", "sets": 1, "reps": "30-60 min", "intensity": "Suave", "tracking": "timed" }
+              {
+                "id": "mom-sun-walk",
+                "icon": "👟",
+                "name": "Caminata larga",
+                "sets": 1,
+                "reps": "30-60 min",
+                "intensity": "Suave",
+                "tracking": "timed"
+              }
             ]
           }
         }
@@ -351,91 +997,971 @@
   "meals": {
     "martin": {
       "Lunes": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina o pan", "amount": "70 g / 100 g" }, { "emoji": "🥚", "title": "perico", "amount": "3 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "200 g" }, { "emoji": "🍚", "title": "arroz", "amount": "180 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "150 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "70-80 g" }, { "emoji": "🥫", "title": "pasta de hígado", "amount": "30 g" }, { "emoji": "🥄", "title": "mayonesa", "amount": "10 g" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa abundante", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "180-200 g" } ] }
+        "Desayuno": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 820,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 350,
+          "items": [
+            {
+              "code": "M_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            }
+          ]
+        }
       },
       "Martes": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina o pan", "amount": "70 g / 100 g" }, { "emoji": "🥚", "title": "huevos fritos", "amount": "3 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥩", "title": "carne molida", "amount": "170 g" }, { "emoji": "🍚", "title": "arroz", "amount": "180 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "150 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥚", "title": "huevos cocidos", "amount": "3 huevos" } ] },
-        "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "200 g" }, { "emoji": "🥑", "title": "aguacate", "amount": "50 g" }, { "emoji": "🍲", "title": "sopa", "amount": "al gusto" } ] }
+        "Desayuno": {
+          "maxKcal": 560,
+          "items": [
+            {
+              "code": "M_PAN_HUEVOS",
+              "emoji": "🥚",
+              "title": "Pan + huevos",
+              "amount": "100 g pan + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 790,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 340,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 560,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            }
+          ]
+        }
       },
       "Miércoles": {
-        "Desayuno": { "items": [ { "emoji": "🥚", "title": "huevos cocidos o con tomate", "amount": "3-4 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "200 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "200 g" }, { "emoji": "🍚", "title": "arroz", "amount": "120-150 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "70 g" }, { "emoji": "🧀", "title": "queso o huevos", "amount": "30 g / 2" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🥩", "title": "carne molida", "amount": "150 g" } ] }
+        "Desayuno": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 820,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 350,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        }
       },
       "Jueves": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina o pan", "amount": "70 g / 100 g" }, { "emoji": "🥚", "title": "perico", "amount": "3 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "220 g" }, { "emoji": "🍚", "title": "arroz", "amount": "180 g" }, { "emoji": "🥑", "title": "aguacate", "amount": "50 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "70 g" }, { "emoji": "🥫", "title": "pasta de hígado", "amount": "30 g" }, { "emoji": "🥄", "title": "mayonesa", "amount": "10 g" } ] },
-        "Cena": { "items": [ { "emoji": "🥩", "title": "carne molida", "amount": "160 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "180 g" }, { "emoji": "🫓", "title": "harina o pan", "amount": "50 g / 75 g" } ] }
+        "Desayuno": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 820,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 350,
+          "items": [
+            {
+              "code": "M_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        }
       },
       "Viernes": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina o pan", "amount": "70 g / 100 g" }, { "emoji": "🥚", "title": "huevos fritos", "amount": "3 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥩", "title": "carne molida", "amount": "170 g" }, { "emoji": "🍚", "title": "arroz", "amount": "200 g" }, { "emoji": "🧀", "title": "queso", "amount": "30 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥚", "title": "huevos cocidos", "amount": "3 huevos" } ] },
-        "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "180-200 g" }, { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🍌", "title": "plátano", "amount": "150 g" } ] }
+        "Desayuno": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_PAN_HUEVOS",
+              "emoji": "🥚",
+              "title": "Pan + huevos",
+              "amount": "100 g pan + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 820,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 350,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 590,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            }
+          ]
+        }
       },
       "Sábado": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "70 g" }, { "emoji": "🥚", "title": "Huevos", "amount": "3 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥫", "title": "hígado", "amount": "180-200 g" }, { "emoji": "🍚", "title": "arroz", "amount": "180 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "150 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "pan", "amount": "70-80 g" }, { "emoji": "🧀", "title": "queso", "amount": "30 g" } ] },
-        "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "200 g" }, { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🥑", "title": "aguacate", "amount": "40-50 g" } ] }
+        "Desayuno": {
+          "maxKcal": 560,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 790,
+          "items": [
+            {
+              "code": "M_CARNE",
+              "emoji": "🥩",
+              "title": "Carne molida guisada",
+              "amount": "170 g"
+            },
+            {
+              "code": "M_ARROZ",
+              "emoji": "🍚",
+              "title": "Arroz cocido",
+              "amount": "180 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 340,
+          "items": [
+            {
+              "code": "M_YOGURT",
+              "emoji": "🥣",
+              "title": "Yogurt + granola",
+              "amount": "250 g yogurt + 40 g granola"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 560,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            }
+          ]
+        }
       },
       "Domingo": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "pan o harina de arepa", "amount": "80-100 g / 50-60 g" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "220 g" }, { "emoji": "🍚", "title": "arroz", "amount": "250-300 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "120-150 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "harina o pan", "amount": "60 g / 90 g" }, { "emoji": "🥚", "title": "huevos", "amount": "2-3 huevos" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "180 g" }, { "emoji": "🍌", "title": "plátano", "amount": "150 g" } ] }
+        "Desayuno": {
+          "maxKcal": 675,
+          "items": [
+            {
+              "code": "M_AREPA_HUEVOS",
+              "emoji": "🫓",
+              "title": "Arepa + huevos",
+              "amount": "70 g harina + 3 huevos"
+            }
+          ]
+        },
+        "Almuerzo": {
+          "maxKcal": 945,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_ARROZ_DOMINGO",
+              "emoji": "🍚",
+              "title": "Arroz cocido domingo",
+              "amount": "220 g"
+            },
+            {
+              "code": "M_LENTEJAS",
+              "emoji": "🫘",
+              "title": "Lentejas guisadas",
+              "amount": "180 g"
+            }
+          ]
+        },
+        "Merienda": {
+          "maxKcal": 405,
+          "items": [
+            {
+              "code": "M_PAN_HIGADO",
+              "emoji": "🥪",
+              "title": "Pan + pasta de hígado + mayonesa",
+              "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+            }
+          ]
+        },
+        "Cena": {
+          "maxKcal": 675,
+          "items": [
+            {
+              "code": "M_POLLO",
+              "emoji": "🍗",
+              "title": "Pollo guisado",
+              "amount": "200 g"
+            },
+            {
+              "code": "M_ARROZ_DOMINGO",
+              "emoji": "🍚",
+              "title": "Arroz cocido domingo",
+              "amount": "220 g"
+            }
+          ]
+        }
       }
     },
     "mama": {
       "Lunes": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45-50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "140 g" }, { "emoji": "🍚", "title": "arroz", "amount": "110 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "130 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🌾", "title": "granola", "amount": "25-30 g" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa abundante", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "120-140 g" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "45-50 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "perico",
+              "amount": "2 huevos"
+            },
+            {
+              "emoji": "🍅",
+              "title": "tomate",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 440
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "140 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "110 g"
+            },
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "130 g"
+            }
+          ],
+          "maxKcal": 610
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🥣",
+              "title": "yogurt",
+              "amount": "150-180 g"
+            },
+            {
+              "emoji": "🌾",
+              "title": "granola",
+              "amount": "25-30 g"
+            }
+          ],
+          "maxKcal": 260
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍲",
+              "title": "sopa abundante",
+              "amount": "al gusto"
+            },
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "120-140 g"
+            }
+          ],
+          "maxKcal": 440
+        }
       },
       "Martes": {
-        "Desayuno": { "items": [ { "emoji": "🥚", "title": "huevos cocidos", "amount": "2 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" }, { "emoji": "🧀", "title": "queso opcional", "amount": "30 g" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥩", "title": "carne molida", "amount": "120 g" }, { "emoji": "🍚", "title": "arroz", "amount": "100-120 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "130 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "40 g" }, { "emoji": "🧀", "title": "queso", "amount": "25 g" } ] },
-        "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "130 g" }, { "emoji": "🥑", "title": "aguacate", "amount": "40 g" }, { "emoji": "🍲", "title": "sopa", "amount": "al gusto" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🥚",
+              "title": "huevos cocidos",
+              "amount": "2 huevos"
+            },
+            {
+              "emoji": "🍅",
+              "title": "tomate",
+              "amount": "al gusto"
+            },
+            {
+              "emoji": "🧀",
+              "title": "queso opcional",
+              "amount": "30 g"
+            }
+          ],
+          "maxKcal": 410
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🥩",
+              "title": "carne molida",
+              "amount": "120 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "100-120 g"
+            },
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "130 g"
+            }
+          ],
+          "maxKcal": 580
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "40 g"
+            },
+            {
+              "emoji": "🧀",
+              "title": "queso",
+              "amount": "25 g"
+            }
+          ],
+          "maxKcal": 250
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "130 g"
+            },
+            {
+              "emoji": "🥑",
+              "title": "aguacate",
+              "amount": "40 g"
+            },
+            {
+              "emoji": "🍲",
+              "title": "sopa",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 410
+        }
       },
       "Miércoles": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45 g" }, { "emoji": "🥚", "title": "huevos/perico", "amount": "2 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "150 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "170 g" }, { "emoji": "🍅", "title": "tomate/vegetales", "amount": "al gusto" } ] },
-        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🍎", "title": "fruta opcional", "amount": "1 pequeña" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa abundante", "amount": "al gusto" }, { "emoji": "🥩", "title": "carne molida", "amount": "100-120 g" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "45 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "huevos/perico",
+              "amount": "2 huevos"
+            }
+          ],
+          "maxKcal": 440
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "150 g"
+            },
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "170 g"
+            },
+            {
+              "emoji": "🍅",
+              "title": "tomate/vegetales",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 610
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🥣",
+              "title": "yogurt",
+              "amount": "150-180 g"
+            },
+            {
+              "emoji": "🍎",
+              "title": "fruta opcional",
+              "amount": "1 pequeña"
+            }
+          ],
+          "maxKcal": 260
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍲",
+              "title": "sopa abundante",
+              "amount": "al gusto"
+            },
+            {
+              "emoji": "🥩",
+              "title": "carne molida",
+              "amount": "100-120 g"
+            }
+          ],
+          "maxKcal": 440
+        }
       },
       "Jueves": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "150 g" }, { "emoji": "🍚", "title": "arroz", "amount": "120 g" }, { "emoji": "🥑", "title": "aguacate", "amount": "35-40 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt", "amount": "150-180 g" }, { "emoji": "🌾", "title": "granola", "amount": "25-30 g" } ] },
-        "Cena": { "items": [ { "emoji": "🫘", "title": "lentejas", "amount": "170 g" }, { "emoji": "🥚", "title": "huevo o pollo", "amount": "1 / 100 g" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "50 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "perico",
+              "amount": "2 huevos"
+            },
+            {
+              "emoji": "🍅",
+              "title": "tomate",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 440
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "150 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "120 g"
+            },
+            {
+              "emoji": "🥑",
+              "title": "aguacate",
+              "amount": "35-40 g"
+            }
+          ],
+          "maxKcal": 610
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🥣",
+              "title": "yogurt",
+              "amount": "150-180 g"
+            },
+            {
+              "emoji": "🌾",
+              "title": "granola",
+              "amount": "25-30 g"
+            }
+          ],
+          "maxKcal": 260
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "170 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "huevo o pollo",
+              "amount": "1 / 100 g"
+            }
+          ],
+          "maxKcal": 440
+        }
       },
       "Viernes": {
-        "Desayuno": { "items": [ { "emoji": "🥚", "title": "huevos", "amount": "2 huevos" }, { "emoji": "🫓", "title": "harina", "amount": "40 g" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥩", "title": "carne molida", "amount": "130 g" }, { "emoji": "🍚", "title": "arroz", "amount": "120 g" }, { "emoji": "🍅", "title": "tomate", "amount": "al gusto" } ] },
-        "Merienda": { "items": [ { "emoji": "🧀", "title": "queso o huevos", "amount": "30 g / 2" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "120 g" }, { "emoji": "🍌", "title": "plátano", "amount": "80-100 g" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🥚",
+              "title": "huevos",
+              "amount": "2 huevos"
+            },
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "40 g"
+            }
+          ],
+          "maxKcal": 440
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🥩",
+              "title": "carne molida",
+              "amount": "130 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "120 g"
+            },
+            {
+              "emoji": "🍅",
+              "title": "tomate",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 610
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🧀",
+              "title": "queso o huevos",
+              "amount": "30 g / 2"
+            }
+          ],
+          "maxKcal": 260
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍲",
+              "title": "sopa",
+              "amount": "al gusto"
+            },
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "120 g"
+            },
+            {
+              "emoji": "🍌",
+              "title": "plátano",
+              "amount": "80-100 g"
+            }
+          ],
+          "maxKcal": 440
+        }
       },
       "Sábado": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "45-50 g" }, { "emoji": "🥚", "title": "perico", "amount": "2 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🥫", "title": "hígado", "amount": "120-150 g" }, { "emoji": "🍚", "title": "arroz", "amount": "100 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "120 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt con granola", "amount": "150 g + 25 g" }, { "emoji": "🧀", "title": "queso opcional", "amount": "25-30 g" } ] },
-        "Cena": { "items": [ { "emoji": "🍗", "title": "pollo", "amount": "130-150 g" }, { "emoji": "🍲", "title": "sopa/vegetales", "amount": "al gusto" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "45-50 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "perico",
+              "amount": "2 huevos"
+            }
+          ],
+          "maxKcal": 400
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🥫",
+              "title": "hígado",
+              "amount": "120-150 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "100 g"
+            },
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "120 g"
+            }
+          ],
+          "maxKcal": 560
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🥣",
+              "title": "yogurt con granola",
+              "amount": "150 g + 25 g"
+            },
+            {
+              "emoji": "🧀",
+              "title": "queso opcional",
+              "amount": "25-30 g"
+            }
+          ],
+          "maxKcal": 240
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "130-150 g"
+            },
+            {
+              "emoji": "🍲",
+              "title": "sopa/vegetales",
+              "amount": "al gusto"
+            }
+          ],
+          "maxKcal": 400
+        }
       },
       "Domingo": {
-        "Desayuno": { "items": [ { "emoji": "🫓", "title": "harina", "amount": "50-55 g" }, { "emoji": "🥚", "title": "huevos", "amount": "2 huevos" } ] },
-        "Almuerzo": { "items": [ { "emoji": "🍗", "title": "pollo/carne", "amount": "140 g" }, { "emoji": "🍚", "title": "arroz", "amount": "130 g" }, { "emoji": "🫘", "title": "lentejas", "amount": "130 g" } ] },
-        "Merienda": { "items": [ { "emoji": "🥣", "title": "yogurt, fruta, huevo o queso", "amount": "1 opción ligera" } ] },
-        "Cena": { "items": [ { "emoji": "🍲", "title": "sopa", "amount": "al gusto" }, { "emoji": "🍗", "title": "pollo", "amount": "120-140 g" } ] }
+        "Desayuno": {
+          "items": [
+            {
+              "emoji": "🫓",
+              "title": "harina",
+              "amount": "50-55 g"
+            },
+            {
+              "emoji": "🥚",
+              "title": "huevos",
+              "amount": "2 huevos"
+            }
+          ],
+          "maxKcal": 410
+        },
+        "Almuerzo": {
+          "items": [
+            {
+              "emoji": "🍗",
+              "title": "pollo/carne",
+              "amount": "140 g"
+            },
+            {
+              "emoji": "🍚",
+              "title": "arroz",
+              "amount": "130 g"
+            },
+            {
+              "emoji": "🫘",
+              "title": "lentejas",
+              "amount": "130 g"
+            }
+          ],
+          "maxKcal": 580
+        },
+        "Merienda": {
+          "items": [
+            {
+              "emoji": "🥣",
+              "title": "yogurt, fruta, huevo o queso",
+              "amount": "1 opción ligera"
+            }
+          ],
+          "maxKcal": 250
+        },
+        "Cena": {
+          "items": [
+            {
+              "emoji": "🍲",
+              "title": "sopa",
+              "amount": "al gusto"
+            },
+            {
+              "emoji": "🍗",
+              "title": "pollo",
+              "amount": "120-140 g"
+            }
+          ],
+          "maxKcal": 410
+        }
       }
+    }
+  },
+  "recipes": {
+    "M_POLLO": {
+      "code": "M_POLLO",
+      "emoji": "🍗",
+      "title": "Pollo guisado",
+      "amount": "200 g"
+    },
+    "M_CARNE": {
+      "code": "M_CARNE",
+      "emoji": "🥩",
+      "title": "Carne molida guisada",
+      "amount": "170 g"
+    },
+    "M_ARROZ": {
+      "code": "M_ARROZ",
+      "emoji": "🍚",
+      "title": "Arroz cocido",
+      "amount": "180 g"
+    },
+    "M_ARROZ_DOMINGO": {
+      "code": "M_ARROZ_DOMINGO",
+      "emoji": "🍚",
+      "title": "Arroz cocido domingo",
+      "amount": "220 g"
+    },
+    "M_LENTEJAS": {
+      "code": "M_LENTEJAS",
+      "emoji": "🫘",
+      "title": "Lentejas guisadas",
+      "amount": "180 g"
+    },
+    "M_YOGURT": {
+      "code": "M_YOGURT",
+      "emoji": "🥣",
+      "title": "Yogurt + granola",
+      "amount": "250 g yogurt + 40 g granola"
+    },
+    "M_PAN_HIGADO": {
+      "code": "M_PAN_HIGADO",
+      "emoji": "🥪",
+      "title": "Pan + pasta de hígado + mayonesa",
+      "amount": "70 g pan + 30 g pasta de hígado + 10 g mayonesa"
+    },
+    "M_AREPA_HUEVOS": {
+      "code": "M_AREPA_HUEVOS",
+      "emoji": "🫓",
+      "title": "Arepa + huevos",
+      "amount": "70 g harina + 3 huevos"
+    },
+    "M_PAN_HUEVOS": {
+      "code": "M_PAN_HUEVOS",
+      "emoji": "🥚",
+      "title": "Pan + huevos",
+      "amount": "100 g pan + 3 huevos"
     }
   }
 }

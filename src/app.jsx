@@ -363,6 +363,7 @@
       if (!items.length) return "Plan no cargado";
       return items.map((item) => `${item.title} ${item.amount || ""}`.trim()).join(" + ");
     };
+    const mealKcalLabel = (plan) => plan?.maxKcal ? `Máximo ${plan.maxKcal} kcal` : "Kcal por definir";
 
     const defaultRoutine = { icon: "🗓️", type: "Plan", title: "Sin rutina cargada", detail: "Revisa data/plans.v1.json.", exercises: [] };
     const initialPerson = () => {
@@ -395,6 +396,7 @@
       const personPlans = plans?.profiles?.[activePerson];
       const mealsForDay = plans?.meals?.[activePerson]?.[activeDay] || {};
       const dayPlan = mealsForDay[activeMeal] || {};
+      const activeMealKcal = dayPlan.maxKcal || "";
       const meal = mealMeta[activeMeal] || mealMeta.Desayuno;
       const routineModule = moduleFromSystem(activePerson, activeSystem);
       const routine = personPlans?.routines?.[activeDay]?.[routineModule] || defaultRoutine;
@@ -699,7 +701,7 @@
           meal: activeMeal,
           planned_food: plannedFood,
           eaten_food: plannedFood,
-          calories: "",
+          calories: activeMealKcal,
           protein: "",
           status: "completed",
           notes: "",
@@ -847,6 +849,7 @@
                     <div className="text-center">
                       <p className="text-xs font-normal uppercase text-white/50">{clock}</p>
                       <p className="text-2xl font-normal leading-tight">{meal.emoji} {activeMeal}</p>
+                      <p className="mt-1 text-xs font-normal text-amber-200">{mealKcalLabel(dayPlan)}</p>
                     </div>
                     <button onClick={() => moveMeal(1)} className="tap grid h-10 w-10 place-items-center rounded-2xl bg-white/15 text-white">›</button>
                   </div>
@@ -855,7 +858,10 @@
                       <p className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-normal leading-tight text-amber-200">{item.amount || "al gusto"}</p>
                       <div className="flex items-center gap-3">
                         <div className="grid h-10 w-10 place-items-center text-2xl">{item.emoji}</div>
-                        <p className="text-sm font-normal leading-tight">{item.title}</p>
+                        <div className="min-w-0">
+                          <p className="text-sm font-normal leading-tight">{item.title}</p>
+                          {item.code && <p className="mt-1 text-[11px] font-light leading-tight text-white/45">{item.code}</p>}
+                        </div>
                       </div>
                     </div>)}
                   </div>
@@ -1100,6 +1106,7 @@
                     <h4 className="font-normal">{mealName}</h4>
                   </div>
                   <p className={`mt-2 text-sm leading-relaxed ${activeMeal === mealName ? "text-slate-600" : "text-white/60"}`}>{mealSummary(mealsForDay[mealName])}</p>
+                  <p className={`mt-2 text-xs font-normal ${activeMeal === mealName ? "text-rose-700" : "text-amber-200"}`}>{mealKcalLabel(mealsForDay[mealName])}</p>
                 </button>)}
               </div>
             </div>
